@@ -1,0 +1,5 @@
+# ignore all unencrypted secrets files in this directory
+./secrets/secrets.priv.yaml
+./secrets/secrets.yaml.priv 
+./secrets/secrets.priv.yaml.gpg
+
