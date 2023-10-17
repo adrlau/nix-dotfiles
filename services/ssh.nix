@@ -11,23 +11,22 @@
     settings.UseDns = true;
     settings.PermitRootLogin = "prohibit-password";
     startWhenNeeded = true;
-    UseDns = true;
-    ports = [ 25264 ];
+    ports = [ 6969 ];
     openFirewall = true;
-    Ciphers = [
+    settings.Ciphers = [
       "chacha20-poly1305@openssh.com"
       "aes256-gcm@openssh.com"
       "aes128-gcm@openssh.com"
       "aes256-ctr"
       # remove some weaker ciphers
-    ]
-  }
-  endlessh = {
+    ];
+  };
+  services.endlessh = {
     enable = true;
     port = 22;
     openFirewall = true;
   };
-  sshguard.enable = true; #protection against brute force attacks like fail2ban
+  services.sshguard.enable = true; #protection against brute force attacks like fail2ban
 
 
 }

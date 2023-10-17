@@ -15,7 +15,7 @@ in
       extraDomainNames = [ "*.${config.networking.domain}"   "lauterer.it" "*.lauterer.it" "*.256.no" "*.256.no"];
       dnsProvider = "domeneshop";   # from here according to privider https://go-acme.github.io/lego/dns/ 
       dnsPropagationCheck = true;
-      credentialsFile =  config.sops.secrets."acme/creds/domeneshop".path; #need to manually create this file according to dnsprovider secrets, and format of key according to lego in privider and add to secrets.yaml
+      credentialsFile =  config.sops.secrets."acme/certs/domeneshop".path; #need to manually create this file according to dnsprovider secrets, and format of key according to lego in privider and add to secrets.yaml
     };
   };
 
