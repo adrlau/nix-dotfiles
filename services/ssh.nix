@@ -13,13 +13,13 @@
     startWhenNeeded = true;
     ports = [ 6969 ];
     openFirewall = true;
-    settings.Ciphers = [
-      "chacha20-poly1305@openssh.com"
-      "aes256-gcm@openssh.com"
-      "aes128-gcm@openssh.com"
-      "aes256-ctr"
-      # remove some weaker ciphers
-    ];
+    #settings.Ciphers = [
+    #  "chacha20-poly1305@openssh.com"
+    #  "aes256-gcm@openssh.com"
+    #  "aes128-gcm@openssh.com"
+    #  "aes256-ctr"
+    #  # remove some weaker ciphers
+    #];
   };
   services.endlessh = {
     enable = true;

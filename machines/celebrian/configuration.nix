@@ -8,6 +8,7 @@
     [ # Include the results of the hardware scan.
       ../../profiles/base.nix
       ../../services/ssh.nix
+      ../../services/nginx.nix
     ];
 
 
@@ -100,31 +101,31 @@
 
 
 #vpn stuff
-  #need to run at fresh install to create namespace: headscale namespaces create <namespace_name> 
-  services.headscale = {
-    enable = true;
-    user = "headscale";
-    address = "127.0.0.1";
-	    port = 8080;
-    settings = {
-      logtail.enabled = false;
-      metrics_listen_addr = "127.0.0.1:9090";
-      server_url = "https://${"vpn."+config.networking.domain}";
-      dns_config = {
-        base_domain = "${config.networking.domain}";
-        magic_dns = true;
-        nameservers = [
-          "1.1.1.1"
-        ];
-      };
-
-      ##should really implement with fex github and kanidm
-      #oidc = {
-      #  issuer  = "{config.services.kanidm.serverSettings.origin}";
-      #  allowed_domains = Domains;
-      #};
-    };
-  };
+#  #need to run at fresh install to create namespace: headscale namespaces create <namespace_name> 
+#  services.headscale = {
+#    enable = true;
+#    user = "headscale";
+#    address = "127.0.0.1";
+#	    port = 8080;
+#    settings = {
+#      logtail.enabled = false;
+#      metrics_listen_addr = "127.0.0.1:9090";
+#      server_url = "https://${"vpn."+config.networking.domain}";
+#      dns_config = {
+#        base_domain = "${config.networking.domain}";
+#        magic_dns = true;
+#        nameservers = [
+#          "1.1.1.1"
+#        ];
+#      };
+#
+#      ##should really implement with fex github and kanidm
+#      #oidc = {
+#      #  issuer  = "{config.services.kanidm.serverSettings.origin}";
+#      #  allowed_domains = Domains;
+#      #};
+#    };
+#  };
 
   #tailscale
   services.tailscale.enable = true;
@@ -157,9 +158,9 @@ users.users."gunalx".openssh.authorizedKeys.keys = [
     checkReversePath = "loose";
     trustedInterfaces = [ "tailscale0" ];
     allowedUDPPorts = [
-      8096
       80
       443
+      6969
       #config.services.openssh.ports
       config.services.tailscale.port
       config.services.headscale.port

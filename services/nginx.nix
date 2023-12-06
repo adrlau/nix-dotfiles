@@ -1,9 +1,9 @@
 { config, pkgs, lib, ... }:
 let
   basicAuthUser = "guest";
-  basicAuthPass = "12345678"; 
+  basicAuthPass = ""; 
 in
-{
+{  
 
   #acme and certs helpful blog https://carjorvaz.com/posts/
   security.acme = {
@@ -15,7 +15,7 @@ in
       extraDomainNames = [ "*.${config.networking.domain}"   "lauterer.it" "*.lauterer.it" "*.256.no" "*.256.no"];
       dnsProvider = "domeneshop";   # from here according to privider https://go-acme.github.io/lego/dns/ 
       dnsPropagationCheck = true;
-      credentialsFile =  config.sops.secrets."acme/certs/domeneshop".path; #need to manually create this file according to dnsprovider secrets, and format of key according to lego in privider and add to secrets.yaml
+      credentialsFile =  config.sops.secrets."acme/certs".path; #need to manually create this file according to dnsprovider secrets, and format of key according to lego in privider and add to secrets.yaml
     };
   };
 
@@ -39,37 +39,62 @@ in
     recommendedGzipSettings = true;
     recommendedOptimisation = true;
 
-    virtualHosts.${"vpn."+config.networking.domain} = {
+
+    virtualHosts.${"managment.funn-nas.lauterer.it"} = {
       forceSSL = true;
       useACMEHost = "${config.networking.domain}";
       locations."/" = {
         proxyWebsockets = true;
-        proxyPass = "http://localhost:${toString config.services.headscale.port}";
+        proxyPass = "http://100.104.182.48";
+      };
+      basicAuth = {
+        guest = basicAuthPass;
       };
     };
 
-    virtualHosts.${config.services.kanidm.serverSettings.domain} = { # (auth.)
+    virtualHosts.${"funn-nas.lauterer.it"} = {
       forceSSL = true;
       useACMEHost = "${config.networking.domain}";
       locations."/" = {
         proxyWebsockets = true;
-        proxyPass = "${"https://"+config.services.kanidm.serverSettings.bindaddress}";
-
+        proxyPass = "https://100.104.182.48:30044";
+      };
+      basicAuth = {
+        guest = basicAuthPass;
       };
     };
 
-    virtualHosts.${"jellyfin."+config.networking.domain} = {
-      forceSSL = true;
-      #enableACME = true;
-      useACMEHost = "${config.networking.domain}";
-      locations."/" = {
-        proxyPass = "http://jellyfin.galadriel";
-        proxyWebsockets = true;
-        basicAuth = {
-          guest = basicAuthPass;
-        };
-      };
-    };
+   # virtualHosts.${"vpn."+config.networking.domain} = {
+   #   forceSSL = true;
+   #   useACMEHost = "${config.networking.domain}";
+   #   locations."/" = {
+   #     proxyWebsockets = true;
+   #     proxyPass = "http://localhost:${toString config.services.headscale.port}";
+   #   };
+   # };
+
+   # virtualHosts.${config.services.kanidm.serverSettings.domain} = { # (auth.)
+   #   forceSSL = true;
+   #   useACMEHost = "${config.networking.domain}";
+   #   locations."/" = {
+   #     proxyWebsockets = true;
+   #     proxyPass = "${"https://"+config.services.kanidm.serverSettings.bindaddress}";
+
+   #   };
+   # };
+
+   # virtualHosts.${"jellyfin."+config.networking.domain} = {
+   #   forceSSL = true;
+   #   #enableACME = true;
+   #   useACMEHost = "${config.networking.domain}";
+   #   locations."/" = {
+   #     proxyPass = "http://jellyfin.galadriel";
+   #     proxyWebsockets = true;
+   #     basicAuth = {
+   #       guest = basicAuthPass;
+   #     };
+   #   };
+   # };
   };
 
 

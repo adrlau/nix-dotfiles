@@ -10,7 +10,8 @@
   # This will add secrets.yml to the nix store
   # You can avoid this by adding a string to the full path instead, i.e.
   # sops.defaultSopsFile = "/root/.sops/secrets/example.yaml";
-  sops.defaultSopsFile = ../secrets/secrets.yaml;
+  sops.defaultSopsFile = "/etc/nixos/nix-dotfiles/secrets/secrets.yaml";
+  sops.validateSopsFiles = false;
   # This will automatically import SSH keys as age keys
   sops.age.sshKeyPaths = [
 			 "/etc/ssh/nixos"
@@ -24,6 +25,6 @@
 
   # This is the actual specification of the secrets.
   #sops.secrets."myservice/my_subdir/my_secret" = {};
-  sops.secrets."acme/certs/domeneshop" = {  };
+  sops.secrets."acme/certs" = {  };
 
 }
