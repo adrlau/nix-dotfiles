@@ -6,16 +6,11 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../profiles/base.nix
-      ../services/ssh.nix
+      ../../profiles/base.nix
+      ../../services/ssh.nix
+      ../../services/nginx.nix
     ];
 
-  # Use the GRUB 2 boot loader.
-  boot.loader.grub.enable = true;
-  #boot.loader.grub.version = 2; #Depreciated
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.device = "/dev/vda"; # or "nodev" for efi only # Define on which hard drive you want to install Grub.
 
   # Set your time zone.
   time.timeZone = "Europe/Oslo";
@@ -25,8 +20,8 @@
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;                   
-  networking.interfaces.ens18.useDHCP = true;
-  networking.hostName = "addictedmaker"; # Define your hostname.
+  networking.interfaces.ens3.useDHCP = true; # lmao interface is not constant. I really only want to use dhcp att all so could remove this in favor of the old way.
+  networking.hostName = "celebrian"; # Define your hostname.
   networking.domain = "addictedmaker.eu"; # Define your domain.
   
   boot.kernel.sysctl = {
@@ -61,90 +56,79 @@
 
 
   #add proxyserver to acme
-  users.users.kanidm.extraGroups = [ "acme" ];
+  #users.users.kanidm.extraGroups = [ "acme" ];
 
 #sequrity managment through kanidm
-  systemd.services.kanidm = let
-    certName = config.services.nginx.virtualHosts.${config.services.kanidm.serverSettings.domain}.useACMEHost;
-  in {
-    requires = [ "acme-finished-${certName}.target" ];
-    serviceConfig.LoadCredential = let
-      certDir = config.security.acme.certs.${certName}.directory;
-    in [
-      "fullchain.pem:${certDir}/fullchain.pem"
-      "key.pem:${certDir}/key.pem"
-    ];
-  };
-
-  services.kanidm = {
-    enableServer = true;
-    #enablePam = true;
-    serverSettings = let
-      credsDir = "/run/credentials/kanidm.service";
-      #credsDir = "/var/lib/acme/${config.networking.domain}"; #the files are here but not readable
-    in {
-      origin = "https://${config.services.kanidm.serverSettings.domain}";
-      domain = "auth.${config.networking.domain}";
-      tls_chain = "${credsDir}/fullchain.pem";
-      tls_key = "${credsDir}/key.pem";
-      bindaddress = "localhost:8300";
-    };
-
-    clientSettings = {
-      # This should be at /etc/kanidm/config or ~/.config/kanidm, and configures the kanidm command line tool
-      uri = "${config.services.kanidm.serverSettings.bindaddress}";
-      verify_ca = true;
-      verify_hostnames = true;
-    };
-  };
-
-  #environment = {
-  #  etc."kanidm/config".text = ''
-  #    uri="https://auth.${config.networking.domain}"
-  #  '';
-  #}; 
+#  systemd.services.kanidm = let
+#    certName = config.services.nginx.virtualHosts.${config.services.kanidm.serverSettings.domain}.useACMEHost;
+#  in {
+#    requires = [ "acme-finished-${certName}.target" ];
+#    serviceConfig.LoadCredential = let
+#      certDir = config.security.acme.certs.${certName}.directory;
+#    in [
+#      "fullchain.pem:${certDir}/fullchain.pem"
+#      "key.pem:${certDir}/key.pem"
+#    ];
+#  };
+#
+#  services.kanidm = {
+#    enableServer = true;
+#    #enablePam = true;
+#    serverSettings = let
+#      credsDir = "/run/credentials/kanidm.service";
+#      #credsDir = "/var/lib/acme/${config.networking.domain}"; #the files are here but not readable
+#    in {
+#      origin = "https://${config.services.kanidm.serverSettings.domain}";
+#      domain = "auth.${config.networking.domain}";
+#      tls_chain = "${credsDir}/fullchain.pem";
+#      tls_key = "${credsDir}/key.pem";
+#      bindaddress = "localhost:8300";
+#    };
+#
+#    clientSettings = {
+#      # This should be at /etc/kanidm/config or ~/.config/kanidm, and configures the kanidm command line tool
+#      uri = "${config.services.kanidm.serverSettings.bindaddress}";
+#      verify_ca = true;
+#      verify_hostnames = true;
+#    };
+			#  };
+#
+#  #environment = {
+#  #  etc."kanidm/config".text = ''
+#  #    uri="https://auth.${config.networking.domain}"
+#  #  '';
+#  #}; 
 
 
 #vpn stuff
-  #need to run at fresh install to create namespace: headscale namespaces create <namespace_name> 
-  services.headscale = {
-    enable = true;
-    user = "headscale";
-    address = "127.0.0.1";
-    port = 8080;
-    settings = {
-      logtail.enabled = false;
-      metrics_listen_addr = "127.0.0.1:9090";
-      server_url = "https://${"vpn."+config.networking.domain}";
-      dns_config = {
-        base_domain = "${config.networking.domain}";
-        magic_dns = true;
-        nameservers = [
-          "1.1.1.1"
-        ];
-      };
-
-      ##should really implement with fex github and kanidm
-      #oidc = {
-      #  issuer  = "{config.services.kanidm.serverSettings.origin}";
-      #  allowed_domains = Domains;
-      #};
-    };
-  };
+#  #need to run at fresh install to create namespace: headscale namespaces create <namespace_name> 
+#  services.headscale = {
+#    enable = true;
+#    user = "headscale";
+#    address = "127.0.0.1";
+#	    port = 8080;
+#    settings = {
+#      logtail.enabled = false;
+#      metrics_listen_addr = "127.0.0.1:9090";
+#      server_url = "https://${"vpn."+config.networking.domain}";
+#      dns_config = {
+#        base_domain = "${config.networking.domain}";
+#        magic_dns = true;
+#        nameservers = [
+#          "1.1.1.1"
+#        ];
+#      };
+#
+#      ##should really implement with fex github and kanidm
+#      #oidc = {
+#      #  issuer  = "{config.services.kanidm.serverSettings.origin}";
+#      #  allowed_domains = Domains;
+#      #};
+#    };
+#  };
 
   #tailscale
   services.tailscale.enable = true;
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  services.openssh.settings.UseDns = true;
-  services.openssh.settings.PermitRootLogin = "prohibit-password";
-  services.openssh.startWhenNeeded = true;
-  services.openssh.ports = [ 6969 ];
-  services.endlessh.enable = true; #ssh honeypot
-  services.endlessh.port = 22;
-  services.endlessh.openFirewall = true;
-  services.sshguard.enable = true; #protection against brute force attacks like fail2ban
 
   users.users."root".openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHTExYoT3+flrd2wPYiT7sFFDmAUqi2YAz0ldQg7WMop"
@@ -174,9 +158,9 @@ users.users."gunalx".openssh.authorizedKeys.keys = [
     checkReversePath = "loose";
     trustedInterfaces = [ "tailscale0" ];
     allowedUDPPorts = [
-      8096
       80
       443
+      6969
       #config.services.openssh.ports
       config.services.tailscale.port
       config.services.headscale.port
