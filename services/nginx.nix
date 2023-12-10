@@ -1,8 +1,4 @@
 { config, pkgs, lib, ... }:
-let
-  basicAuthUser = "guest";
-  basicAuthPass = ""; 
-in
 {  
 
   #acme and certs helpful blog https://carjorvaz.com/posts/
@@ -47,9 +43,7 @@ in
         proxyWebsockets = true;
         proxyPass = "http://100.104.182.48";
       };
-      basicAuth = {
-        guest = basicAuthPass;
-      };
+      basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
     };
 
     virtualHosts.${"funn-nas.lauterer.it"} = {
@@ -59,9 +53,7 @@ in
         proxyWebsockets = true;
         proxyPass = "https://100.104.182.48:30044";
       };
-      basicAuth = {
-        guest = basicAuthPass;
-      };
+      basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
     };
 
    # virtualHosts.${"vpn."+config.networking.domain} = {
@@ -90,9 +82,7 @@ in
    #   locations."/" = {
    #     proxyPass = "http://jellyfin.galadriel";
    #     proxyWebsockets = true;
-   #     basicAuth = {
-   #       guest = basicAuthPass;
-   #     };
+   #     basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
    #   };
    # };
   };
