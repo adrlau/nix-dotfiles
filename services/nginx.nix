@@ -19,6 +19,13 @@
   users.users.nginx.extraGroups = [ "acme" ];
   users.users.root.extraGroups = [ "acme" ];
 
+  #declare secrets
+  sops.secrets."acme/certs" = {  };
+  sops.secrets."nginx/defaultpass" = {
+    restartUnits = [ "nginx.service" ];
+    owner = "nginx";
+  };
+
   #TODO add oauth2 proxy to auth
   # services.oauth2_proxy = {
   #   enable = true;

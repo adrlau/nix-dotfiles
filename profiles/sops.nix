@@ -25,7 +25,5 @@
 
   # This is the actual specification of the secrets.
   #sops.secrets."myservice/my_subdir/my_secret" = {};
-  sops.secrets."acme/certs" = {  };
-  sops.secrets."nginx/defaultpass" = {  };
 
 }
