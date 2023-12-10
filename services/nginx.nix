@@ -42,20 +42,25 @@
     recommendedGzipSettings = true;
     recommendedOptimisation = true;
 
+    logError = "syslog:server=unix:/dev/log";
+    commonHttpConfig = ''
+     access_log syslog:server=unix:/dev/log;
+    '';
 
-    virtualHosts.${"managment.funn-nas.lauterer.it"} = {
+
+    virtualHosts."managment.funn-nas.lauterer.it" = {
       forceSSL = true;
-      useACMEHost = "${config.networking.domain}";
+      useACMEHost = config.networking.domain;
       locations."/" = {
         proxyWebsockets = true;
-        proxyPass = "http://100.104.182.48";
+        proxyPass = "https://100.104.182.48";
       };
       basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
     };
 
-    virtualHosts.${"funn-nas.lauterer.it"} = {
+    virtualHosts."funn-nas.lauterer.it" = {
       forceSSL = true;
-      useACMEHost = "${config.networking.domain}";
+      useACMEHost = config.networking.domain;
       locations."/" = {
         proxyWebsockets = true;
         proxyPass = "https://100.104.182.48:30044";

@@ -6,9 +6,9 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ../../profiles/base.nix
-      ../../services/ssh.nix
-      ../../services/nginx.nix
+      ../../profiles/webhost.nix
+      #../../services/ssh.nix
+      #../../services/nginx.nix
     ];
 
 
@@ -138,19 +138,19 @@ users.users."gunalx".openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEj+Y0RUrSaF8gUW8m2BY6i8e7/0bUWhu8u8KW+AoHDh gunalx@nixos"
   ];
 
-  #fail2ban
-  services.fail2ban = {
-    enable = true;
-    maxretry = 5;
-    ignoreIP = [
-      "127.0.0.0/8" 
-      "10.0.0.0/8" 
-      "100.64.0.0/8" 
-      "172.16.0.0/12"
-      "192.168.0.0/16"
-      "8.8.8.8"
-    ];
-  };
+  #fail2ban moved to service file
+  #services.fail2ban = {
+  #  enable = true;
+  #  maxretry = 5;
+  #  ignoreIP = [
+  #     "127.0.0.0/8" 
+  #     "10.0.0.0/8" 
+  #     "100.64.0.0/8" 
+  #     "172.16.0.0/12"
+  #     "192.168.0.0/16"
+  #     "8.8.8.8"
+  #   ];
+  # };
 
   #firewall options
   networking.firewall = {

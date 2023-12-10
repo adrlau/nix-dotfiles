@@ -3,7 +3,7 @@
 imports =
     [ 
       ../packages/vim.nix
-      ./sops.nix
+      ../services/ssh.nix
     ];
 
   #nix stuff
