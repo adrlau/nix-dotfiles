@@ -83,8 +83,12 @@
   services.tandoor-recipes.enable = true;
   
 ##media
+  users.groups.media.members = ["jellyfin"]; #have media directory owned by media group
+  services.jellyfin.group = "media"; 
   services.jellyfin.enable = true;
-  services.komga.enable = true;
+
+
+#  services.komga.enable = true;
   
   services.polaris.enable = true;
   services.navidrome.enable = true;
