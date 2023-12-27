@@ -2,7 +2,7 @@
 {
   environment.systemPackages = [
     pkgs.openssh
-    pkgs.endlessh
+    pkgs.endlessh-go
     pkgs.sshguard
   ];
 
@@ -21,12 +21,10 @@
     #  # remove some weaker ciphers
     #];
   };
-  services.endlessh = {
+  services.endlessh-go = {
     enable = true;
     port = 22;
     openFirewall = true;
   };
   services.sshguard.enable = true; #protection against brute force attacks like fail2ban
-
-
 }
