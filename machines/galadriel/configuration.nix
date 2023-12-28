@@ -7,7 +7,11 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./vim.nix
+     ./vim.nix
+     ./openvpn.nix
+     ../../profiles/base.nix
+     ../../profiles/sops.nix
+     #../../services/torrent.nix
     ];
 
   networking.hostName = "galadriel"; # Define your hostname.
@@ -113,7 +117,7 @@
   
 #indexing
   services.prowlarr.enable = true;
-  services.jackett.enable = true;
+  #services.jackett.enable = true;
   
   #torrent managment
   services.transmission.enable = true;
