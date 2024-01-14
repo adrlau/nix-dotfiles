@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 {
-
+  imports = [ ./cachix.nix ]; # Import the cachix cache for cuda packages
   # Enable OpenGL
   hardware.opengl = {
     enable = true;
@@ -14,7 +14,6 @@
   #boot with nvidia kernel module
   boot.initrd.kernelModules = [ "nvidia" ];
   hardware.nvidia = {
-
     # Modesetting is required.
     modesetting.enable = true;
 
@@ -40,4 +39,16 @@
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
+
+
+  # Enable the CUDA toolkit
+  #install packages 
+  environment.systemPackages = with pkgs; [
+    cudaPackages.cudnn
+    cudaPackages.cudatoolkit
+    cudaPackages.tensorrt
+    
+  ];
+
+
 }

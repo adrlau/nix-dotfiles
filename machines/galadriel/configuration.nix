@@ -7,11 +7,13 @@
 {
   imports =
     [ # Include the results of the hardware scan.
+     ./hardware-configuration.nix
      ./vim.nix
      ./nvidia.nix
      ./openvpn.nix
      ../../profiles/base.nix
      ../../profiles/sops.nix
+     ./zfs.nix
      #../../services/torrent.nix
     ];
 
@@ -68,10 +70,8 @@
       jellyfin-mpv-shim
       jftui
       sonixd
-      sonarr
-      bazarr
       unpackerr
-      freshrss
+      qbittorrent-nox
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -105,23 +105,20 @@
   services.calibre-web.enable = true;
   #services.calibre-server.enable = true;
   
-  services.freshrss.enable = true; #rss aggregator
-  services.freshrss.baseUrl = "http://127.0.0.1";
-  services.freshrss.passwordFile = "/run/secrets/freshrss";
+  # services.freshrss.enable = true; #rss aggregator
+  # services.freshrss.baseUrl = "http://127.0.0.1";
+  # services.freshrss.passwordFile = "/run/secrets/freshrss";
 
 ##downloading
   #autodownload
-  services.sonarr.enable = true;
-  services.radarr.enable = true;
-  services.lidarr.enable = true;
-  services.bazarr.enable = true;
+  # services.sonarr.enable = true;
+  # services.radarr.enable = true;
+  # services.lidarr.enable = true;
+  # services.bazarr.enable = true;
   
 #indexing
-  services.prowlarr.enable = true;
+  # services.prowlarr.enable = true;
   #services.jackett.enable = true;
-  
-  #torrent managment
-  services.transmission.enable = true;
   
 ##networking
   # Enable the OpenSSH daemon.
@@ -159,14 +156,14 @@
 
   
   #mounts
-  fileSystems."/mnt/nas" = {
-    device = "192.168.1.137:/mnt/Main/Home";
-    fsType = "nfs";
+  # fileSystems."/mnt/nas" = {
+  #   device = "192.168.1.137:/mnt/Main/Home";
+  #   fsType = "nfs";
     
-    options = [ 
-      #"nfsvers=4.2" 
-      "x-systemd.automount" "noauto"
-      "x-systemd.idle-timeout=600"
-      ];
-  };
+  #   options = [ 
+  #     #"nfsvers=4.2" 
+  #     "x-systemd.automount" "noauto"
+  #     "x-systemd.idle-timeout=600"
+  #     ];
+  # };
 }
