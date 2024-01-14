@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
      ./vim.nix
+     ./nvidia.nix
      ./openvpn.nix
      ../../profiles/base.nix
      ../../profiles/sops.nix
