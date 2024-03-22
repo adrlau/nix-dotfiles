@@ -8,7 +8,7 @@
   services.zfs.autoSnapshot.enable = true;
   services.zfs.autoSnapshot.flags = "-k -p --utc";
 
-  environment.packages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     zfs
     zfsnap
     zfstools

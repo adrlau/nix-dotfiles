@@ -34,7 +34,8 @@ imports =
   '';
 
   #nix stuff
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.gc.automatic = true;
   system.autoUpgrade.enable = true;
-
+  
 }

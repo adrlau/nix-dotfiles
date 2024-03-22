@@ -14,6 +14,9 @@
      ../../profiles/base.nix
      ../../profiles/sops.nix
      ./zfs.nix
+     ./backup.nix
+     ../../services/stableDiffusion.nix
+     #../../services/freshrrs.nix 
      #../../services/torrent.nix
     ];
 
@@ -72,6 +75,9 @@
       sonixd
       unpackerr
       qbittorrent-nox
+      python310
+      python310Packages.torchWithCuda
+      ollama
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -100,26 +106,10 @@
   
   services.podgrab.enable = true;
   services.podgrab.port = 4242;
-
   
   services.calibre-web.enable = true;
   #services.calibre-server.enable = true;
-  
-  # services.freshrss.enable = true; #rss aggregator
-  # services.freshrss.baseUrl = "http://127.0.0.1";
-  # services.freshrss.passwordFile = "/run/secrets/freshrss";
 
-##downloading
-  #autodownload
-  # services.sonarr.enable = true;
-  # services.radarr.enable = true;
-  # services.lidarr.enable = true;
-  # services.bazarr.enable = true;
-  
-#indexing
-  # services.prowlarr.enable = true;
-  #services.jackett.enable = true;
-  
 ##networking
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;

@@ -1,6 +1,5 @@
 { config, lib, pkgs, ... }:
 {
-  imports = [ ./cachix.nix ]; # Import the cachix cache for cuda packages
   # Enable OpenGL
   hardware.opengl = {
     enable = true;
@@ -30,25 +29,25 @@
     # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
     # Only available from driver 515.43.04+
     # Currently alpha-quality/buggy, so false is currently the recommended setting.
-    open = false;
+      open = false;
 
-    # Enable the Nvidia settings menu,
-	# accessible via `nvidia-settings`.
-    nvidiaSettings = true;
+      # Enable the Nvidia settings menu,
+          # accessible via `nvidia-settings`.
+      #nvidiaSettings = true;
 
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-
-
-  # Enable the CUDA toolkit
-  #install packages 
-  environment.systemPackages = with pkgs; [
-    cudaPackages.cudnn
-    cudaPackages.cudatoolkit
-    cudaPackages.tensorrt
-    
-  ];
+      # Optionally, you may need to select the appropriate driver version for your specific GPU.
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+    };
 
 
-}
+    # Enable the CUDA toolkit
+    #install packages 
+    environment.systemPackages = with pkgs; [
+      cudaPackages.cudnn
+      cudaPackages.cudatoolkit
+      cudaPackages.tensorrt_8_6_0
+      
+    ];
+
+
+  }
