@@ -6,7 +6,7 @@ imports =
       ./sops.nix
       ../services/nginx.nix
       #../services/authelia.nix
-      ../services/fail2ban.nix
+      #../services/fail2ban.nix
     ];
 
 }

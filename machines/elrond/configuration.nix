@@ -22,7 +22,6 @@
   networking.useDHCP = false;                   
   networking.interfaces.ens3.useDHCP = true; # lmao interface is not constant. I really only want to use dhcp att all so could remove this in favor of the old way.
   networking.hostName = "elrond"; # Define your hostname.
-  networking.domain = "addictedmaker.eu"; # Define your domain.
   
   boot.kernel.sysctl = {
 	"net.ipv4.conf.all.forwarding" = true;
