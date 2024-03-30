@@ -18,7 +18,16 @@
      ../../services/stableDiffusion.nix
      #../../services/freshrrs.nix 
      #../../services/torrent.nix
-    ];
+
+   ];
+
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true; 
+
 
   networking.hostName = "galadriel"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -91,7 +100,7 @@
   # List services that you want to enable:
 
 ##productivity
-  services.tandoor-recipes.enable = true;
+  #services.tandoor-recipes.enable = true;
   
 ##media
   users.groups.media.members = ["jellyfin"]; #have media directory owned by media group
@@ -101,13 +110,13 @@
 
 #  services.komga.enable = true;
   
-  services.polaris.enable = true;
-  services.navidrome.enable = true;
+  #services.polaris.enable = true;
+  #services.navidrome.enable = true;
   
-  services.podgrab.enable = true;
-  services.podgrab.port = 4242;
+  #services.podgrab.enable = true;
+  #services.podgrab.port = 4242;
   
-  services.calibre-web.enable = true;
+  #services.calibre-web.enable = true;
   #services.calibre-server.enable = true;
 
 ##networking
@@ -156,4 +165,19 @@
   #     "x-systemd.idle-timeout=600"
   #     ];
   # };
+
+
+
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "23.11"; # Did you read the comment?
+
+
+
+
+
 }
