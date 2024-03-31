@@ -5,14 +5,14 @@
     pkgs.sops
   ];
 
-  imports = [ "${builtins.fetchTarball "https://github.com/Mic92/sops-nix/archive/master.tar.gz"}/modules/sops" ];
+#  imports = [ nix-sops ];
   
   # This will add secrets.yml to the nix store
   # You can avoid this by adding a string to the full path instead, i.e.
   # sops.defaultSopsFile = "/root/.sops/secrets/example.yaml";
   sops.defaultSopsFile = "/etc/nixos/nix-dotfiles/secrets/secrets.yaml";
   sops.validateSopsFiles = false;
-  # This will automatically import SSH keys as age keys
+  # This will automaticx-sopsally import SSH keys as age keys
   sops.age.sshKeyPaths = [
 			  "/etc/ssh/nixos"
 			  #"/$HOME/.ssh/nixos"

@@ -5,17 +5,11 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    nix-darwin.url = "github:lnl7/nix-darwin/master";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     matrix-synapse-next.url = "github:dali99/nixos-matrix-modules";
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
-
-    # voyager-addons.url = "git+ssh://git@git.feal.no:2222/felixalb/voyager-addons.git";
-    voyager-addons.url = "git+file:///home/felixalb/voyager-addons";
 
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
