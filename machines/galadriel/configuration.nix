@@ -15,7 +15,8 @@
      ../../profiles/sops.nix
      ./zfs.nix
      ./backup.nix
-     ../../services/stableDiffusion.nix
+     ../../services/smb.nix
+     #../../services/stableDiffusion.nix
      #../../services/freshrrs.nix 
      #../../services/torrent.nix
 
