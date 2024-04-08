@@ -81,8 +81,8 @@
       sonixd
       unpackerr
       qbittorrent-nox
-      python310
-      python310Packages.torchWithCuda
+      python3
+      python3Packages.torchWithCuda
       ollama
   ];
 
@@ -124,18 +124,15 @@
   services.tailscale.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  networking.firewall.enable = false;
+  networking.firewall.allowedTCPPorts = [ 22 80 8090 8096 443 433 6969 1194 ];
+  networking.firewall.allowedUDPPorts = [ 22 80 8090 8096 443 433 6969 1194 ];
+  networking.firewall.enable = true;
 
 ##storage
 
   
   #autofs
   #services.autofs.enable = true;
-
-  #smb share
   
   #nfs share
   #services.nfs.server = {
