@@ -50,6 +50,14 @@ imports =
   #nix stuff
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.gc.automatic = true;
-  system.autoUpgrade.enable = true;
+  system.autoUpgrade = {
+    enable = true;
+    flake = "git+https://github.com/adrlau/nix-dotfiles.git";
+    flags = [
+      "--update-input" "nixpkgs"
+      "--update-input" "nixpkgs-unstable"
+      "--no-write-lock-file"
+    ];
+  };
   
 }
