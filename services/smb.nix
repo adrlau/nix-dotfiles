@@ -59,7 +59,7 @@ networking.firewall.allowPing = true;
 
 
 
-services.avahi.openfirewall = true;
+#services.avahi.openfirewall = true;
 services.avahi = {
     enable = true;
     nssmdns = true;
