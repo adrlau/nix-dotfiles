@@ -3,6 +3,7 @@
 
 
 services.samba = {
+  package = pkgs.samba4Full;
   enable = true;
   securityType = "user";
   openFirewall = true;
@@ -13,13 +14,13 @@ services.samba = {
     security = user 
     #use sendfile = yes
     #max protocol = smb2
-    min protocol = SMB2
+    min protocol = SMB3_00
+    server smb encrypt = required
     # note: localhost is the ipv6 localhost ::1
     hosts allow = 192.168.1. 127.0.0.1 localhost 100.
     hosts deny = 0.0.0.0/0
-    guest account = nobody
+    guest account = guest
     map to guest = bad user
-    smb encrypt = required
   '';
   shares = {
    # public = {
@@ -39,9 +40,9 @@ services.samba = {
       "force group" = "gunalx";
       browseable = "yes";
       "read only" = "no";
-      "guest ok" = "no";
-      "create mask" = "0644";
-      "directory mask" = "0755";
+      "guest ok" = "yes";
+      "create mask" = "0777";
+      "directory mask" = "0777";
     };
   };
 };
@@ -53,6 +54,40 @@ services.samba-wsdd = {
 
 #networking.firewall.enable = true;
 networking.firewall.allowPing = true;
+
+
+
+
+
+services.avahi.openfirewall = true;
+services.avahi = {
+    enable = true;
+    nssmdns = true;
+    nssmdns4 = true;
+    publish = {
+      enable = true;
+      addresses = true;
+      domain = true;
+      hinfo = true;
+      userServices = true;
+      workstation = true;
+    };
+    extraServiceFiles = {
+      smb = ''
+        <?xml version="1.0" standalone='no'?><!--*-nxml-*-->
+        <!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+        <service-group>
+          <name replace-wildcards="yes">%h</name>
+          <service>
+            <type>_smb._tcp</type>
+            <port>445</port>
+          </service>
+        </service-group>
+      '';
+    };
+  };
+
+
 
 
 }

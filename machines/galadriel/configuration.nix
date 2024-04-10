@@ -124,8 +124,8 @@
   services.tailscale.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 80 8090 8096 443 433 6969 1194 ];
-  networking.firewall.allowedUDPPorts = [ 22 80 8090 8096 443 433 6969 1194 ];
+  networking.firewall.allowedTCPPorts = [ 22 80 8090 8096 443 433 6969 1194 445 139];
+  networking.firewall.allowedUDPPorts = [ 22 80 8090 8096 443 433 6969 1194 137 138];
   networking.firewall.enable = true;
 
 ##storage
