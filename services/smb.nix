@@ -14,8 +14,8 @@ services.samba = {
     #use sendfile = yes
     #max protocol = smb2
     # note: localhost is the ipv6 localhost ::1
-    hosts allow = 192.168.0. 127.0.0.1 localhost 100.0.0.0/8
-    hosts deny = 0.0.0.0/0
+    hosts allow = 192.168.1.0/24 127.0.0.1 localhost 100.0.0.0/8
+    # hosts deny = 0.0.0.0/0
     guest account = nobody
     map to guest = bad user
   '';
