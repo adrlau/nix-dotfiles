@@ -7,17 +7,19 @@ services.samba = {
   securityType = "user";
   openFirewall = true;
   extraConfig = ''
-    #workgroup = WORKGROUP
+    workgroup = WORKGROUP
     server string = galadriel
     netbios name = galadriel
     security = user 
     #use sendfile = yes
     #max protocol = smb2
+    min protocol = SMB2
     # note: localhost is the ipv6 localhost ::1
     hosts allow = 192.168.1. 127.0.0.1 localhost 100.
     hosts deny = 0.0.0.0/0
     guest account = nobody
     map to guest = bad user
+    smb encrypt = required
   '';
   shares = {
    # public = {
