@@ -15,6 +15,9 @@ imports =
       git
       rsync
       ripgrep
+      htop
+      bottom
+      foot.terminfo
       tailscale
     ];
 

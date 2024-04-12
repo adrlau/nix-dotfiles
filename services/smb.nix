@@ -17,9 +17,9 @@ services.samba = {
     min protocol = SMB3_00
     server smb encrypt = required
     # note: localhost is the ipv6 localhost ::1
-    hosts allow = 192.168.1. 127.0.0.1 localhost 100.
+    hosts allow = 192.168.1. 192.168.0. 127.0.0.1 localhost 100.0.0.0/255.0.0.0 
     hosts deny = 0.0.0.0/0
-    guest account = guest
+    guest account = nobody
     map to guest = bad user
   '';
   shares = {
@@ -35,14 +35,13 @@ services.samba = {
    # };
     Backup = {
       path = "/Main/Backup";
-      "valid users" = "gunalx";
+      browseable = "yes";
       "force user" = "gunalx";
       "force group" = "gunalx";
-      browseable = "yes";
       "read only" = "no";
-      "guest ok" = "yes";
-      "create mask" = "0777";
-      "directory mask" = "0777";
+      "guest ok" = "no";
+      "create mask" = "0644";
+      "directory mask" = "0755";
     };
   };
 };
@@ -54,9 +53,6 @@ services.samba-wsdd = {
 
 #networking.firewall.enable = true;
 networking.firewall.allowPing = true;
-
-
-
 
 
 #services.avahi.openfirewall = true;
