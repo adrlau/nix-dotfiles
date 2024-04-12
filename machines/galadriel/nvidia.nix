@@ -45,7 +45,7 @@
     environment.systemPackages = with pkgs; [
       cudaPackages.cudnn
       cudaPackages.cudatoolkit
-      cudaPackages.tensorrt_8_6_0
+      #cudaPackages.tensorrt_8_6_0
       
     ];
 
