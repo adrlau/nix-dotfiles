@@ -2,10 +2,10 @@
 
 let
   cfg = config.services.qbittorrent-nox;
-  cfgPath = "/var/lib/qbittorrent/.config/qBittorrent/qBittorrent.conf";
   path = "/var/lib/qbittorrent";
+  cfgPath = "${path}/.config/qBittorrent/qBittorrent.conf";
 
-  configurationFile = lib.writeText "${cfgPath}" ''
+  configurationFile = pkgs.writeText "qbittorrent-nox.conf" ''
     [Application]
     FileLogger\Age=${toString cfg.Filelogger.age}
     FileLogger\AgeType=${toString cfg.Filelogger.ageType}
@@ -24,7 +24,7 @@ let
     Session\BTProtocol=${cfg.BTProtocol}
     Session\BandwidthSchedulerEnabled=${toString cfg.BandwidthSchedulerEnabled}
     Session\DefaultSavePath=${cfg.DefaultSavePath}
-    Session\Encryption=${ lib.mkIf cfg.Encryption "1" "0" }
+    Session\Encryption=${toString cfg.Encryption }
     Session\ExcludedFileNames=${cfg.ExcludedFileNames}
     Session\FinishedTorrentExportDirectory=${cfg.FinishedTorrentExportDirectory}
     Session\GlobalDLSpeedLimit=${toString cfg.GlobalDLSpeedLimit}
@@ -190,8 +190,9 @@ in
     };
 
     Encryption = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
+      type = lib.types.int;
+      default = 1;
+      example = "0";
       description = "Enable encryption.";
     };
 
@@ -439,12 +440,6 @@ in
       default = false;
       description = "RSS Session enable processing.";
     };
-
-    configFile = lib.mkOption {
-      type = lib.types.path;
-      default = "${cfgPath}";
-      description = "Path to qbittorrent-nox configuration file.";
-    };
     
   };
 
@@ -455,7 +450,7 @@ in
 
     users.users = lib.mkIf (cfg.user == "qbittorrent") {
       qbittorrent = {
-        isSystemUser = true;
+        isNormalUser = true;
         home = path;
         group = cfg.group;
       };
@@ -466,7 +461,9 @@ in
 
     systemd.services."qbittorrent-nox" ={
       serviceConfig = {
-        ExecStart = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --configuration=${cfg.configFile}";
+        #create the configuration file from string using echo
+        ExecStartPre = "${pkgs.coreutils}/bin/cat ${configurationFile}";
+        ExecStart = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --configuration=${configurationFile}";
         User = cfg.user;
         Group = cfg.group;
         Restart = "on-failure";

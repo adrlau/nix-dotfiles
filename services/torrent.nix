@@ -4,6 +4,17 @@ let
   torrentPort = 44183;
   savePath = "/Main/Data/media/Downloads/";
   path = "/var/lib/qbittorrent";
+
+
+  
+
+
+
+
+
+
+
+
 in
 {
   networking.firewall.allowedTCPPorts = [ port torrentPort];
@@ -27,19 +38,18 @@ in
       Group = "qbittorrent";
       Restart = "on-failure";
 
-      #DynamicUser = true;
-      #RuntimeDirectory = "qbittorrent";
-      #InaccessiblePaths = [ "/home" "/root" "/run" "/boot" "/etc" "/proc" "/sys" "/usr" "/lib" "/bin" "/sbin" "/srv" "/opt" ];
+      DynamicUser = true;
+      InaccessiblePaths = [ "/home" "/root" "/run" "/boot" "/etc" "/proc" "/sys" "/usr" "/lib" "/bin" "/sbin" "/srv" "/opt" ];
       
       # Security options
-      #PrivateTmp = true;
-      #ProtectSystem = "full";
-      #ProtectKernelTunables = true;
-      #ProtectKernelModules = true;
-      #ProtectControlGroups = true;
-      #NoNewPrivileges = true;
-      #ProtectHome = true;
-      #PrivateDevices = true;
+      PrivateTmp = true;
+      ProtectSystem = "full";
+      ProtectKernelTunables = true;
+      ProtectKernelModules = true;
+      ProtectControlGroups = true;
+      NoNewPrivileges = true;
+      ProtectHome = true;
+      PrivateDevices = true;
     };
   };
 }
