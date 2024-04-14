@@ -16,7 +16,7 @@
      ./zfs.nix
      ./backup.nix
      ../../services/smb.nix
-     ../../services/qbittorrent.nix
+     ../../services/torrent.nix
      #../../services/stableDiffusion.nix
      #../../services/freshrrs.nix 
      #../../services/torrent.nix
