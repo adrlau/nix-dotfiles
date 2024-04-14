@@ -5,6 +5,8 @@
     viAlias = true;
     vimAlias = true;
     defaultEditor = true;
+    withPython3 = true;
+    withNodeJs = true;
 
     configure = {
       customRC = ''
@@ -16,7 +18,7 @@
         " ...
       '';
       packages.myplugins = with pkgs.vimPlugins; {
-        start = [ vim-nix vim-lastplace vim-yaml ];
+        start = [ vim-nix vim-lastplace vim-yaml coc-rust-analyzer neovim-fuzzy LanguageClient-neovim copilot-vim chadtree];
         opt = [];
       };
     };
