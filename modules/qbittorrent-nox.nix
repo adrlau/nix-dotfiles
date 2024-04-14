@@ -456,7 +456,7 @@ in
     users.users = lib.mkIf (cfg.user == "qbittorrent") {
       qbittorrent = {
         isSystemUser = true;
-        home = "/var/lib/qbittorrent";
+        home = path;
         group = cfg.group;
       };
     };
@@ -464,9 +464,9 @@ in
       qbittorrent = {};
     };
 
-    systemd.services."qbittorrent-nox@" ={
+    systemd.services."qbittorrent-nox" ={
       serviceConfig = {
-        ExecStart = "qbittorrent-nox -d --configuration=${cfg.configFile}";
+        ExecStart = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --configuration=${cfg.configFile}";
         User = cfg.user;
         Group = cfg.group;
         Restart = "on-failure";
