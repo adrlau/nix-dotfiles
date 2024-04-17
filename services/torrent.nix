@@ -4,9 +4,14 @@ let
   torrentPort = 44183;
   savePath = "/Main/Data/media/Downloads/";
   path = "/var/lib/qbittorrent";
-  interfaceAddress = pkgs.coreutils + "/bin/cat ${config.sops.secrets."qbittorrent/interfaceAddress".path}";
+  #p[-interfaceAddress = pkgs.coreutils + "/bin/cat ${config.sops.secrets."qbittorrent/interfaceAddress".path}";
+  #interfaceAddress = "${config.sops.placeholder."qbittorrent/interfaceAddress"}";
 
-configurationFile = pkgs.writeText "qbittorrent.conf" ''
+  interfaceAddress = "${config.sops.templates."qbittorrent/interfaceAddress".content}";
+
+  contentLayout = "Subfolder";
+
+  configurationFile = pkgs.writeText "qbittorrent.conf" ''
 [Application]
 FileLogger\Age=1
 FileLogger\AgeType=1
@@ -47,6 +52,7 @@ Session\SubcategoriesEnabled=true
 Session\Tags=movie, anime
 Session\TempPath=/Main/Data/media/Downloads/temp
 Session\TempPathEnabled=true
+Session\TorrentContentLayout=${contentLayout}
 Session\TorrentExportDirectory=/Main/Data/media/Downloads/torrents
 Session\UseAlternativeGlobalSpeedLimit=false
 
@@ -60,7 +66,6 @@ Accepted=true
 MigrationVersion=6
 
 [Network]
-Cookies="__ddg1_=taU4w9Chkfjo3Llq2wDx; HttpOnly; expires=Sun, 09-Feb-2025 16:45:23 GMT; domain=.nyaa.si; path=/"
 PortForwardingEnabled=true
 
 [Preferences]
@@ -87,42 +92,34 @@ in
   imports = [
     ../profiles/sops.nix
   ];
-
-  sops.secrets."qbittorrent/interfaceAddress" = {};
   
   networking.firewall.allowedTCPPorts = [ port torrentPort];
   networking.firewall.allowedUDPPorts = [ port torrentPort];
 
+  sops.secrets."qbittorrent/interfaceAddress" = {};
+
   users.users.qbittorrent = {
     isNormalUser = true; #make this a normal user to be able to make files
     home = path;
-    group = "qbittorrent";
+    group = "media";
   };
   users.groups.qbittorrent = {};
 
   systemd.services."qbittorrent-nox" = {
     after = [ "network.target" ];
-    #environment.HOME = "/var/lib/qbittorrent";
+    wants = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
 
     serviceConfig = {
-      ExecStartPre = "${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/mkdir -p ${path} && ${pkgs.coreutils}/bin/chown -R qbittorrent:qbittorrent ${path} && ${pkgs.coreutils}/bin/chmod -R 755 ${path} && ${pkgs.coreutils}/bin/cp ${configurationFile} ${path}/.config/qBittorrent/qBittorrent.conf'";
+      ExecStartPre = "${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/mkdir -p ${path} && ${pkgs.coreutils}/bin/chmod -R 755 ${path} && ${pkgs.coreutils}/bin/cp ${configurationFile} ${path}/.config/qBittorrent/qBittorrent.conf'";
       ExecStart = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox";
       User = "qbittorrent";
-      Group = "qbittorrent";
+      Group = "media";
       Restart = "on-failure";
 
-      #DynamicUser = true;
-      #InaccessiblePaths = [ "/home" "/root" "/boot" "/etc" "/proc" "/sys" "/usr" "/lib" "/bin" "/sbin" "/srv" "/opt" ];
-      
-      # Security options
-      #PrivateTmp = true;
-      #ProtectSystem = "full";
-      #ProtectKernelTunables = true;
-      #ProtectKernelModules = true;
-      #ProtectControlGroups = true;
-      #NoNewPrivileges = true;
-      #ProtectHome = true;
-      #PrivateDevices = true;
+      ProtectKernelModules = true;
+      NoNewPrivileges = true;
     };
+
   };
 }
