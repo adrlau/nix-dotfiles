@@ -1,8 +1,7 @@
 {pkgs, lib, ...}:
-let
-  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
-in
 {
+  
+  unstable.config.allowUnfree = true;
   home-manager.users.gunalx = {
       #vscode with home manager
       programs.vscode = {

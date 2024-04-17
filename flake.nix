@@ -34,7 +34,7 @@
         
        
         # aragon = nixpkgs.lib.nixosSystem {
-        #   system = "x86_64-linux";
+        #   system = "x83_64-linux";
         #   specialArgs = {
         #     inherit inputs;
         #   };
@@ -53,8 +53,21 @@
         # };
 
 
-       
+        aragon = nixpkgs.lib.nixosSystem {
+          system = "x84_64-linux";
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = [
+            # Overlays-module makes "pkgs.unstable" available in configuration.nix
+            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
+            ./machines/aragon/configuration.nix
+            sops-nix.nixosModules.sops
+          ];
+        };
+        
 
+      
         galadriel = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {

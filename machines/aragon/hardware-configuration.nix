@@ -9,11 +9,29 @@
     ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "sr_mod" ];
-  #boot.initrd.kernelModules = ["amdgou" ];
   boot.initrd.kernelModules = ["amdgpu" ];
 
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+  
+  services.xserver.videoDrivers = [ "amdgpu" ];
+  systemd.tmpfiles.rules = [
+    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+  ];
+  hardware.opengl.extraPackages = with pkgs; [
+    rocmPackages.clr.icd
+    #amdvlk
+    libva-utils
+  ];
+
+  #hardware.opengl.extraPackages32 = with pkgs; [
+  #  driversi686Linux.amdvlk
+  #];
+
+  hardware.opengl.driSupport = true; # This is already enabled by default
+  hardware.opengl.driSupport32Bit = true; # For 32 bit applications
+  
+
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/8ab16ad5-08d2-44f9-a9e4-2e6240bfd8f8";

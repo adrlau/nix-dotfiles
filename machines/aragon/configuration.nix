@@ -3,18 +3,23 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, lib, ... }:
-
 {
   imports =
     [ 	# Include the results of the hardware scan.
 	./hardware-configuration.nix
+        
+        
+        #profiles
+	../../profiles/base.nix
+       
+
 	
 	#home manager
-	./home.nix      	
+	#../../home/home.nix
 
 	#customised applications
-	./steam.nix
-	./podman.nix
+	../../home/steam.nix
+	../../services/podman.nix
     ];
 
   # Bootloader.
@@ -69,7 +74,7 @@
     xkbVariant = "";
   };
 
-fonts.fonts = with pkgs; [
+fonts.packages = with pkgs; [
   noto-fonts
   noto-fonts-cjk
   noto-fonts-emoji
@@ -97,11 +102,12 @@ fonts.fonts = with pkgs; [
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
+    
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -113,15 +119,15 @@ fonts.fonts = with pkgs; [
     description = "Adrian Gunnar Lauterer";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      firefox
-      kate
-
+      	firefox
+      	kate
+	unstable.ollama
         python310
 	python310Packages.scipy
 	python310Packages.sympy
 	python310Packages.numpy
 	python310Packages.matplotlib
-	python310Packages.torch
+	python310Packages.torchWithRocm
         python310Packages.torchvision
      	gcc
      	gpp
@@ -129,11 +135,24 @@ fonts.fonts = with pkgs; [
 	rustup
 	rustc
 	cargo
+	etcher
+	rpi-imager
+	minecraft
+	prismlauncher
+	hmcl
 
+        appimage-run
+	#unstable.alvr
 
+        easyeffects
+	
 
     ];
   };
+	#allow electron 19 becasue of etcher
+	nixpkgs.config.permittedInsecurePackages = [
+                "electron-19.1.9"
+              ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -155,15 +174,19 @@ fonts.fonts = with pkgs; [
 	python310Packages.sympy
 	python310Packages.numpy
 	python310Packages.matplotlib
-	python310Packages.torch
+	#python310Packages.torch
         python310Packages.torchvision
+        python310Packages.torchWithRocm
      	gcc
      	gpp
-	cmake
+	gdb
+   	cmake
 	rustup
 	rustc
 	cargo
 	cura
+	prusa-slicer
+	openscad
 	htop
 	killall
 	docker-compose
@@ -195,10 +218,12 @@ fonts.fonts = with pkgs; [
  services.udev.extraRules = ''
      ACTION=="add", SUBSYSTEM=="pci", DRIVER=="pcieport", ATTR{power/wakeup}="disabled"
   '';
- #  systemd.targets.sleep.enable = false;
- #  systemd.targets.suspend.enable = false;
- #  systemd.targets.hibernate.enable = false;
- #  systemd.targets.hybrid-sleep.enable = false;
+ 
+#comment out to enable sleep. Uncommented over vacations
+#  systemd.targets.sleep.enable = false;
+#   systemd.targets.suspend.enable = false;
+#   systemd.targets.hibernate.enable = false;
+#   systemd.targets.hybrid-sleep.enable = false;
   
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -218,7 +243,7 @@ fonts.fonts = with pkgs; [
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

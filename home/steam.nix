@@ -15,6 +15,12 @@
 
   environment.systemPackages = [
     pkgs.steam-run
+    pkgs.unstable.alvr
+    pkgs.openvr
+    pkgs.openhmd
+    pkgs.sidequest
+    pkgs.mplayer 
+    pkgs.appimage-run 
   ];
 
 
