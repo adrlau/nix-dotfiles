@@ -4,14 +4,10 @@ let
   torrentPort = 44183;
   savePath = "/Main/Data/media/Downloads/";
   path = "/var/lib/qbittorrent";
-  #p[-interfaceAddress = pkgs.coreutils + "/bin/cat ${config.sops.secrets."qbittorrent/interfaceAddress".path}";
-  #interfaceAddress = "${config.sops.placeholder."qbittorrent/interfaceAddress"}";
-
-  interfaceAddress = "${config.sops.templates."qbittorrent/interfaceAddress".content}";
 
   contentLayout = "Subfolder";
 
-  configurationFile = pkgs.writeText "qbittorrent.conf" ''
+  configurationFile = ''
 [Application]
 FileLogger\Age=1
 FileLogger\AgeType=1
@@ -40,7 +36,7 @@ Session\I2P\Enabled=true
 Session\IgnoreLimitsOnLAN=true
 Session\IncludeOverheadInLimits=true
 Session\Interface=tun0
-Session\InterfaceAddress=${interfaceAddress}
+Session\InterfaceAddress=${config.sops.placeholder."qbittorrent/interfaceAddress"}
 Session\InterfaceName=tun0
 Session\LSDEnabled=true
 Session\MaxActiveCheckingTorrents=15
@@ -96,7 +92,14 @@ in
   networking.firewall.allowedTCPPorts = [ port torrentPort];
   networking.firewall.allowedUDPPorts = [ port torrentPort];
 
-  sops.secrets."qbittorrent/interfaceAddress" = {};
+  sops.secrets."qbittorrent/interfaceAddress" = {
+  };
+
+  sops.templates."qbittorrent/configuration" = {
+    content = configurationFile;
+    path = "${path}/.config/qBittorrent/qBittorrent.conf";
+  };
+
 
   users.users.qbittorrent = {
     isNormalUser = true; #make this a normal user to be able to make files
@@ -111,7 +114,6 @@ in
     wantedBy = [ "multi-user.target" ];
 
     serviceConfig = {
-      ExecStartPre = "${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/mkdir -p ${path} && ${pkgs.coreutils}/bin/chmod -R 755 ${path} && ${pkgs.coreutils}/bin/cp ${configurationFile} ${path}/.config/qBittorrent/qBittorrent.conf'";
       ExecStart = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox";
       User = "qbittorrent";
       Group = "media";
