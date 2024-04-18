@@ -93,11 +93,16 @@ in
   networking.firewall.allowedUDPPorts = [ port torrentPort];
 
   sops.secrets."qbittorrent/interfaceAddress" = {
+    restartUnits = [ "qbittorrent-nox.service" ];
+    mode = "0755";
   };
 
   sops.templates."qbittorrent/configuration" = {
     content = configurationFile;
-    path = "${path}/.config/qBittorrent/qBittorrent.conf";
+    #path = "${path}/.config/qBittorrent/qBittorrent.conf";
+    owner = "qbittorrent";
+    mode = "0755";
+ 
   };
 
 
@@ -105,6 +110,7 @@ in
     isNormalUser = true; #make this a normal user to be able to make files
     home = path;
     group = "media";
+
   };
   users.groups.qbittorrent = {};
 
@@ -114,6 +120,7 @@ in
     wantedBy = [ "multi-user.target" ];
 
     serviceConfig = {
+      ExecStartPre = "${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/mkdir -p ${path} && ${pkgs.coreutils}/bin/chmod -R 755 ${path} && ${pkgs.coreutils}/bin/cp ${config.sops.templates."qbittorrent/configuration".path} ${path}/.config/qBittorrent/qBittorrent.conf'";
       ExecStart = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox";
       User = "qbittorrent";
       Group = "media";
