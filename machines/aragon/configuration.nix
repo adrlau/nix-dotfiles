@@ -149,10 +149,14 @@ fonts.packages = with pkgs; [
 
     ];
   };
-	#allow electron 19 becasue of etcher
-	nixpkgs.config.permittedInsecurePackages = [
-                "electron-19.1.9"
-              ];
+
+  programs.dconf.enable = true; #needed for easyeffects for some reason 
+
+  
+  #allow electron 15 becasue of etcher
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-19.1.9"
+  ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
