@@ -7,28 +7,45 @@ imports =
     ];
 
 
-
-
   environment.systemPackages = with pkgs; [
       vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-      wget
       git
+      wget
       rsync
       ripgrep
+      neofetch
       htop
       bottom
+      killall
       foot.terminfo
       tailscale
     ];
 
+  #just allow unfree, im fine with it. 
+  nixpkgs.config.allowUnfree = true; 
+  
 
+  # Set your time zone.
+  time.timeZone = "Europe/Oslo";
 
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
 
+  # Configure console
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "no";
+  };
 
-  #system vide bash aliases.
+  #tailscale
+  services.tailscale.enable = true;
+
+  #system vide bash aliases. TODO: check if only one of these works so i dont need duplicates.
+  programs.bash.shellAliases = config.environment.shellAliases;
   environment.shellAliases = {
       gst="git status";
-      gcm="git commit -m";
+      gcm="git commit -m";  
+      gca="git commit --amend";  
       gsw="git switch";
       gaa="git add -A";
       gb="git branch"; 
@@ -36,12 +53,10 @@ imports =
       la="ls -la";
       lls="ls"; 
   };
-
-  programs.bash.shellAliases = config.environment.shellAliases;
-
   environment.interactiveShellInit = ''
     alias gst='git status'
     alias gcm='git commit -m'
+    alias gca='git commit --amend'
     alias gsw='git switch'
     alias gaa='git add -A'
     alias gb='git branch'
@@ -49,6 +64,8 @@ imports =
     alias la='ls -la'
     alias lls='ls'
   '';
+
+  #TODO: ssh hosts.
 
   #nix stuff
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

@@ -9,40 +9,25 @@
       ./hardware-configuration.nix
       ../../profiles/webhost.nix
       ../../profiles/base.nix
+      ./routes.nix
     ];
-
-
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-
-
-  # Set your time zone.
-  time.timeZone = "Europe/Oslo";
-
-
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;                   
-  networking.interfaces.ens3.useDHCP = true; # lmao interface is not constant. I really only want to use dhcp att all so could remove this in favor of the old way.
+  networking.interfaces.ens3.useDHCP = true; # Interface is not constant. I really only want to use dhcp att all so could remove this in favor of the old way.
   networking.hostName = "elrond"; # Define your hostname.
   
   boot.kernel.sysctl = {
-	"net.ipv4.conf.all.forwarding" = true;
-	"net.ipv6.conf.all.forwarding" = true;
+    "net.ipv4.conf.all.forwarding" = true;
+    "net.ipv6.conf.all.forwarding" = true;
   };
   
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "no";
-
-  };
-
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -60,9 +45,6 @@
     initialPassword = "pw123";  # this is changed imedeately.
   };
 
-
-  #add proxyserver to acme
-  #users.users.kanidm.extraGroups = [ "acme" ];
 
 #sequrity managment through kanidm
 #  systemd.services.kanidm = let
@@ -133,30 +115,13 @@
 #    };
 #  };
 
-  #tailscale
-  services.tailscale.enable = true;
-
   users.users."root".openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHTExYoT3+flrd2wPYiT7sFFDmAUqi2YAz0ldQg7WMop"
   ];
-users.users."gunalx".openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHTExYoT3+flrd2wPYiT7sFFDmAUqi2YAz0ldQg7WMop"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEj+Y0RUrSaF8gUW8m2BY6i8e7/0bUWhu8u8KW+AoHDh gunalx@nixos"
+  users.users."gunalx".openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHTExYoT3+flrd2wPYiT7sFFDmAUqi2YAz0ldQg7WMop"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEj+Y0RUrSaF8gUW8m2BY6i8e7/0bUWhu8u8KW+AoHDh gunalx@nixos"
   ];
-
-  #fail2ban moved to service file
-  #services.fail2ban = {
-  #  enable = true;
-  #  maxretry = 5;
-  #  ignoreIP = [
-  #     "127.0.0.0/8" 
-  #     "10.0.0.0/8" 
-  #     "100.64.0.0/8" 
-  #     "172.16.0.0/12"
-  #     "192.168.0.0/16"
-  #     "8.8.8.8"
-  #   ];
-  # };
 
   #firewall options
   networking.firewall = {
@@ -166,19 +131,12 @@ users.users."gunalx".openssh.authorizedKeys.keys = [
     allowedUDPPorts = [
       80
       443
-      6969
-      #config.services.openssh.ports
       config.services.tailscale.port
-      config.services.headscale.port
+      #config.services.headscale.port
     ];
     allowedTCPPorts = config.networking.firewall.allowedUDPPorts;
   };
 
-
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

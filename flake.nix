@@ -32,26 +32,23 @@
     {
       nixosConfigurations = {
         
-       
-        # aragon = nixpkgs.lib.nixosSystem {
-        #   system = "x83_64-linux";
-        #   specialArgs = {
-        #     inherit inputs;
-        #   };
-        #   modules = [
-        #     # Overlays-module makes "pkgs.unstable" available in configuration.nix
-        #     ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
-
-        #     ./machines/aragon/configuration.nix
-        #     sops-nix.nixosModules.sops
-        #     home-manager.nixosModules.home-manager {
-        #       home-manager.useGlobalPkgs = true;
-        #       home-manager.useUserPackages = true;
-        #       home-manager.users."gunalx" = import ./home/home.nix;
-        #     }
-        #   ];
-        # };
-
+        #aragon = nixpkgs.lib.nixosSystem {
+        #  system = "x83_64-linux";
+        #  specialArgs = {
+        #    inherit inputs;
+        #  };
+        #  modules = [
+        #    # Overlays-module makes "pkgs.unstable" available in configuration.nix
+        #    ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
+        #    ./machines/aragon/configuration.nix
+        #    sops-nix.nixosModules.sops
+        #    home-manager.nixosModules.home-manager {
+        #      home-manager.useGlobalPkgs = true;
+        #      home-manager.useUserPackages = true;
+        #      home-manager.users."gunalx" = import ./home/home.nix;
+        #    }
+        #  ];
+        #};
 
         aragon = nixpkgs.lib.nixosSystem {
           system = "x84_64-linux";
@@ -67,7 +64,6 @@
         };
         
 
-      
         galadriel = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {

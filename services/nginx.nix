@@ -1,53 +1,16 @@
 { config, pkgs, lib, ... }:
 {  
   #declare secrets
-  sops.secrets."acme/certs" = {  };
   sops.secrets."nginx/defaultpass" = {
     restartUnits = [ "nginx.service" ];
     owner = "nginx";
   };
-
-
-  networking.enableIPv6 = false; # lol for some reason acme works without ipv6
-
-  networking.domain = "lauterer.it";
-  #acme and certs helpful blog https://carjorvaz.com/posts/
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "adrian+acme@lauterer.it";
-    certs."${config.networking.domain}" = {
-      domain = "*.${config.networking.domain}";
-      extraDomainNames = [ 
-        "${config.networking.domain}"
-        #"${config.networking.domain}"
-        #"lauterer.it"
-        #"*.lauterer.it"
-        #"*.256.no"
-      ];
-      
-      #server = "https://acme-staging-v02.api.letsencrypt.org/directory"; #for testing.
-      enableDebugLogs = true;
-
-
-
-      dnsResolver = "ns1.hyp.net:53";
-      dnsProvider = "domeneshop";   # from here according to provider https://go-acme.github.io/lego/dns/ 
-      dnsPropagationCheck = true;
-      #need to manually create this file according to dnsprovider secrets, and format of key according to lego in privider and add to secrets.yaml
-      credentialsFile =  config.sops.secrets."acme/certs".path; 
-    };
-  };
-
-  #add proxyserver to acme
-  users.users.nginx.extraGroups = [ "acme" ];
-  users.users.root.extraGroups = [ "acme" ];
-
   # services.oauth2_proxy = {
   #   enable = true;
   # }
 
 
-    #proxy stuff
+  #proxy stuff
   services.nginx = {
     enable = true;
     statusPage = true;

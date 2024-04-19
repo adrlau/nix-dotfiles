@@ -7,21 +7,21 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-     ./hardware-configuration.nix
-     ./vim.nix
-     ./nvidia.nix
-     ./openvpn.nix
-     ../../profiles/base.nix
-     ../../profiles/sops.nix
-     ./zfs.nix
-     ./backup.nix
-     ../../services/smb.nix
-     ../../services/torrent.nix
-     #../../services/stableDiffusion.nix
-     #../../services/freshrrs.nix 
-     #../../services/torrent.nix
+      ./hardware-configuration.nix
+      ./zfs.nix
+      ./nvidia.nix
+      ./openvpn.nix
+      ./backup.nix
 
-   ];
+      ../../profiles/base.nix
+      ../../profiles/sops.nix
+      #../../profiles/ai.nix
+
+      ../../services/smb.nix
+      ../../services/torrent.nix
+      #../../services/stableDiffusion.nix
+      #../../services/freshrrs.nix
+    ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -37,20 +37,7 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
-  time.timeZone = "Europe/Oslo";
 
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "no";
-    xkbVariant = "";
-  };
-
-  # Configure console keymap
-  console.keyMap = "no";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.gunalx = {
@@ -74,7 +61,6 @@
       tailscale
       nfs-utils
       cifs-utils
-      tailscale
       jellyfin
       jellyfin-web
       jellyfin-mpv-shim
@@ -118,12 +104,6 @@
   #services.calibre-server.enable = true;
 
 ##networking
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  
-  #tailscale
-  services.tailscale.enable = true;
-
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 80 8090 8096 443 433 6969 1194 445 139];
   networking.firewall.allowedUDPPorts = [ 22 80 8090 8096 443 433 6969 1194 137 138];
@@ -160,7 +140,6 @@
   #     "x-systemd.idle-timeout=600"
   #     ];
   # };
-
 
 
   # This value determines the NixOS release from which the default

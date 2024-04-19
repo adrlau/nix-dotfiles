@@ -26,5 +26,5 @@
     port = 22;
     openFirewall = true;
   };
-  services.sshguard.enable = true; #protection against brute force attacks like fail2ban
+  services.sshguard.enable = true; #protection against brute force attacks
 }

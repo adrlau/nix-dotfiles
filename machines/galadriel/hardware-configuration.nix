@@ -12,7 +12,7 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
-
+  
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/1f5ecd69-80d4-454a-96bd-cdc23884470c";
       fsType = "ext4";
@@ -28,7 +28,6 @@
       fsType = "ext4";
     };
   
-
   boot.initrd.luks.devices."luks-028e05b0-f079-41f6-b244-eb7ceda4f315".device = "/dev/disk/by-uuid/028e05b0-f079-41f6-b244-eb7ceda4f315";
 
   swapDevices =
