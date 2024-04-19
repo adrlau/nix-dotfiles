@@ -15,7 +15,7 @@
 
       ../../profiles/base.nix
       ../../profiles/sops.nix
-      #../../profiles/ai.nix
+      ../../profiles/ai.nix
 
       ../../services/smb.nix
       ../../services/torrent.nix

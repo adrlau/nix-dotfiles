@@ -11,7 +11,7 @@
   
   #possibly a flawed idea.
   services.ollama.acceleration = lib.mkDefault (  let
-                                                    hostname = config.networking.hostname;
+                                                    hostname = config.networking.hostName;
                                                   in
                                                     if hostname == "galadriel" then "cuda"
                                                     else if hostname == "aragorn" then "rocm"
