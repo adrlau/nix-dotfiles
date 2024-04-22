@@ -5,7 +5,7 @@
           ./base.nix
           ../services/podman.nix
           ../services/ollama.nix
-          # ../services/whisper.nix
+          ../services/whisper.nix
         ];
     
     environment.systemPackages = with pkgs.unstable; [
