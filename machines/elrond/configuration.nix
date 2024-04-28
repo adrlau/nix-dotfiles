@@ -131,6 +131,7 @@
     allowedUDPPorts = [
       80
       443
+      25565
       config.services.tailscale.port
       #config.services.headscale.port
     ];
