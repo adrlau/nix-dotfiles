@@ -19,6 +19,7 @@
 
       ../../services/smb.nix
       ../../services/torrent.nix
+      ../../services/mc.nix
       #../../services/stableDiffusion.nix
       #../../services/freshrrs.nix
     ];

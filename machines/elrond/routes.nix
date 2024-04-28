@@ -32,14 +32,23 @@
       #basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
     };
 
-    virtualHosts."jellyfin.lauterer.it" = {
-      forceSSL = true;
-      useACMEHost = config.networking.domain;
-      locations."/" = {
-        proxyWebsockets = true;
-        proxyPass = "http://100.84.215.84:8096";
+     virtualHosts."jellyfin.lauterer.it" = {
+        forceSSL = true;
+        useACMEHost = config.networking.domain;
+        locations."/" = {
+          proxyWebsockets = true;
+          proxyPass = "http://100.84.215.84:8096";
+        };
+      }; 
+
+      virtualHosts."minecraft.256.no" = {
+  	 forceSSL = true;
+  	 useACMEHost = config.networking.domain;
+  	 locations."/" = {
+  	   proxyWebsockets = true;
+  	   proxyPass = "http://100.84.215.84:25500";
+  	 };
+  	#basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
       };
-      #basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
-    };
-  };
+   };
 }
