@@ -13,8 +13,8 @@
       domain = "${config.networking.domain}";
       extraDomainNames = [ 
         "*.${config.networking.domain}"
-        "lb0fj.eu"
-        "*.lb0fj.eu"
+        #"lb0fj.eu"
+        #"*.lb0fj.eu"
         "256.no"
         "*.256.no"
         "*.addictedmaker.eu"
