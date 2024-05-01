@@ -40,7 +40,16 @@
           proxyPass = "http://100.84.215.84:8096";
         };
       }; 
-
+    
+      virtualHosts."podgrab.lauterer.it" = {
+        forceSSL = true;
+        useACMEHost = config.networking.domain;
+        locations."/" = {
+          proxyWebsockets = true;
+          proxyPass = "http://100.84.215.84:4242";
+        };
+        basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
+      }; 
 
 
 
