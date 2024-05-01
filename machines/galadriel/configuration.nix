@@ -16,6 +16,7 @@
       ../../profiles/base.nix
       ../../profiles/sops.nix
       ../../profiles/ai.nix
+      ../../profiles/mediaserver.nix
 
       ../../services/smb.nix
       ../../services/torrent.nix
@@ -62,9 +63,6 @@
       tailscale
       nfs-utils
       cifs-utils
-      jellyfin
-      jellyfin-web
-      jellyfin-mpv-shim
       jftui
       sonixd
       unpackerr
@@ -87,12 +85,6 @@
 ##productivity
   #services.tandoor-recipes.enable = true;
   
-##media
-  users.groups.media.members = ["jellyfin"]; #have media directory owned by media group
-  services.jellyfin.group = "media"; 
-  services.jellyfin.enable = true;
-
-
 #  services.komga.enable = true;
   
   #services.polaris.enable = true;
