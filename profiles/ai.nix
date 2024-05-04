@@ -5,6 +5,7 @@
           ./base.nix
           ../services/podman.nix
           ../services/ollama.nix
+          ../services/ollama-webui.nix
           ../services/whisper.nix
         ];
     
