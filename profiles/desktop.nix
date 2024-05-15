@@ -11,6 +11,16 @@ imports =
       
     ];
 
+  environment.systemPackages = with pkgs; [
+    wings
+    openscad
+    cura
+    super-slicer
+    prusa-slicer
+
+    pdfslicer
+  ];
+
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk
