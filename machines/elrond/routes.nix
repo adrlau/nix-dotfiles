@@ -49,25 +49,30 @@
           proxyPass = "http://100.84.215.84:4242";
         };
         basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
-      }; 
+      };
 
-
-
-
-
-virtualHosts."minecraft.256.no" = {
-  locations."/" = {
-    proxyWebsockets = true;
-    proxyPass = "http://100.84.215.84:25565";
-    extraConfig = ''
-          proxy_set_header Host $host;
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-          proxy_set_header X-Forwarded-Proto $scheme;
-        '';
-  };
-};
-
+      virtualHosts."freshrss.lauterer.it" = {
+        forceSSL = true;
+        useACMEHost = config.networking.domain;
+        locations."/" = {
+          proxyWebsockets = true;
+          proxyPass = "http://100.84.215.84:80";
+        };
+        basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
+      };  
+      
+      virtualHosts."minecraft.256.no" = {
+        locations."/" = {
+          proxyWebsockets = true;
+          proxyPass = "100.84.215.84:25565";
+          extraConfig = ''
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+              '';
+        };
+      };
 
 
    };
