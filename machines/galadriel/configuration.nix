@@ -22,7 +22,7 @@
       ../../services/torrent.nix
       ../../services/mc.nix
       #../../services/stableDiffusion.nix
-      ../../services/freshrrs.nix
+      ../../services/rss.nix
     ];
 
   # Bootloader.

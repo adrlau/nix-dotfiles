@@ -6,7 +6,7 @@
       useACMEHost = config.networking.domain;
       locations."/" = {
         proxyWebsockets = true;
-        proxyPass = "https://100.104.182.48";
+        proxyPass = "https://100.104.182.48:443";
       };
       basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
     };
@@ -32,7 +32,7 @@
       #basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
     };
 
-     virtualHosts."jellyfin.lauterer.it" = {
+    virtualHosts."jellyfin.lauterer.it" = {
         forceSSL = true;
         useACMEHost = config.networking.domain;
         locations."/" = {
@@ -65,12 +65,12 @@
         locations."/" = {
           proxyWebsockets = true;
           proxyPass = "100.84.215.84:25565";
-          extraConfig = ''
-                proxy_set_header Host $host;
-                proxy_set_header X-Real-IP $remote_addr;
-                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                proxy_set_header X-Forwarded-Proto $scheme;
-              '';
+         # extraConfig = ''
+         #       proxy_set_header Host $host;
+         #       proxy_set_header X-Real-IP $remote_addr;
+         #       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+         #       proxy_set_header X-Forwarded-Proto $scheme;
+         #     '';
         };
       };
 

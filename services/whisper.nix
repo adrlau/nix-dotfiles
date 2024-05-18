@@ -15,24 +15,8 @@
       fast = {
         enable = true;
         model = "tiny-int8";
-        uri = "tcp://0.0.0.0:10300";
-        device = "cuda";
-        language = "en";
-        beamSize = 1;
-      };
-      fast-no = {
-        enable = true;
-        model = "tiny-int8";
-        uri = "tcp://0.0.0.0:10301";
-        device = "cuda";
-        language = "no";
-        beamSize = 1;
-      };
-      fast-auto = {
-        enable = true;
-        model = "tiny-int8";
         uri = "tcp://0.0.0.0:10302";
-        device = "cuda";
+        device = "auto";
         language = "auto";
         beamSize = 1;
       };
