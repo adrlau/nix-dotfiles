@@ -1,12 +1,12 @@
 { config, pkgs, lib, ... }:
 {
   services.nginx =  {
-    virtualHosts."managment.funn-nas.lauterer.it" = {
+    virtualHosts."managment.lauterer.it" = {
       forceSSL = true;
       useACMEHost = config.networking.domain;
       locations."/" = {
         proxyWebsockets = true;
-        proxyPass = "https://100.104.182.48:443";
+        proxyPass = "http://100.104.182.48";
       };
       basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
     };
@@ -51,29 +51,15 @@
         basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
       };
 
-      virtualHosts."freshrss.lauterer.it" = {
+      virtualHosts."rss.lauterer.it" = {
         forceSSL = true;
         useACMEHost = config.networking.domain;
         locations."/" = {
           proxyWebsockets = true;
-          proxyPass = "http://100.84.215.84:80";
+          proxyPass = "http://100.84.215.84:8081";
         };
-        basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
+        #basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
       };  
-      
-      virtualHosts."minecraft.256.no" = {
-        locations."/" = {
-          proxyWebsockets = true;
-          proxyPass = "100.84.215.84:25565";
-         # extraConfig = ''
-         #       proxy_set_header Host $host;
-         #       proxy_set_header X-Real-IP $remote_addr;
-         #       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-         #       proxy_set_header X-Forwarded-Proto $scheme;
-         #     '';
-        };
-      };
-
 
    };
 }
