@@ -18,7 +18,7 @@
 
 
     services.miniflux.enable = true; 
-    services.miniflux.config.LISTEN_ADDR = "localhost:8081";
+    services.miniflux.config.LISTEN_ADDR = "0.0.0.0:8081";
     services.miniflux.adminCredentialsFile = config.sops.secrets."miniflux/adminCredentialsFile".path;
 
 }
