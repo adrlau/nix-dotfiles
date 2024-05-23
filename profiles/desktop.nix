@@ -4,6 +4,8 @@ imports =
     [
       ./base.nix 
       ./sound.nix #all i would ever need in sound.
+      ./video.nix #all i would ever need in sound.
+      ./office.nix #all i would ever need in sound.
 
       ../packages/vim.nix
       #../home/home-full.nix
