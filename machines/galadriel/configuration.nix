@@ -23,6 +23,7 @@
       ../../services/mc.nix
       #../../services/stableDiffusion.nix
       ../../services/rss.nix
+      ../../services/shiori.nix
     ];
 
   # Bootloader.
