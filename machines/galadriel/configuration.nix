@@ -19,6 +19,7 @@
       ../../profiles/mediaserver.nix
 
       ../../services/smb.nix
+      ../../services/wordpress.nix
       ../../services/torrent.nix
       ../../services/mc.nix
       #../../services/stableDiffusion.nix

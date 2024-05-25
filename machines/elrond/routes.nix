@@ -1,6 +1,15 @@
 { config, pkgs, lib, ... }:
 {
   services.nginx =  {
+    virtualHosts."lauterer.it" = {
+        forceSSL = true;
+        useACMEHost = config.networking.domain;
+        locations."/" = {
+          proxyWebsockets = true;
+          proxyPass = "http://100.84.215.84";
+        };
+    };  
+
     virtualHosts."managment.lauterer.it" = {
       forceSSL = true;
       useACMEHost = config.networking.domain;
@@ -74,6 +83,8 @@
         };
         #basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
       };  
+
+
 
   };  
 }
