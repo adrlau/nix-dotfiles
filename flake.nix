@@ -8,7 +8,13 @@
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    ozai.url = "git+https://git.pvv.ntnu.no/Projects/ozai.git";
+    ozai.inputs.nixpkgs.follows = "unstable";
+    ozai-webui.url = "git+https://git.pvv.ntnu.no/adriangl/ozai-webui.git";
+    ozai-webui.inputs.nixpkgs.follows = "unstable";
+
     matrix-synapse-next.url = "github:dali99/nixos-matrix-modules";
+
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
     sops-nix.url = "github:Mic92/sops-nix";
@@ -19,6 +25,8 @@
     self
     , home-manager
     , matrix-synapse-next
+    , ozai
+    , ozai-webui
     , nix-minecraft
     , nixpkgs
     , sops-nix
@@ -74,6 +82,9 @@
             ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
             ./machines/galadriel/configuration.nix
             sops-nix.nixosModules.sops
+
+            ozai.nixosModules.ozai
+            ozai-webui.nixosModules.ozai-webui
           ];
         };
         
