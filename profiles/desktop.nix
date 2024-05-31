@@ -9,6 +9,7 @@ imports =
 
       ../packages/vim.nix
       #../home/home-full.nix
+      ../home/sway.nix
       ../packages/steam.nix
       
     ];
@@ -21,6 +22,9 @@ imports =
     prusa-slicer
 
     pdfslicer
+
+    libsForQt5.qt5ct
+    qt6Packages.qt6ct
   ];
 
   fonts.packages = with pkgs; [
@@ -35,6 +39,7 @@ imports =
     proggyfonts
     nerdfonts
     ubuntu_font_family
+
   ];
 
   # Enable CUPS to print documents.
@@ -42,6 +47,8 @@ imports =
 
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
+
+  qt.platformTheme = "qt5c";
 
   # Configure keymap in X11
   services.xserver = {

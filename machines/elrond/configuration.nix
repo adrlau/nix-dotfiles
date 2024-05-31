@@ -19,8 +19,8 @@
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
-  networking.useDHCP = false;                   
-  networking.interfaces.ens3.useDHCP = true; # Interface is not constant. I really only want to use dhcp att all so could remove this in favor of the old way.
+  networking.useDHCP = true;                   
+ # networking.interfaces.ens3.useDHCP = true; # Interface is not constant. I really only want to use dhcp att all so could remove this in favor of the old way.
   networking.hostName = "elrond"; # Define your hostname.
   
   boot.kernel.sysctl = {

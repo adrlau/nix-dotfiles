@@ -32,6 +32,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  
   networking.hostName = "galadriel"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -92,10 +93,7 @@
   
   #services.polaris.enable = true;
   #services.navidrome.enable = true;
-  
-  #services.podgrab.enable = true;
-  #services.podgrab.port = 4242;
-  
+    
   #services.calibre-web.enable = true;
   #services.calibre-server.enable = true;
 
