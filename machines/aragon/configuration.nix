@@ -10,6 +10,7 @@
         
         
         #profiles
+	../../profiles/base.nix
 	../../profiles/desktop.nix
   
 	
@@ -66,37 +67,9 @@
     description = "Adrian Gunnar Lauterer";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      firefox
-      kate
-      unstable.ollama
-      python310
-      python310Packages.scipy
-      python310Packages.sympy
-      python310Packages.numpy
-      python310Packages.matplotlib
-      python310Packages.torchWithRocm
-      python310Packages.torchvision
-      gcc
-      gpp
-      cmake
-      rustup
-      rustc
-      cargo
-      etcher
-      rpi-imager
-      minecraft
-      prismlauncher
-      hmcl
-      appimage-run
-      vscode-fhs
     ];
   };
 
-
-  #allow electron 19 becasue of etcher
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-19.1.9"
-  ];  
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -108,28 +81,48 @@
 
     #sleep
     pmutils
+    
+    
+    # When nixos bad
+    docker-compose 
+    appimage-run
+    steam-run
+    xwayland-run
+
+    
 
     #basic programming
-    python310
-    python310Packages.scipy
-    python310Packages.sympy
-    python310Packages.numpy
-    python310Packages.matplotlib
-    #python310Packages.torch
-    python310Packages.torchvision
-    python310Packages.torchWithRocm
-
+    kate
+    vscode-fhs
+    gcc
     gpp
     gdb
     cmake
     rustup
     rustc
     cargo
+    python3
+    python3Packages.scipy
+    python3Packages.sympy
+    python3Packages.numpy
+    python3Packages.matplotlib
+    #python3Packages.torch
+    #python3Packages.torchvision
+    #python3Packages.torchWithRocm
+    
+    rocmPackages.hipcc
+    rocmPackages.half
+    rocmPackages.hipify
+    rocmPackages.rocm-smi
+        
+    firefox
+    ollama
+    rpi-imager
+    prismlauncher
     cura
     prusa-slicer
     openscad
-    htop
-    docker-compose
+
   ];
 
   hardware.bluetooth.enable = true; 

@@ -68,7 +68,7 @@ imports =
 
   services.xserver.displayManager.sddm.enable = true;
 
-  qt.platformTheme = "qt5c";
+  qt.platformTheme = "qt5ct";
 
   # Configure keymap in X11
   services.xserver = {

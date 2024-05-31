@@ -41,9 +41,10 @@
     # Enable the CUDA toolkit
     #install packages 
     environment.systemPackages = with pkgs; [
-      cudaPackages.cudnn
-      cudaPackages.cudatoolkit
-      nvtop-nvidia
+      #cudaPackages.cudnn
+      #cudaPackages.cudatoolkit
+      
+      nvtopPackages.nvidia
       #cudaPackages.tensorrt_8_6_0 #needs to be added manually, to the store and is a pain because of the license agreement and garbage collection
       
     ];

@@ -68,7 +68,6 @@ imports =
     spotifyd
     spotifywm
     spotify-qt
-    spotify-tui
     spotify-tray
 
     tenacity

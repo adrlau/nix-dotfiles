@@ -15,13 +15,8 @@ imports =
     ];
 
   environment.systemPackages = with pkgs; [
-    wings
     openscad
     cura
-    super-slicer
-    prusa-slicer
-
-    pdfslicer
 
     libsForQt5.qt5ct
     qt6Packages.qt6ct
@@ -45,15 +40,16 @@ imports =
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
+  services.desktopManager.plasma6.enableQt5Integration = true;
 
-  qt.platformTheme = "qt5c";
+  qt.platformTheme = "qt5ct";
 
   # Configure keymap in X11
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "no";
-    xkbVariant = "";
+    variant = "";
   };
 
 
