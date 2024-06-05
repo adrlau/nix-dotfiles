@@ -70,7 +70,17 @@
         #basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
       };  
 
-    
+      virtualHosts."azul.256.no" = {
+        forceSSL = true;
+        useACMEHost = config.networking.domain;
+        locations."/" = {
+          proxyWebsockets = true;
+          proxyPass = "http://100.84.215.84:8085";
+        };
+        #basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
+      };  
+
+ 
     #virtualHosts."shiori.lauterer.it" = config.services.nginx.virtualHosts."archive.lauterer.it";
     #virtualHosts."pocket.lauterer.it" = config.services.nginx.virtualHosts."archive.lauterer.it";
     #virtualHosts."bookmarks.lauterer.it" = config.services.nginx.virtualHosts."archive.lauterer.it";
