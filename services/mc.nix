@@ -1,8 +1,5 @@
 { config, pkgs, lib, ... }:
 {
-  environment.systemPackages = [
-    pkgs.ollama
-  ];
 
   services.minecraft-server = {
 	enable = true;

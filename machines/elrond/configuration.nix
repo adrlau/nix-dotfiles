@@ -9,6 +9,7 @@
       ./hardware-configuration.nix
       ../../profiles/webhost.nix
       ../../profiles/base.nix
+      ../../services/gate.nix
       ./routes.nix
     ];
 
