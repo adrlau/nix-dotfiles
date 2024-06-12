@@ -19,6 +19,10 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+  
+
   };
 
   outputs = {
@@ -30,6 +34,7 @@
     , nix-minecraft
     , nixpkgs
     , sops-nix
+    , nixos-hardware
     , unstable
   , ... }@inputs:
     let
@@ -40,23 +45,6 @@
     {
       nixosConfigurations = {
         
-        #aragon = nixpkgs.lib.nixosSystem {
-        #  system = "x83_64-linux";
-        #  specialArgs = {
-        #    inherit inputs;
-        #  };
-        #  modules = [
-        #    # Overlays-module makes "pkgs.unstable" available in configuration.nix
-        #    ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
-        #    ./machines/aragon/configuration.nix
-        #    sops-nix.nixosModules.sops
-        #    home-manager.nixosModules.home-manager {
-        #      home-manager.useGlobalPkgs = true;
-        #      home-manager.useUserPackages = true;
-        #      home-manager.users."gunalx" = import ./home/home.nix;
-        #    }
-        #  ];
-        #};
 
         eowyn = nixpkgs.lib.nixosSystem {
           system = "x84_64-linux";
@@ -68,6 +56,13 @@
             ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
             ./machines/eowyn/configuration.nix
             sops-nix.nixosModules.sops
+            nixos-hardware.nixosModules.dell-latitude-7280
+            home-manager.nixosModules.home-manager {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users."gunalx" = import ./home/home.nix;
+           }
+
           ];
         };
    
