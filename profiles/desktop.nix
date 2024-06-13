@@ -9,7 +9,7 @@ imports =
 
       ../packages/vim.nix
       #../home/home-full.nix
-      ../home/sway.nix
+      #./sway.nix
       ../packages/steam.nix
       
     ];
@@ -39,6 +39,9 @@ imports =
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  security.polkit.enable = true;
+  
 
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;

@@ -3,31 +3,47 @@
   imports = [
   ];
 
+  programs.nix-index = {
+    enable = true;
+  };
+  
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      allowUnfreePredicate = (_: true);
+    };
+  };
+
   programs.bash = {
     shellAliases  = {
         "rebuild" = "sudo nixos-rebuild switch --update-input nixpkgs --update-input unstable --no-write-lock-file --refresh --flake git+https://github.com/adrlau/nix-dotfiles.git --upgrade";
         "nixedit" = "vim /etc/nixos/nix-dotfiles/.";
+        "," = "comma ";
         "gst" = "git status";
         "gsw" = "git switch";
         "gcm" = "git commit -m ";
         "gca" = "git commit --amend";
         "gaa" = "git add -A";
         "gb" = "git branch";
-        "sl" = "ls";
-        "la" = "la -la";
+        "sl" = "eza";
+        "ls" = "eza";
+        "lls" = "ls";
+        "la" = "eza -la";
         "neofetch" = "fastfetch";
     };
-
-
+    historyControl = ["ignoreboth" "erasedups"];
+    historyIgnore = [ "ls" "cd" "exit" "cd .." ".." "la"];
   };
 
   home.packages = with pkgs; [
     bottom
     htop
     fastfetch
+    eza
+    ripgrep
+    foot.terminfo
+    comma
   ];
-
-
 
   programs.git = {
     enable = true;
@@ -38,7 +54,6 @@
       color.ui = "auto";
       init.defaultBranch = "main";
       lfs.enable = true;
-
       user = {
         name = "Adrian G L";
         email = "adrian@lauterer.it";

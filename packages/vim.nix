@@ -23,11 +23,11 @@
 		    vim-nix
 		    vim-lastplace 
 		    vim-yaml 
-		    coc-rust-analyzer 
-		    neovim-fuzzy 
-		    LanguageClient-neovim 
-		    copilot-vim 
-		    chadtree
+		    #coc-rust-analyzer 
+		    #neovim-fuzzy 
+		    #LanguageClient-neovim 
+		    #copilot-vim 
+		    #chadtree
 	    ];
         opt = [
 		#copilot-vim 

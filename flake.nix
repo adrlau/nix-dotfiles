@@ -60,7 +60,7 @@
             home-manager.nixosModules.home-manager {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users."gunalx" = import ./home/home.nix;
+              home-manager.users."gunalx" = import ./home/full.nix;
            }
 
           ];
