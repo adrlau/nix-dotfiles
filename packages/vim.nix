@@ -15,7 +15,7 @@
         set backspace=indent,eol,start
         " Turn on syntax highlighting by default
         syntax on
-        set tabstop=4 softtabstop=0 autoindent  expandtab shiftwidth=4 smarttab
+        set tabstop=2 softtabstop=0 autoindent  expandtab shiftwidth=2 smarttab
         " ...
       '';
       packages.myplugins = with pkgs.vimPlugins; {

@@ -3,13 +3,11 @@
 imports =
     [
       ./base.nix 
-      ./sound.nix #all i would ever need in sound.
-      ./video.nix #all i would ever need in sound.
-      ./office.nix #all i would ever need in sound.
+      ./sound.nix
+      ./video.nix 
+      ./office.nix 
 
       ../packages/vim.nix
-      #../home/home-full.nix
-      #./sway.nix
       ../packages/steam.nix
       
     ];
@@ -18,8 +16,8 @@ imports =
     openscad
     cura
 
-    libsForQt5.qt5ct
-    qt6Packages.qt6ct
+    #libsForQt5.qt5ct
+    #qt6Packages.qt6ct
   ];
 
   fonts.packages = with pkgs; [
@@ -42,12 +40,12 @@ imports =
 
   security.polkit.enable = true;
   
-
+  services.displayManager.sddm.wayland.enable = true;
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
   services.desktopManager.plasma6.enableQt5Integration = true;
 
-  qt.platformTheme = "qt5ct";
+  qt.platformTheme = "kde";
 
   # Configure keymap in X11
   services.xserver.xkb = {
