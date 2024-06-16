@@ -30,6 +30,15 @@
       basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
     };
     
+    virtualHosts."film.lauterer.it" = {
+      forceSSL = true;
+      useACMEHost = config.networking.domain;
+      locations."/" = {
+        proxyWebsockets = true;
+        proxyPass = "http://100.104.182.48:8096";
+      };
+    };
+
     virtualHosts."home.lauterer.it" = {
       forceSSL = true;
       useACMEHost = config.networking.domain;
