@@ -6,6 +6,9 @@
     ./sway.nix
 
   ];
-
+  home.packages = with pkgs; [
+    firefox
+    gimp
+  ];
 }
 
