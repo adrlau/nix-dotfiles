@@ -8,6 +8,12 @@
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    stylix.url = "github:bluskript/stylix/6bc871ab352c9f18d1179daab9e392a4d46393af";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
+    stylix.inputs.home-manager.follows = "home-manager";
+
+
+
     ozai.url = "git+https://git.pvv.ntnu.no/Projects/ozai.git";
     ozai.inputs.nixpkgs.follows = "unstable";
     ozai-webui.url = "git+https://git.pvv.ntnu.no/adriangl/ozai-webui.git";
@@ -28,6 +34,7 @@
   outputs = {
     self
     , home-manager
+    , stylix
     , matrix-synapse-next
     , ozai
     , ozai-webui
@@ -80,8 +87,10 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users."gunalx" = import ./home/full.nix;
-           }
-
+            }
+            #need to choose one. The nixos one has bootloader and display manager in addition to the home manager one.
+            inputs.stylix.nixosModules.stylix
+            #inputs.stylix.homeManagerModules.stylix
           ];
         };
    
