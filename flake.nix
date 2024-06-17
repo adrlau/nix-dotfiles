@@ -44,7 +44,26 @@
     in
     {
       nixosConfigurations = {
-        
+        boromir = nixpkgs.lib.nixosSystem {
+          system = "x84_64-linux";
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = [
+            # Overlays-module makes "pkgs.unstable" available in configuration.nix
+            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
+            ./machines/boromir/configuration.nix
+            sops-nix.nixosModules.sops
+            nixos-hardware.nixosModules.lenovo-thinkpad-p1
+            home-manager.nixosModules.home-manager {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users."gunalx" = import ./home/full.nix;
+           }
+
+          ];
+        };
+
 
         eowyn = nixpkgs.lib.nixosSystem {
           system = "x84_64-linux";
