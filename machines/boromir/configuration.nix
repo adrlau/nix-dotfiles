@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ./nvidia.nix
       ../../profiles/desktop.nix
+      ../../services/podman.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
