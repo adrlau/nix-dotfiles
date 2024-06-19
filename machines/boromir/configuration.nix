@@ -11,6 +11,9 @@
       ./nvidia.nix
       ../../profiles/desktop.nix
       ../../services/podman.nix
+      ../../services/postgres.nix
+      ../../services/mysql.nix
+      ../../services/ollama.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
