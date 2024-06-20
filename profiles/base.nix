@@ -24,6 +24,11 @@ imports =
   #just allow unfree, im fine with it. 
   nixpkgs.config.allowUnfree = true; 
   
+  zramSwap = {
+    enable = true;
+    memoryPercent = 25;
+  };
+
 
   # Set your time zone.
   time.timeZone = "Europe/Oslo";
