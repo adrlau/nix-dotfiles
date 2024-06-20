@@ -15,7 +15,7 @@ imports =
         obs-cli
 
         #obs-studio-plugins.obs-3d-effect
-        obs-studio-plugins.wlrobs
+        #obs-studio-plugins.wlrobs
         #obs-studio-plugins.obs-ndi
         #obs-studio-plugins.waveform
         #obs-studio-plugins.obs-vaapi
@@ -28,8 +28,8 @@ imports =
         #obs-studio-plugins.obs-source-record
         #obs-studio-plugins.obs-replay-source
         #obs-studio-plugins.obs-source-switcher
-        obs-studio-plugins.obs-backgroundremoval
-        obs-studio-plugins.obs-pipewire-audio-capture
+        #obs-studio-plugins.obs-backgroundremoval
+        #obs-studio-plugins.obs-pipewire-audio-capture
 
 
         shotcut

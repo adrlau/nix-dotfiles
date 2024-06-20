@@ -6,7 +6,11 @@
     driSupport = true;
     driSupport32Bit = true;
   };
-  
+  nixpkgs.config = {
+    allowUnfree = true;
+    cudaSupport = true;
+  };
+
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];
   #boot with nvidia kernel module
@@ -43,8 +47,21 @@
     environment.systemPackages = with pkgs; [
       #cudaPackages.cudnn
       cudaPackages.cudatoolkit
-      
+      cudaPackages.cudnn
       nvtopPackages.nvidia
+      libxcrypt-legacy
+      gcc
+      xgboostWithCuda
+      cudaPackages.setupCudaHook
+      cudaPackages.nccl
+      cudaPackages.markForCudatoolkitRootHook
+      cmake
+      llama-cpp
+      python3Packages.pip
+      cudaPackages.cuda_cudart
+      cudaPackages.cuda_cudart.static
+      pkgs.cudaPackages.libcublas
+
       #cudaPackages.tensorrt_8_6_0 #needs to be added manually, to the store and is a pain because of the license agreement and garbage collection
       
     ];
