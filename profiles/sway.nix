@@ -66,7 +66,6 @@ imports =
 
   ];
 
-  services.xserver.displayManager.sddm.enable = true;
 
   qt.platformTheme = "qt5ct";
 
