@@ -33,6 +33,9 @@ imports =
     nerdfonts
     ubuntu_font_family
 
+    
+    where-is-my-sddm-theme
+
   ];
 
   # Enable CUPS to print documents.
@@ -42,9 +45,12 @@ imports =
   
   services.displayManager = {
     enable = true;
+    sessionPackages = with pkgs; [ sway ];
     sddm = {
       enable = true;
+      theme = "${pkgs.where-is-my-sddm-theme}";
       wayland.enable = true;
+      wayland.compositor = "kwin";
       autoNumlock = true;
       enableHidpi = true;
     };
@@ -57,14 +63,9 @@ imports =
 
   # Configure keymap in X11
   services.xserver.xkb = {
-    layout = "no";
-    variant = "";
+    layout = "us,no";
+    variant = ",";
   };
-
-
-  #TODO: add sway with home manager to get proper dotfiles. Possibly in its own sway file.
-  #TODO: add hyperland.
-
   
 
 }

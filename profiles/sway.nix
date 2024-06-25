@@ -68,16 +68,6 @@ imports =
 
 
   qt.platformTheme = "qt5ct";
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "no";
-    xkbVariant = "";
-  };
-
-
-  #TODO: add sway config with home manager to get proper dotfiles. 
-
   
 
 }
