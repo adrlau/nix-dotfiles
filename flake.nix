@@ -12,8 +12,6 @@
     stylix.inputs.nixpkgs.follows = "nixpkgs";
     stylix.inputs.home-manager.follows = "home-manager";
 
-
-
     ozai.url = "git+https://git.pvv.ntnu.no/Projects/ozai.git";
     ozai.inputs.nixpkgs.follows = "unstable";
     ozai-webui.url = "git+https://git.pvv.ntnu.no/adriangl/ozai-webui.git";
@@ -134,6 +132,8 @@
             ./machines/elrond/configuration.nix
             ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
             sops-nix.nixosModules.sops
+            inputs.ozai.nixosModules.ozai
+            inputs.ozai-webui.nixosModules.ozai-webui
           ];
         };
       };

@@ -10,6 +10,7 @@
       ../../profiles/webhost.nix
       ../../profiles/base.nix
       ../../services/gate.nix
+      ../../services/ozai.nix
       ./routes.nix
     ];
 
