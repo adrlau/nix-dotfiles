@@ -51,22 +51,15 @@ imports =
     whistle
     cozy
     lollypop
-    deadbeef
-    deadbeef-with-plugins
     libsForQt5.elisa
 
-    radiotray-ng
     shortwave
     radioboat
-    qradiolink
-    pithos
-    gnomeExtensions.internet-radio
     gqrx
 
     headset
     nuclear
     spotifyd
-    spotifywm
     spotify-qt
     spotify-tray
 
@@ -76,6 +69,5 @@ imports =
   ];
 
   programs.dconf.enable = true; #needed for easyeffects for some reason 
-
 
 }
