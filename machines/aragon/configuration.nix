@@ -44,6 +44,10 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  nixpkgs.config.permittedInsecurePackages = [
+                "python3.11-youtube-dl-2021.12.17"
+              ];
+
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
