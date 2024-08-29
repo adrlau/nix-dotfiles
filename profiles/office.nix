@@ -32,21 +32,13 @@ imports =
 
     reveal-md
 
-
-
     markdownlint-cli
     markdown-anki-decks
 
-
-    pro-office-calculator
     gnucash
     wcalc
     libsForQt5.kcalc
     libsForQt5.kate
-
-
-
-
      ];
 
 }
