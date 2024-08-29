@@ -14,6 +14,7 @@ imports =
         obs-studio
         obs-cli
 
+        ## constantly breaking, more hassle than useful.
         #obs-studio-plugins.obs-3d-effect
         #obs-studio-plugins.wlrobs
         #obs-studio-plugins.obs-ndi
@@ -31,20 +32,14 @@ imports =
         #obs-studio-plugins.obs-backgroundremoval
         #obs-studio-plugins.obs-pipewire-audio-capture
 
-
         shotcut
         libsForQt5.kdenlive
         olive-editor
         subtitleedit
-        
 
         vlc
         mpv
-
-
      ];
-
   programs.dconf.enable = true; #needed for easyeffects for some reason 
-
 
 }
