@@ -1,7 +1,8 @@
 { pkgs, config, lib, ... }:
 {
     imports = [
-       ./wofi.nix 
+       #./fuzzle.nix 
+       #./wofi.nix 
        ./foot.nix 
        ./fonts.nix 
        ./kanshi.nix 
@@ -49,9 +50,11 @@
       swayest-workstyle
 
       #launcher
-    	wofi
-    	wofi-emoji
-    	bemoji
+      #wofi
+      #wofi-emoji
+      bemoji
+      fuzzel
+      
 
       #screenshots	
     	grim
@@ -108,7 +111,7 @@ in {
   config = rec {
     modifier = "Mod4";
     terminal = "footclient"; 
-    menu = "wofi --show run";
+    menu = "fuzzel";
     bars = [{
         fonts.size = 16.0;
         command = "waybar";

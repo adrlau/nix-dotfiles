@@ -1,17 +1,13 @@
-{ pkgs, … }: 
- 
+{ pkgs, lib, ... }: 
 {
 
   stylix.enable = true;
 
   
-  stylix.image = pkgs.fetchurl {
-    url = "https://www.pixelstalk.net/wp-content/uploads/2016/05/Epic-Anime-Awesome-Wallpapers.jpg";
-    sha256 = "enQo3wqhgf0FEPHj2coOCvo7DuZv+x5rL/WIo4qPI50=";
-  };
+  stylix.image = "/etc/nixos/nix-dotfiles/home/assets/wallpaper.jpg"; 
 
 
-  stylix.base16Scheme = ”${pkgs.base16-schemes}/share/themes/apathy.yaml”;
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/apathy.yaml";
 
  # stylix.fonts = {
  #   monospace = {
@@ -39,9 +35,9 @@
     applications = 1.0;
     terminal = 0.8;
     desktop = 1.0;
-    popups = 1.0;
+    popups = 0.9;
   };
   
-  stylix.polarity = “dark” # “light” or “either”
+  stylix.polarity = "dark"; # “light” or “either”
 
 }

@@ -4,7 +4,7 @@
     ./base.nix
     ./code.nix
     ./sway.nix
-    #./stylix.nix
+    ./stylix.nix
 
   ];
   home.packages = with pkgs; [

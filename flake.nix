@@ -87,7 +87,7 @@
               home-manager.users."gunalx" = import ./home/full.nix;
             }
             #need to choose one. The nixos one has bootloader and display manager in addition to the home manager one.
-            #inputs.stylix.nixosModules.stylix
+            inputs.stylix.nixosModules.stylix
             #inputs.stylix.homeManagerModules.stylix
           ];
         };

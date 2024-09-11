@@ -18,6 +18,8 @@ imports =
 
     #libsForQt5.qt5ct
     #qt6Packages.qt6ct
+    
+    where-is-my-sddm-theme
   ];
 
   fonts.packages = with pkgs; [
@@ -34,7 +36,6 @@ imports =
     ubuntu_font_family
 
     
-    where-is-my-sddm-theme
 
   ];
 
