@@ -4,8 +4,9 @@
     ./base.nix
     ./code.nix
     ./sway.nix
-    ./stylix.nix
+    ./colors.nix
 
+    #inputs.nix-colors.homeManagerModules.default
   ];
   home.packages = with pkgs; [
     firefox

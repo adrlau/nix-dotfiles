@@ -19,17 +19,23 @@
     shellAliases  = {
         "rebuild" = "sudo nixos-rebuild switch --update-input nixpkgs --update-input unstable --no-write-lock-file --refresh --flake git+https://github.com/adrlau/nix-dotfiles.git --upgrade";
         "nixedit" = "vim /etc/nixos/nix-dotfiles/.";
+        "nixdir" = "cd /etc/nixos/nix-dotfiles";
+
+
         "," = "comma ";
+
         "gst" = "git status";
         "gsw" = "git switch";
         "gcm" = "git commit -m ";
         "gca" = "git commit --amend";
         "gaa" = "git add -A";
         "gb" = "git branch";
+
         "sl" = "eza";
         "ls" = "eza";
         "lls" = "ls";
         "la" = "eza -la";
+        "tree" = "eza -T";
         "neofetch" = "fastfetch";
     };
     historyControl = ["ignoreboth" "erasedups"];
@@ -69,12 +75,6 @@
       "*__pycache__*"
     ];
   };
-
-
-
-
-
-
 
   home.stateVersion = "23.05";
 }

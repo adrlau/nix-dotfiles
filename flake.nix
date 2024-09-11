@@ -8,9 +8,7 @@
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    stylix.url = "github:bluskript/stylix/6bc871ab352c9f18d1179daab9e392a4d46393af";
-    stylix.inputs.nixpkgs.follows = "nixpkgs";
-    stylix.inputs.home-manager.follows = "home-manager";
+    nix-colors.url = "github:misterio77/nix-colors"; 
 
     ozai.url = "git+https://git.pvv.ntnu.no/Projects/ozai.git";
     ozai.inputs.nixpkgs.follows = "unstable";
@@ -32,7 +30,7 @@
   outputs = {
     self
     , home-manager
-    , stylix
+    , nix-colors
     , matrix-synapse-next
     , ozai
     , ozai-webui
@@ -49,26 +47,6 @@
     in
     {
       nixosConfigurations = {
-        boromir = nixpkgs.lib.nixosSystem {
-          system = "x84_64-linux";
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            # Overlays-module makes "pkgs.unstable" available in configuration.nix
-            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
-            ./machines/boromir/configuration.nix
-            sops-nix.nixosModules.sops
-            nixos-hardware.nixosModules.lenovo-thinkpad-p1
-            home-manager.nixosModules.home-manager {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users."gunalx" = import ./home/full.nix;
-           }
-
-          ];
-        };
-
 
         eowyn = nixpkgs.lib.nixosSystem {
           system = "x84_64-linux";
@@ -85,10 +63,8 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users."gunalx" = import ./home/full.nix;
+              home-manager.extraSpecialArgs = {inherit nix-colors inputs;};
             }
-            #need to choose one. The nixos one has bootloader and display manager in addition to the home manager one.
-            inputs.stylix.nixosModules.stylix
-            #inputs.stylix.homeManagerModules.stylix
           ];
         };
    
