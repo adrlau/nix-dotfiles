@@ -70,7 +70,12 @@ imports =
     alias lls='ls'
   '';
 
-  #TODO: ssh hosts.
+
+  
+  #some insecure packages
+  nixpkgs.config.permittedInsecurePackages = [
+    "python3.11-youtube-dl-2021.12.17"
+  ];
 
   #nix stuff
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
