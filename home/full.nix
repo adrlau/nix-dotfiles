@@ -12,6 +12,11 @@
     firefox
     gimp
     dconf
+    feh
+    ripgrep
+    eza
+    bottom
+    killall
   ];
 }
 

@@ -1,14 +1,18 @@
 { pkgs, config, lib, ... }:
+let
+  palette = config.colorScheme.palette;
+in
 {
     imports = [
-       #./fuzzle.nix 
-       #./wofi.nix 
-       ./foot.nix 
-       ./fonts.nix 
-       ./kanshi.nix 
+       #./fuzzle.nix
+       #./wofi.nix
+       #./waybar.nix
+       ./foot.nix
+       ./fonts.nix
+       ./kanshi.nix
     ];
 
-  
+
     home.packages = with pkgs; [
       wl-clipboard
     	libsForQt5.qt5ct
@@ -20,7 +24,7 @@
     	## possible other options
     	#kitty
     	#alacrity
-    	
+
 
       #disply and background
     	wdisplays
@@ -33,16 +37,16 @@
     	networkmanagerapplet
     	networkmanager
     	libsForQt5.networkmanager-qt
-      mako 
+      mako
 
       #lockscreen and related
-    	wleave	
+    	wleave
       swayidle
     	swaylock-effects
     	#swaylock-fancy #migth change to this default may look prettier.
 
       #ligth and sound
-    	brightnessctl     
+    	brightnessctl
     	pavucontrol
 
       #sway automation
@@ -54,9 +58,9 @@
       #wofi-emoji
       bemoji
       fuzzel
-      
 
-      #screenshots	
+
+      #screenshots
     	grim
     	slurp
 
@@ -99,18 +103,21 @@
     _JAVA_AWT_WM_NONREPARENTING = 1;
 
     # gtk applications on wayland
-    # export GDK_BACKEND=wayland
+    #GTK_BACKEND="wayland";
   };
 
-    
-wayland.windowManager.sway = let 
+
+wayland.windowManager.sway = let
   cfg = config.wayland.windowManager.sway;
 in {
   wrapperFeatures.gtk = true;
+  systemd.enable = true;
   enable = true;
   config = rec {
+    
     modifier = "Mod4";
-    terminal = "footclient"; 
+
+    terminal = "footclient";
     menu = "fuzzel";
     bars = [{
         fonts.size = 16.0;
@@ -134,6 +141,10 @@ in {
       "${cfg.config.down}" = "resize grow height 10 px or 10 ppt";
       "${cfg.config.up}" = "resize shrink height 10 px or 10 ppt";
       "${cfg.config.right}" = "resize grow width 10 px or 10 ppt";
+      "Left" = "resize shrink width 10 px or 10 ppt";
+      "Down" = "resize grow height 10 px or 10 ppt";
+      "Up" = "resize shrink height 10 px or 10 ppt";
+      "Right" = "resize grow width 10 px or 10 ppt";
     };
     keybindings = {
         "${cfg.config.modifier}+Return" = "exec ${cfg.config.terminal}";
@@ -219,7 +230,7 @@ in {
         "${cfg.config.modifier}+Shift+c" = "exec code";
         "${cfg.config.modifier}+f11" = "exec grim -g \"$(slurp)\" ~/Pictures/screenshots/\"screenshot-`date +%F-%T`\".png";
         "${cfg.config.modifier}+Print" = "exec grim -g \"$(slurp)\" ~/Pictures/screenshots/\"screenshot-`date +%F-%T`\".png";
-        "Mod1+tab" = "workspace back_and_forth";
+        "${cfg.config.modifier}+tab" = "workspace back_and_forth";
         };
   };
 
@@ -228,23 +239,18 @@ in {
     input type:keyboard xkb_capslock disabled
     input type:keyboard xkb_numlock enabled
     xwayland enable
-    
-    assign [class="autostart1"] workspace 1
-    assign [class="autostart2"] workspace 2
-    assign [class="autostart3"] workspace 3
-    assign [class="autostart4"] workspace 4
-    
-    smart_borders no_gaps 
+
+    smart_borders no_gaps
     smart_gaps on
     gaps inner 5
     default_border pixel 1
     default_floating_border pixel 2
     titlebar_border_thickness 1
 
-    client.focused          #80a0ff     #303030     #c6c6c6     #80a0ff     #80a0ff
-    client.focused_inactive #80a0ff     #303030     #c6c6c6     #80a0ff     #80a0ff
-    client.unfocused        #80a0ff     #080808     #c6c6c6     #80a0ff     #303030
-    client.urgent           #80a0ff     #80a0ff     #080808     #80a0ff
+    client.focused          ${palette.base0D} ${palette.base00} ${palette.base05} ${palette.base0D} ${palette.base0D}
+    client.focused_inactive ${palette.base0D} ${palette.base00} ${palette.base05} ${palette.base0D} ${palette.base0D}
+    client.unfocused        ${palette.base0D} ${palette.base03} ${palette.base05} ${palette.base0D} ${palette.base00}
+    client.urgent           ${palette.base0D} ${palette.base0D} ${palette.base03} ${palette.base0D}
 
     for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable
     for_window [title="(?:Open|Save) (?:File|Folder|As)"] resize set 1920 1080
@@ -260,12 +266,6 @@ in {
     for_window [app_id="dolphin"] floating enable
     for_window [app_id="file-manager"] floating enable
 
-    #client.focused $accent $accent #000000 #00ffcc $accent
-    #client.focused_inactive #000000 #000000 #ff9900 #000000 #000000
-    #client.unfocused #000000 #000000 #00ffcc #000000 #000000
-    #client.urgent #ff0000 #ff0000 #00ffcc #ff0000 #ff0000
-    #client.placeholder #000000 #000000 #00ffcc #000000 #000000
-    #client.background #000000
   '';
 };
 }

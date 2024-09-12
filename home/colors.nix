@@ -1,52 +1,87 @@
-{ pkgs, config, nix-colors, ... }: {
+{ pkgs, config, nix-colors, ... }:
+
+let
+  nix-colors-lib = nix-colors.lib.contrib { inherit pkgs; };
+
+  background = "010C09";
+  foreground = "FFFFFF";
+  offWhite = "F0FFF8";
+  teal = "60C89A";
+  red = "E64553";
+  blue = "58B5E0";
+  green = "79E05B";
+  purple = "6B5BDC";
+  magenta = "80D1A0";
+  cyan = "5FE2C5";
+  yellow = "F5D24D";
+  orange = "FF8800";
+  pink = "FF4EC9";
+  grey = "888B8E";
+  lightGrey = "F3FCF7";
+  darkTeal = "154E44";
+  lighterTeal = "2C7A6A";
+  lightTeal = "B0E8DA";
+
+in{
   imports = [
     nix-colors.homeManagerModules.default
   ];
+
+  #  colorScheme = nix-colors-lib.colorSchemeFromPicture {
+  #    path = ./assets/evergarden-telescope.jpg;
+  #    variant = "dark";
+  #  };
   colorScheme = {
-    slug = "cyberpunk-apathy-adjusted";
-    name = "Cyberpunk Apathy Adjusted";
+    slug = "cyberpunk-apathy";
+    name = "Cyberpunk Apathy";
     author = "Adrian G L (based on Apathy by Jannik Siebert)";
     palette = {
-      base00 = "031A16"; # Background (kept original)
-      base01 = "2A6D62"; # Lighter Background (brighter)
-      base02 = "3D9F87"; # Selection Background (brighter)
-      base03 = "68D6A0"; # Comments, Invisibles, Line Highlighting (brighter)
-      base04 = "99E3D6"; # Dark Foreground (brighter)
-      base05 = "D1F5E3"; # Default Foreground, Caret, Delimiters, Operators (brighter)
-      base06 = "E0FCF8"; # Light Foreground (brighter)
-      base07 = "FFFFFF"; # Light Background (brighter)
-      base08 = "D066C2"; # Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted (brighter teal)
-      base09 = "6FBCDE"; # Integers, Boolean, Constants, XML Attributes, Markup Link Url (brighter blue)
-      base0A = "7E6BCC"; # Classes, Markup Bold, Search Text Background (brighter purple)
-      base0B = "6ACB9A"; # Strings, Inherited Class, Markup Code, Diff Inserted (brighter magenta)
-      base0C = "D26D6E"; # Support, Regular Expressions, Escape Characters, Markup Quotes (slightly adjusted red)
-      base0D = "E0C964"; # Functions, Methods, Attribute IDs, Headings (brighter yellow)
-      base0E = "8FCB5F"; # Keywords, Storage, Selector, Markup Italic, Diff Changed (brighter green)
-      base0F = "6FC8B8"; # Deprecated, Opening/Closing Embedded Language Tags (brighter cyan)
+      # Base16 color values with context-specific usage comments
+      base00 = background;  # Default background
+      base01 = darkTeal;    # Lighter background (used for status bars)
+      base02 = lighterTeal; # Selection background
+      base03 = teal;        # Comments, secondary content, line highlighting
+      base04 = lightTeal;   # Darker foreground (used for status bars)
+      base05 = foreground;  # Default text and foreground
+      base06 = lightGrey;   # Lighter foreground (used for inactive text)
+      base07 = offWhite;    # Lightest background (used for highlights)
+      base08 = teal;        # Variables, constants, markup link text
+      base09 = blue;        # Integers, booleans, constants, and XML attributes
+      base0A = magenta;     # Classes, headings, keywords
+      base0B = cyan;        # Strings, literals, escape sequences
+      base0C = green;       # Support and error colors
+      base0D = cyan;        # Functions, methods, function names
+      base0E = red;         # Keywords, storage, selectors
+      base0F = yellow;      # Deprecated or obsolete code
     };
   };
+
   programs.foot.settings.colors = {
-    alpha = "0.95"; # Slightly more transparent for a cyberpunk feel
+    alpha = "0.85";
+    #set based on https://github.com/tinted-theming/base16-foot/blob/main/colors/base16-apathy.ini   and https://github.com/tinted-theming/base16-schemes/blob/main/apathy.yaml
+
     foreground = "${config.colorScheme.palette.base05}";
     background = "${config.colorScheme.palette.base00}";
-    regular0 = "${config.colorScheme.palette.base00}"; # Black
-    regular1 = "${config.colorScheme.palette.base08}"; # Red (now brighter teal)
-    regular2 = "${config.colorScheme.palette.base0B}"; # Green
-    regular3 = "${config.colorScheme.palette.base0A}"; # Yellow
-    regular4 = "${config.colorScheme.palette.base09}"; # Blue
-    regular5 = "${config.colorScheme.palette.base0E}"; # Magenta
-    regular6 = "${config.colorScheme.palette.base0C}"; # Cyan (now slightly adjusted red)
-    regular7 = "${config.colorScheme.palette.base05}"; # White
-    bright0 = "${config.colorScheme.palette.base03}"; # Bright Black
-    bright1 = "${config.colorScheme.palette.base08}"; # Bright Red (now brighter teal)
-    bright2 = "${config.colorScheme.palette.base0B}"; # Bright Green
-    bright3 = "${config.colorScheme.palette.base0A}"; # Bright Yellow
-    bright4 = "${config.colorScheme.palette.base09}"; # Bright Blue
-    bright5 = "${config.colorScheme.palette.base0E}"; # Bright Magenta
-    bright6 = "${config.colorScheme.palette.base0C}"; # Bright Cyan (now adjusted red)
-    bright7 = "${config.colorScheme.palette.base07}"; # Bright White
-    selection-foreground = "${config.colorScheme.palette.base00}"; # Dark background color for selected text
-    selection-background = "${config.colorScheme.palette.base0A}"; # Selection color
+
+    regular0 = "${config.colorScheme.palette.base00}";  
+    regular1 = "${config.colorScheme.palette.base08}";
+    regular2 = "${config.colorScheme.palette.base0B}";
+    regular3 = "${config.colorScheme.palette.base0A}";
+    regular4 = "${config.colorScheme.palette.base0D}";
+    regular5 = "${config.colorScheme.palette.base0E}";
+    regular6 = "${config.colorScheme.palette.base0C}";
+    regular7 = "${config.colorScheme.palette.base05}";
+    
+    bright0 = "${config.colorScheme.palette.base03}";
+    bright1 = "${config.colorScheme.palette.base08}";
+    bright2 = "${config.colorScheme.palette.base0B}";
+    bright3 = "${config.colorScheme.palette.base0A}";
+    bright4 = "${config.colorScheme.palette.base0D}";
+    bright5 = "${config.colorScheme.palette.base0E}";
+    bright6 = "${config.colorScheme.palette.base0C}";
+    bright7 = "${config.colorScheme.palette.base07}";
+    selection-foreground = "${config.colorScheme.palette.base00}";
+    selection-background = "${config.colorScheme.palette.base0A}";
   };
 }
 

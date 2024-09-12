@@ -16,6 +16,7 @@
   };
 
   programs.bash = {
+    enable = true;
     shellAliases  = {
         "rebuild" = "sudo nixos-rebuild switch --update-input nixpkgs --update-input unstable --no-write-lock-file --refresh --flake git+https://github.com/adrlau/nix-dotfiles.git --upgrade";
         "nixedit" = "vim /etc/nixos/nix-dotfiles/.";
@@ -38,7 +39,7 @@
         "tree" = "eza -T";
         "neofetch" = "fastfetch";
     };
-    historyControl = ["ignoreboth" "erasedups"];
+    historyControl = ["ignoredups" "ignorespace" "erasedups"];
     historyIgnore = [ "ls" "cd" "exit" "cd .." ".." "la"];
   };
 
