@@ -9,6 +9,11 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-colors.url = "github:misterio77/nix-colors"; 
+    
+    # stylix.url = "github:bluskript/stylix/6bc871ab352c9f18d1179daab9e392a4d46393af";
+    # stylix.inputs.nixpkgs.follows = "nixpkgs";
+    # stylix.inputs.home-manager.follows = "home-manager";
+
 
     ozai.url = "git+https://git.pvv.ntnu.no/Projects/ozai.git";
     ozai.inputs.nixpkgs.follows = "unstable";
@@ -65,6 +70,9 @@
               home-manager.users."gunalx" = import ./home/full.nix;
               home-manager.extraSpecialArgs = {inherit nix-colors inputs;};
             }
+            #need to choose one. The nixos one has bootloader and display manager in addition to the home manager one.
+            #inputs.stylix.nixosModules.stylix
+            #inputs.stylix.homeManagerModules.stylix
           ];
         };
    

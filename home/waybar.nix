@@ -1,14 +1,17 @@
-{ pkgs, config, nix-colors, ... }:
+{ pkgs, inputs, lib, config, nix-colors, ... }:
 
-let
-  palette = config.colorScheme.palette;
-in{
+{
   imports = [
   ];
 
 
 
-  programs.waybar = {
+  programs.waybar = let
+        inherit (inputs.nix-colors.lib.conversions) hexToRGBString;
+        inherit (config.colorscheme) colors;
+        inherit (config.colorscheme) palette;
+        toRGBA = color: opacity: "rgba(${hexToRGBString "," (lib.removePrefix "#" color)},${opacity})";
+      in {
 
     enable = true;
 
@@ -22,9 +25,9 @@ in{
 }
 
 window#waybar {
-    background-color: #${palette.base00}50;
-    border-bottom: 3px solid #${palette.base03}50;
-    color: ${palette.base05};
+    background-color: #${palette.base00};
+    border-bottom: 3px solid #${palette.base03};
+    color: ${toRGBA palette.base05 "0.7"};
     transition-property: background-color;
     transition-duration: .5s;
 }
@@ -77,7 +80,7 @@ button:hover {
 }
 
 #workspaces button:hover {
-    background: #${palette.base00}20;
+    background: #${palette.base00};
 }
 
 #workspaces button.focused {
@@ -166,48 +169,55 @@ button:hover {
     padding-right: 15px;
 }
 
+/*0b also looked good though.  */
 #power-profiles-daemon.performance {
-    background-color: #${palette.base08};
-    color: #${palette.base05};
+    background-color: #${palette.base04};
+    color: #${palette.base00};
 }
 
 #power-profiles-daemon.balanced {
-    background-color: #${palette.base0D};
-    color: #${palette.base05};
+    background-color: #${palette.base04};
+    color: #${palette.base00};
 }
 
 #power-profiles-daemon.power-saver {
-    background-color: #${palette.base0B};
-    color: ${palette.base00};
+    background-color: #${palette.base04};
+    color: #${palette.base00};
 }
 
 label:focus {
-    background-color: #${palette.base00};
+    background-color: #${palette.base04};
+    color: #${palette.base00};
 }
 
 #cpu {
-    background-color: #${palette.base0B};
-    color: ${palette.base00};
+    background-color: #${palette.base04};
+    color: #${palette.base00};
 }
 
 #memory {
-    background-color: #${palette.base0E};
+    background-color: #${palette.base04};
+    color: #${palette.base00};
 }
 
 #disk {
-    background-color: #${palette.base09};
+    background-color: #${palette.base04};
+    color: #${palette.base00};
 }
 
 #backlight {
-    background-color: #${palette.base0C};
+    background-color: #${palette.base04};
+    color: #${palette.base00};
 }
 
 #network {
-    background-color: #${palette.base0D};
+    background-color: #${palette.base04};
+    color: #${palette.base00};
 }
 
 #network.disconnected {
-    background-color: #${palette.base08};
+    background-color: #${palette.base0E};
+    color: #${palette.base00};
 }
 
 #pulseaudio {
@@ -216,7 +226,7 @@ label:focus {
 }
 
 #pulseaudio.muted {
-    background-color: #${palette.base0C};
+    background-color: #${palette.base0E};
     color: #${palette.base03};
 }
 
@@ -226,33 +236,39 @@ label:focus {
 }
 
 #wireplumber.muted {
-    background-color: #${palette.base08};
+    background-color: #${palette.base0E};
+    color: #${palette.base00};
 }
 
 #custom-media {
-    background-color: #${palette.base0B};
-    color: #${palette.base03};
+    background-color: #${palette.base04};
+    color: #${palette.base00};
     min-width: 100px;
 }
 
 #custom-media.custom-spotify {
-    background-color: #${palette.base0B};
+    background-color: #${palette.base04};
+    color: #${palette.base00};
 }
 
 #custom-media.custom-vlc {
-    background-color: #${palette.base09};
+    background-color: #${palette.base04};
+    color: #${palette.base00};
 }
 
 #temperature {
-    background-color: #${palette.base0A};
+    background-color: #${palette.base04};
+    color: #${palette.base00};
 }
 
 #temperature.critical {
-    background-color: #${palette.base08};
+    background-color: #${palette.base0E};
+    color: #${palette.base00};
 }
 
 #tray {
-    background-color: #${palette.base0D};
+    background-color: #${palette.base04};
+    color: #${palette.base00};
 }
 
 #tray > .passive {
@@ -261,25 +277,28 @@ label:focus {
 
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
-    background-color: #${palette.base08};
-}
-
-#idle_inhibitor {
-    background-color: #${palette.base00};
-}
-
-#idle_inhibitor.activated {
     background-color: #${palette.base07};
     color: #${palette.base00};
 }
 
+#idle_inhibitor {
+    background-color: #${palette.base04};
+    color: #${palette.base00};
+}
+
+#idle_inhibitor.activated {
+    background-color: #${palette.base06};
+    color: #${palette.base00};
+}
+
 #mpd {
-    background-color: #${palette.base0B};
-    color: #${palette.base03};
+    background-color: #${palette.base04};
+    color: #${palette.base00};
 }
 
 #mpd.disconnected {
-    background-color: #${palette.base08};
+    background-color: #${palette.base06};
+    color: #${palette.base00};
 }
 
 #mpd.stopped {
@@ -291,15 +310,15 @@ label:focus {
 }
 
 #language {
-    background: #${palette.base0C};
-    color: #${palette.base0E};
+    background: #${palette.base04};
+    color: #${palette.base00};
     padding: 0 5px;
     margin: 0 5px;
     min-width: 16px;
 }
 
 #keyboard-state {
-    background: #${palette.base0B};
+    background: #${palette.base04};
     color: #${palette.base00};
     padding: 0 0px;
     margin: 0 5px;
@@ -311,11 +330,13 @@ label:focus {
 }
 
 #keyboard-state > label.locked {
-    background: #${palette.base00}20;
+    background: #${palette.base04};
+    color: #${palette.base00};
 }
 
 #scratchpad {
-    background: #${palette.base00}20;
+    background: #${palette.base00};
+    color: #${palette.base00};
 }
 
 #scratchpad.empty {
@@ -324,15 +345,16 @@ label:focus {
 
 #privacy {
     padding: 0;
+    color: #${palette.base04};
 }
 
 #privacy-item {
+    color: #${palette.base00};
     padding: 0 5px;
-    color: #${palette.base05};
 }
 
 #privacy-item.screenshare {
-    background-color: #${palette.base09};
+    background-color: #${palette.base00};
 }
 
 #privacy-item.audio-in {

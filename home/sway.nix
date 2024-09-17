@@ -1,12 +1,11 @@
 { pkgs, config, lib, ... }:
 let
+  wallpapers = import ./wallpaper.nix { inherit pkgs; };
   palette = config.colorScheme.palette;
 in
 {
     imports = [
-       #./fuzzle.nix
-       #./wofi.nix
-       #./waybar.nix
+       ./waybar.nix
        ./foot.nix
        ./fonts.nix
        ./kanshi.nix
@@ -30,7 +29,8 @@ in
     	wdisplays
       kanshi
       wlr-randr
-      swaybg
+      #swaybg
+      swww
 
       #bar applets and notifications
     	waybar
@@ -83,7 +83,7 @@ in
     ];
 
   qt.enable = true;
-  qt.style.name = "breeze";
+  qt.style.name = "adwaita-dark";
 
 
   home.sessionVariables = {
@@ -91,7 +91,7 @@ in
     MOZ_USE_XINPUT2 = "1";
     XDG_SESSION_TYPE = "wayland";
     XDG_CURRENT_DESKTOP = "sway";
-    XKB_DEFAULT_OPTIONS = "terminate:ctrl_alt_bksp,caps:escape,altwin:swap_alt_win";
+    XKB_DEFAULT_OPTIONS = "terminate:ctrl_alt_bksp,caps:escape";
     SDL_VIDEODRIVER = "wayland";
 
     # needs qt5.qtwayland in systemPackages
@@ -111,14 +111,16 @@ wayland.windowManager.sway = let
   cfg = config.wayland.windowManager.sway;
 in {
   wrapperFeatures.gtk = true;
-  systemd.enable = true;
   enable = true;
+  systemd.enable = true;
+
+
   config = rec {
     
     modifier = "Mod4";
 
     terminal = "footclient";
-    menu = "fuzzel";
+    menu = "fuzzel -b ${palette.base00}BB -t ${palette.base05}FF";
     bars = [{
         fonts.size = 16.0;
         command = "waybar";
@@ -126,6 +128,9 @@ in {
       }];
     startup = [
       {command = "foot --server";}
+      {command = "swww-daemon";}
+      {command = ''while true; do for wallpaper in $WALLPAPER_DIR/*; do swww img "$wallpaper"; sleep 300; done; done'';}
+
       {command = "firefox";}
       {command = "nm-applet";}
       {command = "autotiling-rs";}
@@ -214,9 +219,7 @@ in {
         "${cfg.config.modifier}+r" = "mode resize";
 
         "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +5%";
-        "F3" = "exec pactl set-sink-volume @DEFAULT_SINK@ +5%";
         "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -5%";
-        "F2" = "exec pactl set-sink-volume @DEFAULT_SINK@ -5%";
         "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
         "XF86AudioMicMute" = "exec pactl set-source-mute @DEFAULT_SOURCE@ toggle";
         "XF86MonBrightnessDown" = "exec brightnessctl set 5%-";
@@ -230,12 +233,12 @@ in {
         "${cfg.config.modifier}+Shift+c" = "exec code";
         "${cfg.config.modifier}+f11" = "exec grim -g \"$(slurp)\" ~/Pictures/screenshots/\"screenshot-`date +%F-%T`\".png";
         "${cfg.config.modifier}+Print" = "exec grim -g \"$(slurp)\" ~/Pictures/screenshots/\"screenshot-`date +%F-%T`\".png";
-        "${cfg.config.modifier}+tab" = "workspace back_and_forth";
+        "${cfg.config.modifier}+tab" = "workspace next";
+        "Alt+tab" = "workspace back_and_forth";
         };
   };
 
   extraConfig = ''
-    set $mod Mod4
     input type:keyboard xkb_capslock disabled
     input type:keyboard xkb_numlock enabled
     xwayland enable
@@ -247,10 +250,10 @@ in {
     default_floating_border pixel 2
     titlebar_border_thickness 1
 
-    client.focused          ${palette.base0D} ${palette.base00} ${palette.base05} ${palette.base0D} ${palette.base0D}
-    client.focused_inactive ${palette.base0D} ${palette.base00} ${palette.base05} ${palette.base0D} ${palette.base0D}
-    client.unfocused        ${palette.base0D} ${palette.base03} ${palette.base05} ${palette.base0D} ${palette.base00}
-    client.urgent           ${palette.base0D} ${palette.base0D} ${palette.base03} ${palette.base0D}
+    client.focused          #${palette.base0D} #${palette.base00} #${palette.base05} #${palette.base0D} #${palette.base0D}
+    client.focused_inactive #${palette.base0D} #${palette.base00} #${palette.base05} #${palette.base0D} #${palette.base0D}
+    client.unfocused        #${palette.base0D} #${palette.base03} #${palette.base05} #${palette.base0D} #${palette.base00}
+    client.urgent           #${palette.base0D} #${palette.base0D} #${palette.base03} #${palette.base0D} #${palette.base00}
 
     for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable
     for_window [title="(?:Open|Save) (?:File|Folder|As)"] resize set 1920 1080

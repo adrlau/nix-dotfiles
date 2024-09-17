@@ -6,6 +6,8 @@
     ./sway.nix
     ./colors.nix
 
+    #./stylix.nix
+
     #inputs.nix-colors.homeManagerModules.default
   ];
   home.packages = with pkgs; [
