@@ -90,7 +90,7 @@
         };
         
 
-        galadriel = nixpkgs.lib.nixosSystem {
+      galadriel = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {
             inherit inputs;
@@ -104,10 +104,21 @@
             ozai.nixosModules.ozai
             ozai-webui.nixosModules.ozai-webui
           ];
-        };
+      };
         
+      gandalf = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = [
+            ./machines/gandalf/configuration.nix
+            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
+            sops-nix.nixosModules.sops
+          ];
+        };
 
-       elrond = nixpkgs.lib.nixosSystem {
+      elrond = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {
             inherit inputs;
@@ -119,8 +130,8 @@
             inputs.ozai.nixosModules.ozai
             inputs.ozai-webui.nixosModules.ozai-webui
           ];
-        };
-      };
+         };
+       };
 
      
       devShells.x86_64-linux = {
