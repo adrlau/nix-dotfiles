@@ -29,7 +29,8 @@ imports =
     rustup
 
 
-
+    mpi
+    gnuplot
 
 
 

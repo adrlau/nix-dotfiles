@@ -67,7 +67,7 @@ imports =
   ];
 
 
-  qt.platformTheme = "qt5ct";
+  #qt.platformTheme = "qt5ct";
   
 
 }
