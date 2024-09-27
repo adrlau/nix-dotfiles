@@ -1,10 +1,13 @@
-{ stdenv, lib }:
+{ lib, stdenv, pkgs }:
 
 stdenv.mkDerivation rec {
   pname = "wallpapers";
   version = "1.0";
 
-  src = ./;
+  src = pkgs.fetchurl {
+    url = "file://./";
+    sha256 = lib.fakeSha256;
+  };
 
   installPhase = ''
     mkdir -p $out/share/wallpapers
@@ -17,3 +20,4 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ adriangl ];
   };
 }
+

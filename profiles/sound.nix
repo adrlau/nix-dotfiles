@@ -8,10 +8,12 @@ imports =
 
     # Enable sound with pipewire.
   sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  #hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
+    audio.enable = true;
+    systemWide = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
@@ -33,7 +35,7 @@ imports =
     synthesia
     vital
     picoloop
-    bespokesynth-with-vst2
+    #bespokesynth-with-vst2 #always takes ages compiling
     fmsynth
     polyphone #soundfont editor
 

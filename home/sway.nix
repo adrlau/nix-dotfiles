@@ -1,7 +1,13 @@
 { pkgs, config, lib, ... }:
 let
-  wallpapers = import ./wallpaper.nix { inherit pkgs; };
+  #wallpapers = import ./wallpapers { inherit lib pkgs; };
+  
   palette = config.colorScheme.palette;
+
+
+  idlelock = "brightnessctl -d intel_backlight s 10% && swaylock && brightnessctl -d intel_backlight s 50% ";
+
+
 in
 {
     imports = [
@@ -9,14 +15,20 @@ in
        ./foot.nix
        ./fonts.nix
        ./kanshi.nix
+       ./swaylock.nix
+       #./assets/wallpapers
     ];
 
 
+    #home.packages = [
+    #  wallpapers
+    #];
     home.packages = with pkgs; [
       wl-clipboard
     	libsForQt5.qt5ct
     	qt6Packages.qt6ct
-    	pass-wayland
+      pass-wayland
+      wev
 
       #term
     	foot
@@ -42,7 +54,7 @@ in
       #lockscreen and related
     	wleave
       swayidle
-    	swaylock-effects
+      #swaylock-effects
     	#swaylock-fancy #migth change to this default may look prettier.
 
       #ligth and sound
@@ -82,9 +94,6 @@ in
 
     ];
 
-  qt.enable = true;
-  qt.style.name = "adwaita-dark";
-
 
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "1";
@@ -103,8 +112,14 @@ in
     _JAVA_AWT_WM_NONREPARENTING = 1;
 
     # gtk applications on wayland
-    #GTK_BACKEND="wayland";
+    GTK_BACKEND="wayland";
+
+    #WALLPAPER_DIR="${wallpapers}/share/wallpapers";
+    WALLPAPER_DIR="/home/gunalx/Pictures/wallpapers";
+
   };
+
+
 
 
 wayland.windowManager.sway = let
@@ -113,8 +128,7 @@ in {
   wrapperFeatures.gtk = true;
   enable = true;
   systemd.enable = true;
-
-
+  
   config = rec {
     
     modifier = "Mod4";
@@ -128,8 +142,18 @@ in {
       }];
     startup = [
       {command = "foot --server";}
+
+      #wallpaper
       {command = "swww-daemon";}
-      {command = ''while true; do for wallpaper in $WALLPAPER_DIR/*; do swww img "$wallpaper"; sleep 300; done; done'';}
+      {command = "while true; do for wallpaper in $WALLPAPER_DIR/*; do swww img \"$wallpaper\"; sleep 15; done; done;";}
+
+      #idlelock
+      {command = ''swayidle \
+      	timeout 120 ${idlelock} \
+      	timeout 180 'swaymsg "output * dpms off"' \
+      	resume 'swaymsg "output * dpms on"' \
+        before-sleep ${idlelock}
+        '';}
 
       {command = "firefox";}
       {command = "nm-applet";}
@@ -233,14 +257,24 @@ in {
         "${cfg.config.modifier}+Shift+c" = "exec code";
         "${cfg.config.modifier}+f11" = "exec grim -g \"$(slurp)\" ~/Pictures/screenshots/\"screenshot-`date +%F-%T`\".png";
         "${cfg.config.modifier}+Print" = "exec grim -g \"$(slurp)\" ~/Pictures/screenshots/\"screenshot-`date +%F-%T`\".png";
+        "${cfg.config.modifier}+m" = "exec ${idlelock}";
+        "ctrl+space" = "exec xkb_switch_layout next"; #TODO:verify
         "${cfg.config.modifier}+tab" = "workspace next";
         "Alt+tab" = "workspace back_and_forth";
         };
   };
 
   extraConfig = ''
-    input type:keyboard xkb_capslock disabled
-    input type:keyboard xkb_numlock enabled
+    input type:keyboard { 
+      xkb_capslock disabled
+      xkb_numlock enabled
+
+      xkb_layout us,no
+      xkb_options :
+    }
+
+
+
     xwayland enable
 
     smart_borders no_gaps

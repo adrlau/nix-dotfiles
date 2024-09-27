@@ -44,6 +44,9 @@ imports =
 
   security.polkit.enable = true;
   
+  security.pam.services.swaylock = {};
+  security.pam.services.swaylock-effects = {};
+
   services.displayManager = {
     enable = true;
     sessionPackages = with pkgs; [ sway ];
@@ -60,7 +63,24 @@ imports =
   services.desktopManager.plasma6.enable = true;
   services.desktopManager.plasma6.enableQt5Integration = true;
 
-  qt.platformTheme = "kde";
+  #bluetooth
+  services.blueman.enable = true;
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  hardware.bluetooth = {
+    enable = true; # enables support for Bluetooth
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+        Experimental = true;
+      };
+    };
+
+  };
+
+  #automount
+  services.udisks2.enable = true;
+
+  #qt.platformTheme = "kde";
 
   # Configure keymap in X11
   services.xserver.xkb = {

@@ -68,6 +68,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users."gunalx" = import ./home/full.nix;
+              home-manager.backupFileExtension = "bac";
               home-manager.extraSpecialArgs = {inherit nix-colors inputs;};
             }
             #need to choose one. The nixos one has bootloader and display manager in addition to the home manager one.
