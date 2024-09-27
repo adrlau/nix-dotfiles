@@ -40,7 +40,7 @@ imports =
   ];
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing.enable = false; #temp off because of CVE
 
   security.polkit.enable = true;
   
