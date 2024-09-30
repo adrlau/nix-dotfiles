@@ -29,6 +29,7 @@ in
     	qt6Packages.qt6ct
       pass-wayland
       wev
+      xkb-switch
 
       #term
     	foot
@@ -52,7 +53,6 @@ in
       mako
 
       #lockscreen and related
-    	wleave
       swayidle
       #swaylock-effects
     	#swaylock-fancy #migth change to this default may look prettier.
@@ -95,6 +95,8 @@ in
     ];
 
 
+  home.keyboard.layout = "us,no";
+
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "1";
     MOZ_USE_XINPUT2 = "1";
@@ -120,7 +122,9 @@ in
   };
 
 
-
+  programs.wlogout = {
+    enable = true;
+  };
 
 wayland.windowManager.sway = let
   cfg = config.wayland.windowManager.sway;
@@ -258,7 +262,7 @@ in {
         "${cfg.config.modifier}+f11" = "exec grim -g \"$(slurp)\" ~/Pictures/screenshots/\"screenshot-`date +%F-%T`\".png";
         "${cfg.config.modifier}+Print" = "exec grim -g \"$(slurp)\" ~/Pictures/screenshots/\"screenshot-`date +%F-%T`\".png";
         "${cfg.config.modifier}+m" = "exec ${idlelock}";
-        "ctrl+space" = "exec xkb_switch_layout next"; #TODO:verify
+        #"ctrl+space" = "exec xkb_switch_layout next"; #TODO:verify
         "${cfg.config.modifier}+tab" = "workspace next";
         "Alt+tab" = "workspace back_and_forth";
         };
@@ -269,8 +273,10 @@ in {
       xkb_capslock disabled
       xkb_numlock enabled
 
-      xkb_layout us,no
-      xkb_options :
+      xkb_layout no,us
+      xkb_options winkeys,
+      xkb_options grp:ctrl_space_toggle
+      xkb_numlock enabled # enable numlock when logging in
     }
 
 

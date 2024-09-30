@@ -84,8 +84,9 @@ imports =
 
   # Configure keymap in X11
   services.xserver.xkb = {
-    layout = "us,no";
-    variant = ",";
+    layout = "no,us";
+    variant = "";
+
   };
   
 
