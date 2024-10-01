@@ -3,7 +3,7 @@
 imports =
     [
       ./base.nix 
-      ./ai.nix 
+      #./ai.nix 
       
     ];
 
@@ -29,9 +29,12 @@ imports =
     rustup
 
 
+    cmake
+    gnumake
     mpi
+    bc
     gnuplot
-
+    ffmpeg
 
 
      ];

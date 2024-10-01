@@ -5,7 +5,8 @@ imports =
       ./base.nix 
       ./sound.nix
       ./video.nix 
-      ./office.nix 
+      ./office.nix
+      ./development.nix
 
       ../packages/vim.nix
       ../packages/steam.nix
