@@ -14,11 +14,19 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+
+
+  # Pick only one of the below networking options.
+  #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+
+
+
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
-  networking.useDHCP = true;                   
- # networking.interfaces.ens3.useDHCP = true; # Interface is not constant. I really only want to use dhcp att all so could remove this in favor of the old way.
+   # networking.useDHCP = true;                   
+ networking.interfaces.wlp3s0f0.useDHCP = true; # Interface is not constant. I really only want to use dhcp att all so could remove this in favor of the old way.
   networking.hostName = "gandalf"; # Define your hostname.
   
   boot.kernel.sysctl = {
