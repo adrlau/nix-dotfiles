@@ -21,6 +21,7 @@ imports =
     #qt6Packages.qt6ct
     
     where-is-my-sddm-theme
+    swww
   ];
 
   fonts.packages = with pkgs; [

@@ -149,7 +149,7 @@ in {
 
       #wallpaper
       {command = "swww-daemon";}
-      {command = "while true; do for wallpaper in $WALLPAPER_DIR/*; do swww img \"$wallpaper\"; sleep 15; done; done;";}
+      {command = "while true; do for wallpaper in $WALLPAPER_DIR/*; do swww img $wallpaper; sleep 15; done; done;";}
 
       #idlelock
       {command = ''swayidle \

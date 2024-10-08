@@ -36,6 +36,7 @@ imports =
     gnuplot
     ffmpeg
 
+    ripes
 
      ];
 
