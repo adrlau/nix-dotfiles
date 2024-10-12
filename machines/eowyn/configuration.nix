@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ../../profiles/base.nix
       ../../profiles/desktop.nix
+      ../../profiles/development.nix
     ];
   nixpkgs.config.allowUnfree = true;
   # Use the systemd-boot EFI boot loader.

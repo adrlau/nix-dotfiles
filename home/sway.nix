@@ -290,10 +290,25 @@ in {
     default_floating_border pixel 2
     titlebar_border_thickness 1
 
-    client.focused          #${palette.base0D} #${palette.base00} #${palette.base05} #${palette.base0D} #${palette.base0D}
-    client.focused_inactive #${palette.base0D} #${palette.base00} #${palette.base05} #${palette.base0D} #${palette.base0D}
-    client.unfocused        #${palette.base0D} #${palette.base03} #${palette.base05} #${palette.base0D} #${palette.base00}
-    client.urgent           #${palette.base0D} #${palette.base0D} #${palette.base03} #${palette.base0D} #${palette.base00}
+    ###client.focused          #${palette.base0D} #${palette.base00} #${palette.base05} #${palette.base0D} #${palette.base0D}
+    ###client.focused_inactive #${palette.base0D} #${palette.base00} #${palette.base05} #${palette.base0D} #${palette.base0D}
+    ###client.unfocused        #${palette.base0D} #${palette.base03} #${palette.base05} #${palette.base0D} #${palette.base00}
+    ###client.urgent           #${palette.base0D} #${palette.base0D} #${palette.base03} #${palette.base0D} #${palette.base00}
+
+    #### window decorations
+    #### class			        border	    background	text        indicator   child_border
+    ###client.focused          #80a0ff     #303030     #c6c6c6     #80a0ff     #80a0ff
+    ###client.focused_inactive #80a0ff     #303030     #c6c6c6     #80a0ff     #80a0ff
+    ###client.unfocused        #80a0ff     #080808     #c6c6c6     #80a0ff     #303030
+    ###client.urgent           #80a0ff     #80a0ff     #080808     #80a0ff
+
+    # window decorations
+    # class			        border	    background	text        indicator   child_border
+    client.focused          ${palette.base0A} ${palette.base01} ${palette.base05} ${palette.base0A} ${palette.base0A}
+    client.focused_inactive ${palette.base0A} ${palette.base01} ${palette.base05} ${palette.base0A} ${palette.base0A}
+    client.unfocused        ${palette.base0A} ${palette.base00} ${palette.base05} ${palette.base0A} ${palette.base01}
+    client.urgent           ${palette.base0A} ${palette.base0A} ${palette.base00} ${palette.base0A}
+
 
     for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable
     for_window [title="(?:Open|Save) (?:File|Folder|As)"] resize set 1920 1080
