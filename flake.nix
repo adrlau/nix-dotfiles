@@ -14,6 +14,9 @@
     # stylix.inputs.nixpkgs.follows = "nixpkgs";
     # stylix.inputs.home-manager.follows = "home-manager";
 
+    NixVirt.url = "https://flakehub.com/f/AshleyYakeley/NixVirt/*.tar.gz";
+    NixVirt.inputs.nixpkgs.follows = "nixpkgs";
+
 
     ozai.url = "git+https://git.pvv.ntnu.no/Projects/ozai.git";
     ozai.inputs.nixpkgs.follows = "unstable";
@@ -43,6 +46,7 @@
     , nixpkgs
     , sops-nix
     , nixos-hardware
+    , NixVirt
     , unstable
   , ... }@inputs:
     let
@@ -113,9 +117,43 @@
             inherit inputs;
           };
           modules = [
+            NixVirt.nixosModules.default
             ./machines/gandalf/configuration.nix
             ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
             sops-nix.nixosModules.sops
+
+            ({ config, pkgs, ... }: {
+            # Your VM configuration here
+            virtualisation.libvirt.enable = true;
+            virtualisation.libvirt.connections."qemu:///system".domains = [
+              {
+                definition = NixVirt.lib.domain.writeXML (NixVirt.lib.domain.templates.q35 {
+                  name = "gandalf-grey";
+                  uuid = "a1db010b-4ad3-436a-bd99-f290f5ac8806"; # Replace with a generated UUID
+                  memory = { count = 4; unit = "GiB"; };
+                  vcpu = { value = 2; }; # Number of CPU cores
+                  storage_vol = "/vm-images/OPNsense-24.7-nano-amd64.img"; # Path to your storage image file
+                  install_vol = null; # No installation volume since we're using an existing image
+                  virtio_net = true;
+                  virtio_video = true;
+                  virtio_drive = true;
+                  devices = [
+                    { hostdev = "/sys/bus/pci/devices/0000:04:00.0"; }
+                    { hostdev = "/sys/bus/pci/devices/0000:05:00.0"; }
+                    { hostdev = "/sys/bus/pci/devices/0000:06:00.0"; }
+                    { hostdev = "/sys/bus/pci/devices/0000:07:00.0"; }
+                    { hostdev = "/sys/bus/pci/devices/0000:08:00.0"; }
+                    { hostdev = "/sys/bus/pci/devices/0000:0b:00.0"; }
+                    { hostdev = "/sys/bus/pci/devices/0000:0b:00.1"; }
+                    { hostdev = "/sys/bus/pci/devices/0000:0c:00.0"; }
+                    { hostdev = "/sys/bus/pci/devices/0000:0c:00.1"; }
+                  ];
+                });
+                active = true;
+              }
+            ];
+          })
+
           ];
         };
 
@@ -144,119 +182,5 @@
       };
     };
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
