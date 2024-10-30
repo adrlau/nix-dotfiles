@@ -7,8 +7,9 @@
 
   services.ozai-webui = {
     enable = true;
-    port = 8085;
+    port = 8095;
     host = "0.0.0.0";
+
   };
 
 }
