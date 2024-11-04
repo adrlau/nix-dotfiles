@@ -50,6 +50,18 @@
       #basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
     };
 
+    virtualHosts."hybel.lauterer.it" = {
+      forceSSL = true;
+      useACMEHost = config.networking.domain;
+      locations."/" = {
+        proxyWebsockets = true;
+        proxyPass = "http://100.109.23.4:8123";
+      };
+      # ignorerer sikkerhet for littegran for å oprettholde lettvinthet og app kompatibilitet.
+      #basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
+    };
+
+
     virtualHosts."jellyfin.lauterer.it" = {
         forceSSL = true;
         useACMEHost = config.networking.domain;
