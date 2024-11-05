@@ -9,7 +9,7 @@
       ./hardware-configuration.nix
       ../../profiles/base.nix
         ../../services/virt.nix
-       # ./nixvirt.nix
+       ./qemu.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
