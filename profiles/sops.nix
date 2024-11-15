@@ -15,6 +15,7 @@
   # This will automaticx-sopsally import SSH keys as age keys
   sops.age.sshKeyPaths = [
 			  "/etc/ssh/nixos"
+			  "/root/.ssh/nixos"
 			  #"/$HOME/.ssh/nixos"
         #"/home/gunalx/.ssh/nixos"
 			];

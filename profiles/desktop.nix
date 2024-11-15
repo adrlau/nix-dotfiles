@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ unstable, config, pkgs, lib, ... } @ args: 
 {
 imports =
     [
@@ -10,7 +10,9 @@ imports =
 
       ../packages/vim.nix
       ../packages/steam.nix
-      
+
+      "${args.inputs.unstable}/nixos/modules/services/display-managers/ly.nix"
+
     ];
 
   environment.systemPackages = with pkgs; [
@@ -19,9 +21,10 @@ imports =
 
     #libsForQt5.qt5ct
     #qt6Packages.qt6ct
+    #where-is-my-sddm-theme
     
-    where-is-my-sddm-theme
     swww
+
   ];
 
   fonts.packages = with pkgs; [
@@ -49,17 +52,28 @@ imports =
   security.pam.services.swaylock = {};
   security.pam.services.swaylock-effects = {};
 
+
+  security.pam.services.ly = {};
+  #security.pam.services.display-manager.ly = {};
   services.displayManager = {
     enable = true;
     sessionPackages = with pkgs; [ sway ];
-    sddm = {
+    execCmd = "${pkgs.unstable.ly}/bin/ly"; 
+    #execCmd = "${unstable.pkgs.ly}/bin/ly"; 
+    ly = {
+      package = pkgs.unstable.ly;
       enable = true;
-      theme = "${pkgs.where-is-my-sddm-theme}";
-      wayland.enable = true;
-      wayland.compositor = "kwin";
-      autoNumlock = true;
-      enableHidpi = true;
+      settings = {
+
+        animation = "matrix";
+        waylandsessions = "${config.services.displayManager.sessionData.desktops}/share/wayland-sessions"; 
+
+      };
+
     };
+    
+    
+    
   };
 
   services.desktopManager.plasma6.enable = true;

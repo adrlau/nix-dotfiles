@@ -14,6 +14,7 @@ in
        ./waybar.nix
        ./foot.nix
        ./fonts.nix
+       ./fcitx5.nix
        ./kanshi.nix
        ./swaylock.nix
        #./assets/wallpapers
@@ -25,7 +26,8 @@ in
     #];
     home.packages = with pkgs; [
       wl-clipboard
-    	libsForQt5.qt5ct
+      #wl-copy
+      libsForQt5.qt5ct
     	qt6Packages.qt6ct
       pass-wayland
       wev
@@ -71,6 +73,9 @@ in
       bemoji
       fuzzel
 
+      #for emoji picker
+      emote
+      unicode-emoji
 
       #screenshots
     	grim
@@ -262,8 +267,10 @@ in {
         "${cfg.config.modifier}+f11" = "exec grim -g \"$(slurp)\" ~/Pictures/screenshots/\"screenshot-`date +%F-%T`\".png";
         "${cfg.config.modifier}+Print" = "exec grim -g \"$(slurp)\" ~/Pictures/screenshots/\"screenshot-`date +%F-%T`\".png";
         "${cfg.config.modifier}+m" = "exec ${idlelock}";
+        ##emoji piacker
+        "${cfg.config.modifier}+period" = "exec emote";
         #"ctrl+space" = "exec xkb_switch_layout next"; #TODO:verify
-        "${cfg.config.modifier}+tab" = "workspace next";
+        "${cfg.config.modifier}+tab" = "${menu}";
         "Alt+tab" = "workspace back_and_forth";
         };
   };
@@ -273,9 +280,9 @@ in {
       xkb_capslock disabled
       xkb_numlock enabled
 
-      xkb_layout no,us
-      xkb_options winkeys,
-      xkb_options grp:ctrl_space_toggle
+      xkb_layout us,no
+      xkb_options ,
+      xkb_options grp:win_space_toggle
       xkb_numlock enabled # enable numlock when logging in
     }
 
@@ -295,12 +302,12 @@ in {
     ###client.unfocused        #${palette.base0D} #${palette.base03} #${palette.base05} #${palette.base0D} #${palette.base00}
     ###client.urgent           #${palette.base0D} #${palette.base0D} #${palette.base03} #${palette.base0D} #${palette.base00}
 
-    #### window decorations
-    #### class			        border	    background	text        indicator   child_border
-    ###client.focused          #80a0ff     #303030     #c6c6c6     #80a0ff     #80a0ff
-    ###client.focused_inactive #80a0ff     #303030     #c6c6c6     #80a0ff     #80a0ff
-    ###client.unfocused        #80a0ff     #080808     #c6c6c6     #80a0ff     #303030
-    ###client.urgent           #80a0ff     #80a0ff     #080808     #80a0ff
+    # # window decorations
+    # # class			        border	    background	text        indicator   child_border
+    # client.focused          #80a0ff     #303030     #c6c6c6     #80a0ff     #80a0ff
+    # client.focused_inactive #80a0ff     #303030     #c6c6c6     #80a0ff     #80a0ff
+    # client.unfocused        #80a0ff     #080808     #c6c6c6     #80a0ff     #303030
+    # client.urgent           #80a0ff     #80a0ff     #080808     #80a0ff
 
     # window decorations
     # class			        border	    background	text        indicator   child_border

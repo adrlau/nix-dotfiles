@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 {
   imports = [
-    ./sshconfig.nix
+    ../common/sshconfig.nix
   ];
 
   programs.nix-index = {

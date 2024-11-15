@@ -70,7 +70,8 @@
             home-manager.nixosModules.home-manager {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users."gunalx" = import ./home/full.nix;
+              home-manager.users."gunalx" = import ./home/gunalx/full.nix;
+              home-manager.users."root" = import ./home/root/base.nix;
               home-manager.backupFileExtension = "bac";
               home-manager.extraSpecialArgs = {inherit nix-colors inputs;};
             }
@@ -140,11 +141,11 @@
 
      
       devShells.x86_64-linux = {
-        default = nixpkgs.legacyPackages.x86_64-linux.callPackage ./home/shell.nix { };
+        default = nixpkgs.legacyPackages.x86_64-linux.callPackage ./home/gunalx/shell.nix { };
       };
 
       devShells.aarch64-linux = {
-        default = nixpkgs.legacyPackages.aarch64-linux.callPackage ./home/shell.nix { };
+        default = nixpkgs.legacyPackages.aarch64-linux.callPackage ./home/gunalx/shell.nix { };
       };
     };
 }
