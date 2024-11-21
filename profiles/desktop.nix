@@ -11,8 +11,6 @@ imports =
       ../packages/vim.nix
       ../packages/steam.nix
 
-      "${args.inputs.unstable}/nixos/modules/services/display-managers/ly.nix"
-
     ];
 
   environment.systemPackages = with pkgs; [
@@ -21,7 +19,7 @@ imports =
 
     #libsForQt5.qt5ct
     #qt6Packages.qt6ct
-    #where-is-my-sddm-theme
+    where-is-my-sddm-theme
     
     swww
 
@@ -40,8 +38,6 @@ imports =
     nerdfonts
     ubuntu_font_family
 
-    
-
   ];
 
   # Enable CUPS to print documents.
@@ -51,26 +47,28 @@ imports =
   
   security.pam.services.swaylock = {};
   security.pam.services.swaylock-effects = {};
-
-
   security.pam.services.ly = {};
-  #security.pam.services.display-manager.ly = {};
+
+#security.pam.services.display-manager.ly = {};
   services.displayManager = {
     enable = true;
     sessionPackages = with pkgs; [ sway ];
-    execCmd = "${pkgs.unstable.ly}/bin/ly"; 
-    #execCmd = "${unstable.pkgs.ly}/bin/ly"; 
-    ly = {
-      package = pkgs.unstable.ly;
+
+    sddm = {
       enable = true;
-      settings = {
-
-        animation = "matrix";
-        waylandsessions = "${config.services.displayManager.sessionData.desktops}/share/wayland-sessions"; 
-
-      };
-
+      autoNumlock = true;
     };
+
+    ### still really broken and neds 24.11
+    #ly = {
+    #  package = pkgs.unstable.ly;
+    #  enable = true;
+    #  settings = {
+    #    animation = "matrix";
+    #    waylandsessions = "${config.services.displayManager.sessionData.desktops}/share/wayland-sessions"; 
+    #  };
+
+    #};
     
     
     

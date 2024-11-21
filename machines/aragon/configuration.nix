@@ -19,6 +19,7 @@
 
 	#customised applications
 	../../services/podman.nix
+	../../services/boinc.nix
     ];
 
   # Bootloader.
