@@ -70,9 +70,10 @@ imports =
 
     #};
     
-    
-    
   };
+
+
+  services.logind.powerKey = "ignore";
 
   services.desktopManager.plasma6.enable = true;
   services.desktopManager.plasma6.enableQt5Integration = true;

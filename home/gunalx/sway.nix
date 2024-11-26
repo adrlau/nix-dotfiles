@@ -47,6 +47,8 @@ in
       #swaybg
       swww
 
+      wleave
+
       #bar applets and notifications
     	waybar
     	networkmanagerapplet
@@ -272,6 +274,7 @@ in {
         #"ctrl+space" = "exec xkb_switch_layout next"; #TODO:verify
         "${cfg.config.modifier}+tab" = "${menu}";
         "Alt+tab" = "workspace back_and_forth";
+        "XF86PowerOff" = "exec ${pkgs.wleave}/bin/wleave";
         };
   };
 
@@ -280,8 +283,8 @@ in {
       xkb_capslock disabled
       xkb_numlock enabled
 
-      xkb_layout us,no
-      xkb_options ,
+      xkb_layout us,no,jp
+      xkb_options ,,
       xkb_options grp:win_space_toggle
       xkb_numlock enabled # enable numlock when logging in
     }
