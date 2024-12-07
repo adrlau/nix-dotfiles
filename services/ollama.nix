@@ -1,10 +1,11 @@
 { config, pkgs, lib, ... }:
 {
   environment.systemPackages = [
-    pkgs.ollama
+    pkgs.unstable.ollama
   ];
 
   services.ollama.enable = true;
+  services.ollama.package = pkgs.unstable.ollama;
   services.ollama.listenAddress = "0.0.0.0:11434";
   services.ollama.models = "/var/lib/ollama/models";
   services.ollama.home = "/var/lib/ollama";
@@ -14,7 +15,6 @@
                                                     hostname = config.networking.hostName;
                                                   in
                                                     if hostname == "galadriel" then "cuda"
-                                                    else if hostname == "boromir" then "cuda"
                                                     else if hostname == "aragorn" then "rocm"
                                                     else null);
 

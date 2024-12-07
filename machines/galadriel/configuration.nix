@@ -70,12 +70,11 @@
       jftui
       sonixd
       unpackerr
-      qbittorrent-nox
       python3
       python3Packages.torchWithCuda
       ollama
-  ];
-
+      unstable.qbittorrent-nox
+    ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

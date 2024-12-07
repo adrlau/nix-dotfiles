@@ -2,6 +2,7 @@
 {
   imports = [
     ../common/sshconfig.nix
+    ../common/unfree.nix
   ];
 
   programs.nix-index = {

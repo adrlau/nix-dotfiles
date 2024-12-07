@@ -27,7 +27,7 @@ imports =
 
   #just allow unfree, im fine with it. 
   nixpkgs.config.allowUnfree = true; 
-  
+
   zramSwap = {
     enable = true;
     memoryPercent = 25;

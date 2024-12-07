@@ -118,7 +118,7 @@ in
 
     serviceConfig = {
       ExecStartPre = "${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/mkdir -p ${path} && ${pkgs.coreutils}/bin/chmod -R 755 ${path} && ${pkgs.coreutils}/bin/cp ${config.sops.templates."qbittorrent/configuration".path} ${path}/.config/qBittorrent/qBittorrent.conf'";
-      ExecStart = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox";
+      ExecStart = "${pkgs.unstable.qbittorrent-nox}/bin/qbittorrent-nox";
       User = "qbittorrent";
       Group = "media";
       Restart = "on-failure";
