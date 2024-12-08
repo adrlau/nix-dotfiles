@@ -8,6 +8,9 @@
   services.zfs.autoSnapshot.enable = true;
   services.zfs.autoSnapshot.flags = "-k -p --utc";
 
+  
+  boot.zfs.extraPools = [ "Main" ];
+
   environment.systemPackages = with pkgs; [
     zfs
     zfsnap
