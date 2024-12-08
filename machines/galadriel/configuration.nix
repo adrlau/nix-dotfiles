@@ -21,7 +21,6 @@
       ../../services/smb.nix
       ../../services/wordpress.nix
       ../../services/torrent.nix
-      ../../services/mc.nix
       #../../services/ozai.nix
       #../../services/stableDiffusion.nix
       ../../services/rss.nix
