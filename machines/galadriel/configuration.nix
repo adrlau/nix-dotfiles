@@ -18,7 +18,7 @@
       ../../profiles/ai.nix
       ../../profiles/mediaserver.nix
 
-      ../../services/smb.nix
+      #../../services/smb.nix
       ../../services/wordpress.nix
       ../../services/torrent.nix
       #../../services/ozai.nix
