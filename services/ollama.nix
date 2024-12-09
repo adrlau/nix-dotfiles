@@ -6,7 +6,8 @@
 
   services.ollama.enable = true;
   services.ollama.package = pkgs.unstable.ollama;
-  services.ollama.listenAddress = "0.0.0.0:11434";
+  services.ollama.host = "0.0.0.0";
+  services.ollama.port = 11434;
   services.ollama.models = "/var/lib/ollama/models";
   services.ollama.home = "/var/lib/ollama";
   
