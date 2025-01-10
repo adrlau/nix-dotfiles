@@ -4,3 +4,6 @@ My nix dotfiles. Will not guarrante it to work as it is always a work in progres
 nix --extra-experimental-features "nix-command flakes" build ".#nixosConfigurations.galadriel.config.system.build.toplevel"
 
 nixos-rebuild switch --update-input nixpkgs --update-input unstable --no-write-lock-file --refresh --flake git+https://github.com/adrlau/nix-dotfiles.git --upgrade
+
+
+nix why-depends .\#nixosConfigurations.eowyn.config.system.build.toplevel pkgs.python3.12-libarcus-4.12.0 --impure
