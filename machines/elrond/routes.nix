@@ -81,6 +81,8 @@
         basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
       };
 
+
+
       virtualHosts."rss.lauterer.it" = {
         forceSSL = true;
         useACMEHost = config.networking.domain;
@@ -90,6 +92,18 @@
         };
         #basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
       };
+
+
+      virtualHosts."ai.lauterer.it" = {
+        forceSSL = true;
+        useACMEHost = config.networking.domain;
+        locations."/" = {
+          proxyWebsockets = true;
+          proxyPass = "http://100.84.215.84:11111";
+        };
+        #basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
+      };
+
 
       #virtualHosts."azul.256.no" = {
       #  forceSSL = true;
