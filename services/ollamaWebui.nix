@@ -2,6 +2,8 @@
 {
   environment.systemPackages = [
     pkgs.unstable.open-webui
+    pkgs.gvisor
+
   ];
 
 
