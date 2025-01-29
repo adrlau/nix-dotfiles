@@ -3,13 +3,16 @@
   environment.systemPackages = [
     pkgs.unstable.open-webui
     pkgs.gvisor
+    pkgs.bash
 
   ];
 
-  services.tika.enable=true;
-  services.tika.openFirewall=true;
-  services.tika.listenAddress = "localhost";
-
+  services.tika = {
+    enable=true;
+    openFirewall=true;
+    listenAddress = "localhost";
+    enableOcr = true;
+  };
   
   services.open-webui = {
     enable = true;
@@ -19,7 +22,7 @@
     host = "0.0.0.0";
     openFirewall = true;
 
-    enviroment = {
+    environment = {
       ANONYMIZED_TELEMETRY = "False";
       DO_NOT_TRACK = "True";
       SCARF_NO_ANALYTICS = "True";
