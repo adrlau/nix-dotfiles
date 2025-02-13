@@ -5,6 +5,11 @@
     enable = true;
     enable32Bit = true;
   };
+
+  nixpkgs.config = {
+    allowUnfree = true;
+    cudaSupport = true;
+  };
   
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];
@@ -18,7 +23,7 @@
 
       # Use the NVidia open source kernel module (not to be confused with the independent third-party "nouveau" open source driver).
       # Currently alpha-quality/buggy, so false is currently the recommended setting.
-      open = false;
+      open = false; #need proprietary for cuda.
 
       # Enable the Nvidia settings menu, accessible via `nvidia-settings`.
       #nvidiaSettings = true;
@@ -29,11 +34,24 @@
 
     # Enable the CUDA toolkit
     #install packages 
-    environment.systemPackages = with pkgs; [
-      cudaPackages.cudnn
+     environment.systemPackages = with pkgs; [
       cudaPackages.cudatoolkit
+      cudaPackages.cudnn
       nvtopPackages.nvidia
+      gcc
+      cudaPackages.nccl
+      cmake
+      #llama-cpp
+      #python3Packages.pip
+      #cudaPackages.cuda_cudart
+      #xgboostWithCuda
+      #libxcrypt-legacy
+      #cudaPackages.setupCudaHook
+      #cudaPackages.markForCudatoolkitRootHook
+      #cudaPackages.cuda_cudart.static
+      pkgs.cudaPackages.libcublas
       #cudaPackages.tensorrt_8_6_0 #needs to be added manually, to the store and is a pain because of the license agreement and garbage collection
+      
     ];
 
     nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
