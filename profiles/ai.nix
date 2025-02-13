@@ -13,7 +13,6 @@
 	    ollama
       openai-whisper
       openai-whisper-cpp
-      whisper-ctranslate2
       wyoming-faster-whisper
       wyoming-piper
       subtitlr

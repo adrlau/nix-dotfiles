@@ -1,14 +1,14 @@
 { config, pkgs, lib, ... }:
 {
   services.nginx =  {
-    virtualHosts."lauterer.it" = {
-        forceSSL = true;
-        useACMEHost = config.networking.domain;
-        locations."/" = {
-          proxyWebsockets = true;
-          proxyPass = "http://100.84.215.84";
-        };
-    };  
+    #virtualHosts."lauterer.it" = {
+    #    forceSSL = true;
+    #    useACMEHost = config.networking.domain;
+    #    locations."/" = {
+    #      proxyWebsockets = true;
+    #      proxyPass = "http://100.84.215.84";
+    #    };
+    #};  
 
     virtualHosts."managment.lauterer.it" = {
       forceSSL = true;
@@ -50,16 +50,16 @@
       #basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
     };
 
-    virtualHosts."hybel.lauterer.it" = {
-      forceSSL = true;
-      useACMEHost = config.networking.domain;
-      locations."/" = {
-        proxyWebsockets = true;
-        proxyPass = "http://100.109.23.4:8123";
-      };
-      # ignorerer sikkerhet for littegran for å oprettholde lettvinthet og app kompatibilitet.
-      #basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
-    };
+    # virtualHosts."hybel.lauterer.it" = {
+    #   forceSSL = true;
+    #   useACMEHost = config.networking.domain;
+    #   locations."/" = {
+    #     proxyWebsockets = true;
+    #     proxyPass = "http://100.109.23.4:8123";
+    #   };
+    #   # ignorerer sikkerhet for littegran for å oprettholde lettvinthet og app kompatibilitet.
+    #   #basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
+    # };
 
 
     virtualHosts."jellyfin.lauterer.it" = {
@@ -81,6 +81,8 @@
         basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
       };
 
+
+
       virtualHosts."rss.lauterer.it" = {
         forceSSL = true;
         useACMEHost = config.networking.domain;
@@ -90,6 +92,18 @@
         };
         #basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
       };
+
+
+      virtualHosts."ai.lauterer.it" = {
+        forceSSL = true;
+        useACMEHost = config.networking.domain;
+        locations."/" = {
+          proxyWebsockets = true;
+          proxyPass = "http://100.84.215.84:11111";
+        };
+        #basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
+      };
+
 
       #virtualHosts."azul.256.no" = {
       #  forceSSL = true;
@@ -101,15 +115,15 @@
       #  #basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
       #};
 
-      virtualHosts."azul.256.no" = {
-        forceSSL = true;
-        useACMEHost = config.networking.domain;
-        locations."/" = {
-          proxyWebsockets = true;
-          proxyPass = "http://localhost:8095";
-        };
-        #basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
-      };  
+     # virtualHosts."azul.256.no" = {
+     #   forceSSL = true;
+     #   useACMEHost = config.networking.domain;
+     #   locations."/" = {
+     #     proxyWebsockets = true;
+     #     proxyPass = "http://localhost:8095";
+     #   };
+     #   #basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
+     # };  
  
  
     #virtualHosts."shiori.lauterer.it" = config.services.nginx.virtualHosts."archive.lauterer.it";
@@ -123,7 +137,7 @@
           proxyPass = "http://100.84.215.84:8082";
         };
         #basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
-      };  
+    };  
 
 
 

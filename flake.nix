@@ -82,7 +82,7 @@
         };
    
        aragon = nixpkgs.lib.nixosSystem {
-          system = "x84_64-linux";
+            system = "x86_64-linux";
           specialArgs = {
             inherit inputs;
           };
