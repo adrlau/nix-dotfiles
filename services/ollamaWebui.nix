@@ -4,13 +4,16 @@
     pkgs.unstable.open-webui
     pkgs.gvisor
     pkgs.bash
+    pkgs.unstable.tika
 
   ];
 
   services.tika = {
     enable=true;
+    package = pkgs.unstable.tika;
     openFirewall=true;
-    listenAddress = "localhost";
+    listenAddress = "0.0.0.0";
+    port  = 9998;
     enableOcr = true;
   };
   
@@ -26,7 +29,6 @@
       ANONYMIZED_TELEMETRY = "False";
       DO_NOT_TRACK = "True";
       SCARF_NO_ANALYTICS = "True";
-      PDF_EXTRACT_IMAGES = "False";
     };
 
   };

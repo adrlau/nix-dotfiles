@@ -129,17 +129,17 @@ imports =
 	#      supportedFeatures = [ "big-parallel" ];
 	#      speedFactor = 129270;
 	#    }
-	    { hostName = "bolle.pbsds.net";
-	      system = "x86_64-linux";
-	      maxJobs = 6;
-	      speedFactor = 12857;
-	    }
-	    { hostName = "garp.pbsds.net";
-	      system = "x86_64-linux";
-	      maxJobs = 4;
-	      # i7-6700
-	      speedFactor = 8088;
-	    }
+  #    { hostName = "bolle.pbsds.net";
+	#      system = "x86_64-linux";
+	#      maxJobs = 6;
+	#      speedFactor = 12857;
+	#    }
+	#    { hostName = "garp.pbsds.net";
+	#      system = "x86_64-linux";
+	#      maxJobs = 4;
+	#      # i7-6700
+	#      speedFactor = 8088;
+	#    }
 	    { hostName = "aragon";
 	      system = "x86_64-linux";
 	      # if the builder supports building for multiple architectures, 
@@ -176,9 +176,8 @@ imports =
     enable = true;
     flake = "git+https://github.com/adrlau/nix-dotfiles.git";
     flags = [
-      "--update-input" "nixpkgs"
-      "--update-input" "nixpkgs-unstable"
       "--no-write-lock-file"
+      "-L"
     ];
   };
   
