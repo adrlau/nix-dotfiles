@@ -10,6 +10,10 @@
     allowUnfree = true;
     cudaSupport = true;
   };
+
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "cuda_cudart"
+  ];
   
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];
@@ -54,8 +58,5 @@
       
     ];
 
-    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-      "cuda_cudart"
-    ];
 
 }
