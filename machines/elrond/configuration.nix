@@ -37,7 +37,6 @@
     wget
     tailscale
     config.services.headscale.package
-    kanidm
   ];
 
   users.users.gunalx = { # Define a user account. Don't forget to set a password with ‘passwd’.
