@@ -19,7 +19,7 @@
       ../../profiles/mediaserver.nix
 
       #../../services/smb.nix
-      ../../services/wordpress.nix
+      #../../services/wordpress.nix # lets not
       ../../services/torrent.nix
       #../../services/ozai.nix
       #../../services/stableDiffusion.nix

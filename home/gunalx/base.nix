@@ -3,6 +3,7 @@
   imports = [
     ../common/sshconfig.nix
     ../common/unfree.nix
+    ../common/atuin.nix
   ];
 
   programs.nix-index = {

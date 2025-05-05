@@ -1,4 +1,7 @@
 { config, pkgs, lib, ... }:
+let
+  mkDefault =  lib.mkDefault;
+in
 {
 imports =
     [ 
@@ -23,12 +26,14 @@ imports =
       foot.terminfo
       tailscale
       sops
+      atuin
+      upower
     ];
 
   #just allow unfree, im fine with it. 
   nixpkgs.config.allowUnfree = true; 
 
-  zramSwap = {
+  zramSwap = mkDefault {
     enable = true;
     memoryPercent = 25;
   };
@@ -41,7 +46,7 @@ imports =
   i18n.defaultLocale = "en_US.UTF-8";
 
   # Configure console
-  console = {
+  console = mkDefault {
     font = "Lat2-Terminus16";
     keyMap = "no";
   };
@@ -68,19 +73,57 @@ imports =
       dc="cd";
       la="ls -la";
       lls="ls"; 
-  };
+      battery="upower -i $(upower -e | grep 'BAT') | grep -E 'state|to full|percentage'";
+      cim="vim";
+      cbuild="mkdir build && cd build && cmake .. && make";
+      untar="tar -xvf";
+    };
+
+
   environment.interactiveShellInit = ''
-    alias gst='git status'
-    alias gcm='git commit -m'
-    alias gca='git commit --amend'
-    alias gsw='git switch'
-    alias gaa='git add -A'
-    alias gb='git branch'
-    alias dc='cd'
-    alias la='ls -la'
-    alias lls='ls'
+    # Colors
+    RESET='\[\e[0m\]'
+    BOLD='\[\e[1m\]'
+    CYAN='\[\e[36m\]'
+    GREEN='\[\e[32m\]'
+    BLUE='\[\e[34m\]'
+    YELLOW='\[\e[33m\]'
+    MAGENTA='\[\e[35m\]'
+    RED='\[\e[31m\]'
+
+    if [[ -n "$SSH_CONNECTION" ]]; then
+      REMOTE_LABEL="\[''${YELLOW}\] (ssh)\[''${RESET}\]"
+    else
+      REMOTE_LABEL=""
+    fi
+    
+    # Git branch function
+    parse_git_branch() {
+        git branch --show-current 2>/dev/null | awk '{print " (" $1 ")"}'
+    }
+    
+    
+    # Set prompt
+    if [[ $EUID -eq 0 ]]; then
+        PS1="''${BOLD}''${RED}\u''${RESET}:''${BOLD}''${RED}\h''${REMOTE_LABEL}''${RESET}:''${BOLD}''${GREEN}\w''${MAGENTA}\$(parse_git_branch) ''${BLUE}\A''${RESET}\$ "
+    else
+        PS1="''${BOLD}''${CYAN}\u''${RESET}:''${BOLD}''${CYAN}\h''${REMOTE_LABEL}''${RESET}:''${BOLD}''${GREEN}\w''${MAGENTA}\$(parse_git_branch) ''${BLUE}\A''${RESET}\$ "
+    fi
   '';
 
+
+#  environment.interactiveShellInit = ''
+#    alias gst='git status'
+#    alias gcm='git commit -m'
+#    alias gca='git commit --amend'
+#    alias gsw='git switch'
+#    alias gaa='git add -A'
+#    alias gb='git branch'
+#    alias dc='cd'
+#    alias la='ls -la'
+#    alias lls='ls'
+#  '';
+#
   
   ## some insecure packages
   nixpkgs.config.permittedInsecurePackages = [
@@ -94,9 +137,9 @@ imports =
   };
 
   #nix stuff
-  nix.gc.automatic = true;
+  nix.gc.automatic = mkDefault true;
   nix = {
-    extraOptions = ''
+    extraOptions = mkDefault ''
 	    builders-use-substitutes = true
 	    experimental-features = nix-command flakes impure-derivations ca-derivations
       !include ${config.sops.secrets."github/api".path}
@@ -139,7 +182,15 @@ imports =
 	#      maxJobs = 4;
 	#      # i7-6700
 	#      speedFactor = 8088;
-	#    }
+  #    }
+      { hostName = "localhost";
+	      system = "x86_64-linux";
+	      maxJobs = 4;
+	      #speedFactor = 8066;
+	      speedFactor = 8000;
+	      supportedFeatures = [ ];
+	      mandatoryFeatures = [ ];
+	    }
 	    { hostName = "aragon";
 	      system = "x86_64-linux";
 	      # if the builder supports building for multiple architectures, 

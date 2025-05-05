@@ -91,6 +91,14 @@
             ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
             ./machines/aragon/configuration.nix
             sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users."gunalx" = import ./home/gunalx/full.nix;
+              home-manager.users."root" = import ./home/root/base.nix;
+              home-manager.backupFileExtension = "bac";
+              home-manager.extraSpecialArgs = {inherit nix-colors inputs;};
+            }
           ];
         };
         
@@ -105,6 +113,17 @@
             ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
             ./machines/galadriel/configuration.nix
             sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users."gunalx" = import ./home/gunalx/base.nix;
+              home-manager.users."root" = import ./home/root/base.nix;
+              home-manager.backupFileExtension = "bac";
+              home-manager.extraSpecialArgs = {inherit nix-colors inputs;};
+            }
+
+
+
 
             ozai.nixosModules.ozai
             ozai-webui.nixosModules.ozai-webui

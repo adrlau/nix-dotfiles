@@ -42,9 +42,9 @@
       cudaPackages.cudatoolkit
       cudaPackages.cudnn
       nvtopPackages.nvidia
-      gcc
+      #gcc
       cudaPackages.nccl
-      cmake
+      #cmake
       #llama-cpp
       #python3Packages.pip
       #cudaPackages.cuda_cudart
