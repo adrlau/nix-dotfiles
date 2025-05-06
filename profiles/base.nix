@@ -80,7 +80,9 @@ imports =
     };
 
 
-  environment.interactiveShellInit = ''
+    environment.interactiveShellInit = ''
+    #atuin import auto
+        
     # Colors
     RESET='\[\e[0m\]'
     BOLD='\[\e[1m\]'

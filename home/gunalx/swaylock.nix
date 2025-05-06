@@ -3,33 +3,40 @@ let
   palette = config.colorScheme.palette;
 in
 {
-  imports = [
-  ];
-
   programs.swaylock = {
     enable = true;
     package = pkgs.swaylock-effects;
     settings = {
-      color = palette.base00;
-      screenshots = true;
-      grace = 15;
-      clock = true;
-      submit-on-touch = true;
-      indicator-idle-visible = true;
-      indicator-radius = 100;
-      indicator-thickness = 7;
-      ring-color = palette.base05;
-      key-hl-color = palette.base03;
-      tect-color = palette.base00;
-      line-colot = palette.base00;
-      innside-color = palette.base04;
-      seperator-color = palette.base00;
-      fade-in = 0.1;
-      effect-scale = 0.6;
-      effect-blur = "7x3";
+      # screen & indicator
+      color                    = palette.base00;       # --color
+      screenshots              = true;                 # --screenshots
+      fade-in                  = 0.1;                  # --fade-in
+      scaling                  = "fill";               # e.g. --scaling=fill
+
+      # authentication grace
+      grace                    = 15;                   # --grace
+      submit-on-touch          = true;                 # --submit-on-touch
+
+      # clock
+      clock                    = true;                 # --clock
+
+      # indicator visuals
+      indicator-idle-visible   = true;                 # --indicator-idle-visible
+      indicator-radius         = 100;                  # --indicator-radius
+      indicator-thickness      = 7;                    # --indicator-thickness
+
+      # indicator colors
+      ring-color               = palette.base05;       # --ring-color
+      key-hl-color             = palette.base03;       # --key-hl-color
+      text-color               = palette.base00;       # --text-color
+      inside-color             = palette.base04;       # --inside-color
+      line-color               = palette.base00;       # --line-color
+      separator-color          = palette.base00;       # --separator-color
+
+      # effects
+      effect-scale             = 0.6;                  # --effect-scale
+      effect-blur              = "7x3";                # --effect-blur
     };
   };
-
-
 }
 

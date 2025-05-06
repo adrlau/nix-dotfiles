@@ -7,7 +7,6 @@ imports =
     ];
 
 
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -35,7 +34,7 @@ imports =
     vital
     picoloop
     #bespokesynth-with-vst2 #always takes ages compiling
-    fmsynth
+    #fmsynth
     polyphone #soundfont editor
 
     #vocaloids
@@ -61,7 +60,8 @@ imports =
     headset
     nuclear
     spotifyd
-    spotify-qt
+    spotify-player
+    spotify
     spotify-tray
 
     tenacity

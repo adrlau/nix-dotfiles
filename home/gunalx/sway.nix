@@ -86,7 +86,7 @@ in
       #fonts
       nerdfonts
       noto-fonts
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       noto-fonts-emoji
       liberation_ttf
       fira-code
@@ -156,7 +156,19 @@ in {
 
       #wallpaper
       {command = "swww-daemon";}
-      {command = "while true; do for wallpaper in $WALLPAPER_DIR/*; do swww img $wallpaper; sleep 15; done; done;";}
+      {command = ''sleep 3 \
+          wallpapers=("/home/gunalx/Pictures/wallpapers"/*.{jpg,jpeg,png,gif}) \
+          transitions=(fade left right top bottom wipe wave grow center outer) \
+          i=0 \
+          while true; do \
+              img="''${wallpapers[i % ''${#wallpapers[@]}]}" \
+              trans="''${transitions[i % ''${#transitions[@]}]}" \
+              swww img "$img" --transition-type "$trans" --transition-fps 60 --transition-duration 3 \
+              ((i++)) \
+              sleep 15m \
+          done
+      '';}
+      #{command = "while true; do for wallpaper in $WALLPAPER_DIR/*; do swww img $wallpaper; sleep 15; done; done;";}
 
       #idlelock
       {command = ''swayidle \

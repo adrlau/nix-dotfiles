@@ -18,19 +18,16 @@
   systemd.tmpfiles.rules = [
     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
   ];
-  hardware.opengl.extraPackages = with pkgs; [
-    rocmPackages.clr.icd
-    #amdvlk
-    libva-utils
-  ];
 
+  nixpkgs.config.rocmSupport = true;
+  
   #hardware.opengl.extraPackages32 = with pkgs; [
   #  driversi686Linux.amdvlk
   #];
 
-  hardware.opengl.driSupport = true; # This is already enabled by default
-  hardware.opengl.driSupport32Bit = true; # For 32 bit applications
-  
+  environment.systemPackages = with pkgs; [ lact ];
+systemd.packages = with pkgs; [ lact ];
+systemd.services.lactd.wantedBy = ["multi-user.target"];
 
 
   fileSystems."/" =

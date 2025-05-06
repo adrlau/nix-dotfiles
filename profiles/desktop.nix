@@ -15,7 +15,9 @@ imports =
 
   environment.systemPackages = with pkgs; [
     openscad
-    cura
+    
+    #cura # broken
+    prusa-slicer
 
     #libsForQt5.qt5ct
     #qt6Packages.qt6ct
@@ -27,7 +29,7 @@ imports =
 
   fonts.packages = with pkgs; [
     noto-fonts
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     noto-fonts-emoji
     liberation_ttf
     fira-code
