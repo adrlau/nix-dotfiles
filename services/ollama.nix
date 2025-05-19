@@ -13,23 +13,21 @@
       home = "/var/lib/ollama";
 
       loadModels = [
-        "llama3.2"
-        "gemma2:2b"
-        "qwen2.5:3b"
+        "gemma3:1b"
+        "qwen3:8b"
+        "qwen3:0.6b"
+        "llama3.1"
 
-        "llama3.2-vision"
-        "llava-phi3"
-        "llava-llama3"
         "moondream"
         "minicpm-v"
+        "qwen2.5vl:3b"
+        "gemma3:4b"
+        "granite3.2-vision"
 
-        "llama3.1"
-        "mistral-nemo"
-        "phi4"
 
         "zylonai/multilingual-e5-large"
         "nomic-embed-text"
-        "snowflake-arctic-embed"
+        "snowflake-arctic-embed2"
         
       ];
   };
