@@ -17,6 +17,7 @@ in
        ./fcitx5.nix
        ./kanshi.nix
        ./swaylock.nix
+       ./mako.nix
        #./assets/wallpapers
     ];
 

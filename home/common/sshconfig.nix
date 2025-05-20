@@ -5,6 +5,7 @@
 
   home.packages = with pkgs; [
     openssh
+    ssh-askpass-fullscreen
     sshfs
   ];
   
@@ -16,20 +17,23 @@
 
     matchBlocks = {
       "*" = {
-
         identityFile = [
           "~/.ssh/nixos"
           "~/.ssh/id_ed25519"
         ];
       };
 
+
       "*.pvv.ntnu.no" = {
         user="adriangl";
       };
+
       "*.ntnu.no !login.pvv.ntnu.no" = {
         user="adriangl";
         proxyJump="login.pvv.ntnu.no";
       };
+
+
       "snotra" = {
         user="adriangl";
         proxyJump="adriangl@login.pvv.ntnu.no";
@@ -49,6 +53,10 @@
       "bolle.pbsds.net" = {
         user="adrlau";
         proxyJump = "login.pvv.ntnu.no";
+        extraOptions = {
+          StrictHostKeyChecking = "no";
+          UserKnownHostsFile = "/dev/null";
+        };
       };
 
       #pvv
@@ -64,28 +72,23 @@
       #home
       "aragon" = {
         port = 6969;
-        user="gunalx";
         hostname="100.74.34.149";
       };
 
       "galadriel" = {
         port = 6969;
-        user="gunalx";
         hostname="100.84.215.84";
       };
       
       "gandalf" = {
         port = 6969;
-        user="gunalx";
         hostname="100.124.183.16";
       };
 
       "elrond" = {
         port = 6969;
-        user="gunalx";
         hostname="100.101.17.39 ";
       };
-
 
 
     };

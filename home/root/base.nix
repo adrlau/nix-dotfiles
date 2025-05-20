@@ -2,7 +2,7 @@
 {
   imports = [
     ../common/sshconfig.nix
-    ../common/unfree.nix
+    ../common/nix.nix
     ../common/atuin.nix
   ];
 

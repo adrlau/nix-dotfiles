@@ -168,23 +168,17 @@ imports =
   };
 
   buildMachines = [
-	#    { hostName = "bob.pvv.ntnu.no";
-	#      system = "x86_64-linux";
-	#      maxJobs = 12;
-	#      supportedFeatures = [ "big-parallel" ];
-	#      speedFactor = 129270;
-	#    }
-  #    { hostName = "bolle.pbsds.net";
-	#      system = "x86_64-linux";
-	#      maxJobs = 6;
-	#      speedFactor = 12857;
-	#    }
-	#    { hostName = "garp.pbsds.net";
-	#      system = "x86_64-linux";
-	#      maxJobs = 4;
-	#      # i7-6700
-	#      speedFactor = 8088;
-  #    }
+      { hostName = "bolle.pbsds.net";
+	      system = "x86_64-linux";
+	      maxJobs = 6;
+	      speedFactor = 12857;
+	    }
+	    { hostName = "garp.pbsds.net";
+	      system = "x86_64-linux";
+	      maxJobs = 4;
+	      # i7-6700
+	      speedFactor = 8088;
+      }
       { hostName = "localhost";
 	      system = "x86_64-linux";
 	      maxJobs = 4;

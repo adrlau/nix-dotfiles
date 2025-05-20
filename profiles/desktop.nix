@@ -54,26 +54,16 @@ imports =
 #security.pam.services.display-manager.ly = {};
   services.displayManager = {
     enable = true;
-    sessionPackages = with pkgs; [ sway ];
+    sessionPackages = with pkgs; [ sway niri];
 
     sddm = {
       enable = true;
       autoNumlock = true;
     };
 
-    ### still really broken and neds 24.11
-    #ly = {
-    #  package = pkgs.unstable.ly;
-    #  enable = true;
-    #  settings = {
-    #    animation = "matrix";
-    #    waylandsessions = "${config.services.displayManager.sessionData.desktops}/share/wayland-sessions"; 
-    #  };
-
-    #};
-    
   };
 
+  services.power-profiles-daemon.enable = true;
 
   services.logind.powerKey = "ignore";
 

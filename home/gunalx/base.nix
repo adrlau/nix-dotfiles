@@ -2,7 +2,7 @@
 {
   imports = [
     ../common/sshconfig.nix
-    ../common/unfree.nix
+    ../common/nix.nix
     ../common/atuin.nix
   ];
 
@@ -20,8 +20,8 @@
   programs.bash = {
     enable = true;
     shellAliases  = {
-        "rebuild" = "sudo nixos-rebuild switch --update-input nixpkgs --update-input unstable --no-write-lock-file --refresh --flake git+https://github.com/adrlau/nix-dotfiles.git --upgrade";
-        "nixedit" = "vim /etc/nixos/nix-dotfiles/.";
+        "rebuild" = "sudo nixos-rebuild switch -no-write-lock-file --flake git+https://github.com/adrlau/nix-dotfiles.git -L --impure";
+        "nixedit" = "sudo vim /etc/nixos/nix-dotfiles/.";
         "nixdir" = "cd /etc/nixos/nix-dotfiles";
 
 

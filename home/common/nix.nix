@@ -3,4 +3,6 @@
   imports = [
   ];
   nixpkgs.config.allowUnfree = true;
-  }
+  programs.nix-index.enable = true;
+
+}

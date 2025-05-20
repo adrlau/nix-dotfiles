@@ -14,7 +14,7 @@ in
       scaling                  = "fill";               # e.g. --scaling=fill
 
       # authentication grace
-      grace                    = 15;                   # --grace
+      grace                    = 3;                   # --grace
       submit-on-touch          = true;                 # --submit-on-touch
 
       # clock
