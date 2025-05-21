@@ -1,9 +1,5 @@
 { config, pkgs, lib, ... }:
 
-let
-  hostname = config.networking.hostName;
-in
-
 {
   # Add Ollama to system packages
   environment.systemPackages = [ pkgs.unstable.ollama ];
@@ -33,8 +29,18 @@ in
       "snowflake-arctic-embed2"
     ];
 
+    # Environment variables based on hostname
+    environmentVariables = {
+      "HIP_VISIBLE_DEVICES" = "0,1";
+      "OLLAMA_LLM_LIBRARY" = "rocm";
+    };
+
+    rocmOverrideGfx = "10.3.0"; #rdna2
+
     # Acceleration settings
-    acceleration = "cuda"; 
+    acceleration = "rocm";
+
+  };
 
   # NGINX reverse proxy configuration
   services.nginx.virtualHosts."ollama.${config.networking.hostName}.${config.networking.domain}" = {

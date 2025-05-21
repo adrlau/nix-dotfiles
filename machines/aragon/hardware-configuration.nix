@@ -13,7 +13,15 @@
 
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+
+  hardware.amdgpu.opencl.enable = true;
+  hardware.amdgpu.amdvlk.enable = true;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   
+  hardware.graphics = {
+    enable = true;
+  };
+
   services.xserver.videoDrivers = [ "amdgpu" ];
   systemd.tmpfiles.rules = [
     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
@@ -21,11 +29,30 @@
 
   nixpkgs.config.rocmSupport = true;
   
+  environment.variables = {
+    HSA_OVERRIDE_GFX_VERSION="10.3.0";
+
+  };
+
+  
   #hardware.opengl.extraPackages32 = with pkgs; [
   #  driversi686Linux.amdvlk
   #];
 
-  environment.systemPackages = with pkgs; [ lact ];
+environment.systemPackages = with pkgs; [ 
+  lact 
+  rocmPackages.rocminfo
+  rocmPackages.rocm-smi
+  rocmPackages.rocm-runtime
+  rocmPackages.rocm-device-libs
+  rocmPackages.rocm-core
+  rocmPackages.rocm-cmake
+  rocmPackages.rocgdb
+  rocmPackages.rocblas
+  rocmPackages.rccl
+
+
+];
 systemd.packages = with pkgs; [ lact ];
 systemd.services.lactd.wantedBy = ["multi-user.target"];
 

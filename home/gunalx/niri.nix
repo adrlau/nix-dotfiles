@@ -194,6 +194,8 @@ layout {
         // Offset moves the shadow relative to the window.
         offset x=0 y=5
 
+
+
         // You can also change the shadow color and opacity.
         color "#0007"
     }
@@ -343,6 +345,8 @@ binds {
     Mod+Return { spawn "foot"; }
     Mod+D { spawn "fuzzel"; }
     Super+M { spawn "swaylock"; }
+    
+    Mod+Escape { toggle-keyboard-shortcuts-inhibit; } //for diabling niri shortcuts for a while.
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.

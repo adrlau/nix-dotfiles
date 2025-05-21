@@ -20,7 +20,7 @@
 	#customised applications
 	../../services/podman.nix
 	../../services/boinc.nix
-	../../services/ollama.nix
+	../../services/ollama-amd.nix
     ];
 
   # Bootloader.
