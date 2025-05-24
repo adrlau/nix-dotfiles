@@ -20,7 +20,7 @@
   fonts.fontconfig.enable = true;
   fonts.fontconfig.defaultFonts = {
       emoji = ["noto-fonts-emoji font-awesome"];
-      monospace = ["0xproto" "zpix" "fira-code"];
+      monospace = ["zpix" "fira-code"];
       serif = [ "Noto Serif" "Source Han Serif" ];
       sansSerif = [ "Noto Sans" "Source Han Sans" ];
   };
