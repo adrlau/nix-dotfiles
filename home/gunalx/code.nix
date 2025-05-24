@@ -2,12 +2,12 @@
 
   programs.vscode = {
     enable = true;
-    enableUpdateCheck = false;
-    enableExtensionUpdateCheck = false;
+    profiles.default.enableUpdateCheck = false;
+    profiles.default.enableExtensionUpdateCheck = false;
     mutableExtensionsDir = true;
 
     # Extensions
-    extensions = (with pkgs.vscode-extensions; [
+    profiles.default.extensions = (with pkgs.vscode-extensions; [
       # Stable
       ms-vscode-remote.remote-ssh
       mhutchie.git-graph
@@ -39,7 +39,7 @@
     ]);
 
     # Settings
-    userSettings = {
+    profiles.default.userSettings = {
       # General
       "editor.fontSize" = 16;
       "editor.fontFamily" = "'Jetbrains Mono', 'monospace', monospace";
