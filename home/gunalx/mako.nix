@@ -32,7 +32,7 @@ in {
     maxIconSize      = 48;                          # px
 
     # Behavior & timing
-    defaultTimeout   = 5000;                        # ms; 0 = no timeout
+    defaultTimeout   = 3000;                        # ms; 0 = no timeout
     ignoreTimeout    = true;                        # use defaultTimeout always
     actions          = true;                        # clickable actions
     maxVisible       = 5;                           # simultaneous popups
@@ -40,30 +40,5 @@ in {
     groupBy          = "app-name";                  # grouping criteria
     markup           = true;                        # enable Pango markup
 
-    extraConfig = ''
-      # Urgency-specific colors
-      [urgency=critical]
-      background-color = ${palette.base08}FF
-      border-color     = ${palette.base00}FF
-      text-color       = ${palette.base01}FF
-
-      # Grouping settings
-      [grouped]
-      invisible = 1
-      on-button-right = dismiss-group
-
-      [group-index=0]
-      invisible = 0
-      on-button-right = dismiss-group
-
-      # Modes
-      [mode=away]
-      default-timeout = 0
-      ignore-timeout  = 1
-
-      [mode=do-not-disturb]
-      invisible   = 1
-      on-notify   = none
-    '';
   };
 }
