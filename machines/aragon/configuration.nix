@@ -90,7 +90,7 @@
     
 
     #basic programming
-    kate
+    kdePackages.kate
     vscode-fhs
     gcc
     gpp

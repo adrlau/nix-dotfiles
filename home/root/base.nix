@@ -10,12 +10,6 @@
     enable = true;
   };
   
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      allowUnfreePredicate = (_: true);
-    };
-  };
 
   programs.bash = {
     enable = true;
