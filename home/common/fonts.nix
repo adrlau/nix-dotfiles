@@ -13,8 +13,9 @@
         font-awesome
         font-awesome_5
         font-awesome_4
+        pkgs.nerd-fonts._0xproto
 
-    ]++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues nerd-fonts);
+    ]++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
 
   fonts.fontconfig.enable = true;
