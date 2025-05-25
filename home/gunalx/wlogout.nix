@@ -40,21 +40,21 @@ in
       }
 
       button {
-        color:            #${palette.base0C};
+        color:            "#${palette.base0C}";
         background-color: ${toRGBA palette.base02 "0.8"};
-        border:           2px solid #${palette.base0C};
+        border:           2px solid "#${palette.base0C}";
         border-radius:    1em;
         margin:           0.75em;
         background-repeat: no-repeat;
         background-position: center;
-        box-shadow:       0 0 4px #${palette.base0C};
+        box-shadow:       0 0 4px "#${palette.base0C}";
         padding:          0.6em 1.2em;
       }
 
       button:focus,
       button:active {
         background-color: ${toRGBA palette.base03 "0.9"};
-        box-shadow:       0 0 6px #${palette.base0C};
+        box-shadow:       0 0 6px "#${palette.base0C}";
         outline:          none;
       }
 
