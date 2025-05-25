@@ -32,27 +32,27 @@ in{
   #    variant = "dark";
   #  };
   colorScheme = {
-    slug = "cyberpunk-apathy";
-    name = "Cyberpunk Apathy";
-    author = "Adrian G L (based on Apathy by Jannik Siebert)";
+    slug = "teal-green-dark";
+    name = "Teal Green Dark";
+    author = "Auto‐generated";
     palette = {
-      # Base16 color values with context-specific usage comments
-      base00 = background;  # Default background
-      base01 = darkTeal;    # Lighter background (used for status bars)
-      base02 = lighterTeal; # Selection background
-      base03 = teal;        # Comments, secondary content, line highlighting
-      base04 = lightTeal;   # Darker foreground (used for status bars)
-      base05 = foreground;  # Default text and foreground
-      base06 = lightGrey;   # Lighter foreground (used for inactive text)
-      base07 = offWhite;    # Lightest background (used for highlights)
-      base08 = teal;        # Variables, constants, markup link text
-      base09 = blue;        # Integers, booleans, constants, and XML attributes
-      base0A = magenta;     # Classes, headings, keywords
-      base0B = cyan;        # Strings, literals, escape sequences
-      base0C = green;       # Support and error colors
-      base0D = cyan;        # Functions, methods, function names
-      base0E = red;         # Keywords, storage, selectors
-      base0F = yellow;      # Deprecated or obsolete code
+      # Base16 Teal‐Green Dark Theme
+      base00 = "0f1f1c"; # Default background
+      base01 = "143028"; # Lighter background (status bars)
+      base02 = "1e3b34"; # Selection background
+      base03 = "28514b"; # Comments, secondary content
+      base04 = "4a7b70"; # Dark foreground (status bars)
+      base05 = "d4efe0"; # Default foreground
+      base06 = "e4f8f2"; # Light foreground
+      base07 = "fafdfb"; # Lightest background
+      base08 = "63d1be"; # Variables, markup link text
+      base09 = "3dc28f"; # Integers, constants
+      base0A = "a2e096"; # Classes, search highlight
+      base0B = "8ce45a"; # Strings, inserted
+      base0C = "4cd7e5"; # Support, escape characters
+      base0D = "2e97d5"; # Functions, headings
+      base0E = "df6fad"; # Keywords, selectors
+      base0F = "e5d97f"; # Deprecated tags
     };
   };
 
