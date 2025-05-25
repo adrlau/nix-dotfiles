@@ -8,10 +8,10 @@ in {
     package          = pkgs.mako;                   # Which package to use
 
     # Colors (from your colorscheme)
-    settings.background-color  = "${palette.base00}FF";       # popup background
-    settings.text-color        = "${palette.base05}FF";       # popup text
-    settings.border-color      = "${palette.base03}FF";       # popup border
-    settings.progress-color    = "over ${palette.base0A}FF";  # progress bar
+    settings.background-color  = "#${palette.base00}FF";       # popup background
+    settings.text-color        = "#${palette.base05}FF";       # popup text
+    settings.border-color      = "#${palette.base03}FF";       # popup border
+    settings.progress-color    = "over #${palette.base0A}FF";  # progress bar
 
     # Placement & layering
     settings.anchor           = "top-right";                 # corner on screen
