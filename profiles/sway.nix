@@ -41,7 +41,7 @@ imports =
 	workstyle
 	#swayest-workstyle #migth switch to this.
 	autotiling-rs
-	wleave	
+	wlogout	
 	
 	pass-wayland
 

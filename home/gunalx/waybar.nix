@@ -20,7 +20,7 @@ in
         {
           "height": 36,
           "spacing": 2,
-          "modules-left": [ "custom/launcher", "sway/workspaces","niri/workspaces"],
+          "modules-left": [  "custom/overview", "custom/launcher", "sway/workspaces","niri/workspaces"],
           "modules-center": ["niri/window"],
           "modules-right": [
             "idle_inhibitor","backlight","pulseaudio","keyboard-state",
@@ -54,6 +54,13 @@ in
             "persistent": true,
             "on-click": "niri msg workspace {index}"
           },
+
+          "custom:overview": {
+            "format": "",
+            "tooltip": "Toggle Overview",
+            "on-click": "niri msg action toggle-overview"
+          },
+
 
           "niri/window": {
             "format": "{title}"
@@ -116,13 +123,6 @@ in
             "states": { "warning": 30, "critical": 15 }
           },
 
-          "power-profiles-daemon": {
-            "format": "{icon}",
-            "format-icons": {
-              "performance":"","balanced":"","power-saver":""
-            },
-            "on-click": "systemctl --user power-profiles-daemon set balanced"
-          },
 
           "power-profiles-daemon": {
             "format": "{icon}",
@@ -139,25 +139,25 @@ in
           "clock": {
             "format": "{:%H:%M}",
             "format-alt": "{:%Y-%m-%d}",
-            "tooltip": true,
-            "tooltip-format": "<tt><small>{calendar}</small></tt>",
-            "calendar": {
-              "mode": "month",
-              "mode-mon-col": 3,
-              "weeks-pos": "right",
-              "on-scroll": 1,
-              "format": {
-                "months": "<span color='#${palette.base05}'><b>{}</b></span>",
-                "days": "<span color='#${palette.base04}'>{}</span>",
-                "weeks": "<span color='#${palette.base0C}'><b>W{}</b></span>",
-                "weekdays": "<span color='#${palette.base0A}'><b>{}</b></span>",
-                "today": "<span color='#${palette.base08}'><b><u>{}</u></b></span>"
-              }
-            },
-            "actions": {
-              "on-click-right": "mode",
-              "on-scroll-up": "shift_up",
-              "on-scroll-down": "shift_down"
+              "tooltip": true,
+              "tooltip-format": "<tt><small>{calendar}</small></tt>",
+              "calendar": {
+                "mode": "month",
+                "mode-mon-col": 3,
+                "weeks-pos": "right",
+                "on-scroll": 1,
+                "format": {
+                  "months": "<span color='#${palette.base05}'><b>{}</b></span>",
+                  "days": "<span color='#${palette.base04}'>{}</span>",
+                  "weeks": "<span color='#${palette.base0C}'><b>W{}</b></span>",
+                  "weekdays": "<span color='#${palette.base0A}'><b>{}</b></span>",
+                  "today": "<span color='#${palette.base08}'><b><u>{}</u></b></span>"
+                }
+              },
+              "actions": {
+                "on-click-right": "mode",
+                "on-scroll-up": "shift_up",
+                "on-scroll-down": "shift_down"
             }
           },
 
@@ -168,7 +168,7 @@ in
           "custom/power": {
             "format": "⏻",
             "tooltip": "exit",
-            "on-click": "wleave"
+            "on-click": "wlogout || wleave"
           }
         }
       '')
@@ -193,7 +193,7 @@ in
       /* Module blocks */
       #idle_inhibitor,#backlight,#pulseaudio,#keyboard-state,
       #network,#cpu,#memory,#temperature,#battery,
-      #power-profiles-daemon,#clock,#tray,#custom-power,#custom-launcher,#niri-window {
+      #power-profiles-daemon,#clock,#tray,#custom-power,#custom-launcher,#custom-overview,#niri-window {
         background-color: ${toRGBA palette.base01 "0.4"};
         border-radius: 8px;
         margin: 0 6px;
@@ -205,7 +205,7 @@ in
       #idle_inhibitor:hover,#backlight:hover,#pulseaudio:hover,
       #keyboard-state:hover,#network:hover,#cpu:hover,#memory:hover,
       #temperature:hover,#battery:hover,#power-profiles-daemon:hover,
-      #clock:hover,#tray:hover,#custom-power:hover,#custom-launcher:hover,#niri-window:hover {
+      #clock:hover,#tray:hover,#custom-power:hover,#custom-launcher:hover,#custom-overview:hover,#niri-window:hover {
         background-color: ${toRGBA palette.base02 "0.5"};
       }
 

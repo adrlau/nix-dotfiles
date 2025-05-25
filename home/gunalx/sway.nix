@@ -13,11 +13,11 @@ in
     imports = [
        ./waybar.nix
        ./foot.nix
-       ./fonts.nix
        ./fcitx5.nix
        ./kanshi.nix
        ./swaylock.nix
        ./mako.nix
+       ./wlogout.nix
        #./assets/wallpapers
     ];
 
@@ -48,7 +48,6 @@ in
       #swaybg
       swww
 
-      wleave
 
       #bar applets and notifications
     	waybar
@@ -85,17 +84,6 @@ in
     	slurp
 
       #fonts
-      nerdfonts
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-emoji
-      liberation_ttf
-      fira-code
-      fira-code-symbols
-      nerdfonts
-      ubuntu_font_family
-      zpix-pixel-font
-      _0xproto
       font-awesome
       font-awesome_5
       font-awesome_4
@@ -287,7 +275,7 @@ in {
         #"ctrl+space" = "exec xkb_switch_layout next"; #TODO:verify
         "${cfg.config.modifier}+tab" = "${menu}";
         "Alt+tab" = "workspace back_and_forth";
-        "XF86PowerOff" = "exec ${pkgs.wleave}/bin/wleave";
+        "XF86PowerOff" = "exec ${pkgs.wlogout}/bin/wlogout";
         };
   };
 

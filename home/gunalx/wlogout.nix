@@ -20,7 +20,7 @@ in
 {
   programs.wlogout = {
     enable  = true;
-    package = pkgs.wleave;
+    package = pkgs.wlogout;
 
     # Your button layout
     layout = [

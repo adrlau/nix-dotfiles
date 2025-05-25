@@ -5,6 +5,7 @@
     ./code.nix
     ./sway.nix
     ./niri.nix
+    ../common/fonts.nix
     ./colors.nix
 
     #./stylix.nix

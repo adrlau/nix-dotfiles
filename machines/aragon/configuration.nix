@@ -63,7 +63,7 @@
   users.users.gunalx = {
     isNormalUser = true;
     description = "Adrian Gunnar Lauterer";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "input" ];
     packages = with pkgs; [
     ];
   };

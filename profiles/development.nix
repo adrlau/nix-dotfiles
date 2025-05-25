@@ -8,6 +8,15 @@ imports =
     ];
 
   environment.systemPackages = with pkgs; [
+    zed-editor-fhs
+    aider-chat
+
+    python3Full
+    uv
+    python3Packages.pip
+    python3Packages.uv
+    poetry
+    
 
 
     texliveFull

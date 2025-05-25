@@ -600,8 +600,6 @@ in
     	wdisplays
       swww
 
-      wleave
-
       xwayland-satellite
 
       #bar applets and notifications
@@ -622,6 +620,13 @@ in
       fuzzel
 
       emote
+
+
+
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-gnome
 
 
       #fonts

@@ -28,6 +28,7 @@ imports =
       sops
       atuin
       upower
+      nvtopPackages.full
     ];
 
   #just allow unfree, im fine with it. 

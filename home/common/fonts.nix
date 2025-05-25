@@ -2,9 +2,15 @@
 {
   
   home.packages = with pkgs; [
+        nerd-fonts._0xproto
+        _0xproto
         noto-fonts
         noto-fonts-cjk-sans
         noto-fonts-emoji
+        noto-fonts-color-emoji
+        noto-fonts-emoji-blob-bin
+        unicode-emoji
+
         liberation_ttf
         fira-code
         fira-code-symbols
@@ -13,7 +19,7 @@
         font-awesome
         font-awesome_5
         font-awesome_4
-        pkgs.nerd-fonts._0xproto
+        nerd-fonts._0xproto
 
     ]++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 

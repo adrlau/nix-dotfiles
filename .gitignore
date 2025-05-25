@@ -3,3 +3,5 @@
 ./secrets/secrets.yaml.priv 
 ./secrets/secrets.priv.yaml.gpg
 
+.aider*
+.env

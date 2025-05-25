@@ -13,21 +13,25 @@ imports =
 
     ];
 
-  environment.systemPackages = with pkgs; [
-    openscad
-    
-    #cura # broken
-    prusa-slicer
+    environment.systemPackages = with pkgs; [
+      libnotify
+      openscad
+      
+      #cura # broken
+      prusa-slicer
 
-    #libsForQt5.qt5ct
-    #qt6Packages.qt6ct
-    where-is-my-sddm-theme
-    
-    swww
+      #libsForQt5.qt5ct
+      #qt6Packages.qt6ct
+      where-is-my-sddm-theme
+      
+      swww
 
   ];
 
   fonts.packages = with pkgs; [
+    nerd-fonts._0xproto
+    _0xproto
+
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-emoji
@@ -37,10 +41,11 @@ imports =
     mplus-outline-fonts.githubRelease
     dina-font
     proggyfonts
-    nerdfonts
+    #nerdfonts
     ubuntu_font_family
 
-  ];
+  ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+
 
   # Enable CUPS to print documents.
   services.printing.enable = false; #temp off because of CVE
