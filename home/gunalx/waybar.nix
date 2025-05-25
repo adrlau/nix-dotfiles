@@ -23,9 +23,9 @@ in
           "modules-left": ["custom/overview", "custom/launcher", "sway/workspaces", "niri/workspaces"],
           "modules-center": ["niri/window"],
           "modules-right": [
-            "idle_inhibitor","backlight","pulseaudio","keyboard-state",
-            "network","cpu","memory","temperature","battery",
-            "power-profiles-daemon","clock","tray","custom/power"
+            "idle_inhibitor", "backlight", "pulseaudio", "keyboard-state",
+            "network", "cpu", "memory", "temperature", "battery",
+            "power-profiles-daemon", "clock", "tray", "custom/power"
           ],
 
           "custom/launcher": {
