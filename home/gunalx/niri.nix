@@ -263,17 +263,14 @@ window-rule {
     default-column-width {}
 }
 
-// Open the Firefox picture-in-picture player as floating by default.
+// Floating Bitwarden extension popup windows only
 window-rule {
-    // This app-id regular expression will work for both:
-    // - host Firefox (app-id is "firefox")
-    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
-    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-    match app-id=r#"firefox$"# title="^Bitwarden$"
-    match app-id=r#"firefox$"# title="^Extension: (Bitwarden Password Manager) - Bitwarden — Mozilla Firefox$"
-    match app-id="firefox" title="Extension: (Bitwarden Password Manager) - Bitwarden — Mozilla Firefox"
-    match app-id="Bitwarden$"
-    match title="^Bitwarden"
+    match app-id=r#"^firefox$"# title=r#"^Extension: \(Bitwarden Password Manager\) - Bitwarden — Mozilla Firefox$"#
+    open-floating true
+}
+// Floating the native Bitwarden desktop app
+window-rule {
+    match app-id=r#"(?i)^bitwarden$"#
     open-floating true
 }
 
