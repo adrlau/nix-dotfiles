@@ -232,7 +232,7 @@ in
       #sway-workspaces button,#niri-workspaces button {
         padding: 0 6px;
         background: transparent;
-        color: ${toRGBA palette.base05 "0.9"};
+        color: ${toRGBA palette.base05 "1"};
         border: none;
         border-radius: 6px;
       }
