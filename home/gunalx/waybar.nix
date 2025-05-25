@@ -55,7 +55,7 @@ in
             "on-click": "niri msg workspace {index}"
           },
 
-          "custom:overview": {
+          "custom/overview": {
             "format": "",
             "tooltip": "Toggle Overview",
             "on-click": "niri msg action toggle-overview"
