@@ -181,7 +181,7 @@ in
 
       /* Bar container */
       window#waybar {
-        background-color: ${toRGBA palette.base00 "0.5"};
+        background-color: ${toRGBA palette.base01 "0.8"};
         border-radius: 12px;
         padding: 4px 20px;
         border: none;
@@ -194,11 +194,11 @@ in
       #idle_inhibitor,#backlight,#pulseaudio,#keyboard-state,
       #network,#cpu,#memory,#temperature,#battery,
       #power-profiles-daemon,#clock,#tray,#custom-power,#custom-launcher,#custom-overview,#niri-window {
-        background-color: ${toRGBA palette.base01 "0.4"};
+        background-color: ${toRGBA palette.base01 "0.6"};
         border-radius: 8px;
         margin: 0 6px;
         padding: 0 10px;
-        border: 1px solid ${toRGBA palette.base07 "0.6"};
+        border: 1px solid ${toRGBA palette.base03 "0.6"};
       }
 
       /* Hover effect */
@@ -206,21 +206,21 @@ in
       #keyboard-state:hover,#network:hover,#cpu:hover,#memory:hover,
       #temperature:hover,#battery:hover,#power-profiles-daemon:hover,
       #clock:hover,#tray:hover,#custom-power:hover,#custom-launcher:hover,#custom-overview:hover,#niri-window:hover {
-        background-color: ${toRGBA palette.base02 "0.5"};
+        background-color: ${toRGBA palette.base02 "0.6"};
       }
 
       /* Tooltip styling */
       tooltip {
-        background-color: ${toRGBA palette.base00 "0.9"};
-        border: 1px solid ${toRGBA palette.base07 "0.4"};
+        background-color: ${toRGBA palette.base01 "0.95"};
+        border: 1px solid ${toRGBA palette.base02 "0.6"};
         border-radius: 8px;
-        color: ${toRGBA palette.base05 "0.9"};
+        color: ${toRGBA palette.base05 "1"};
         padding: 8px 12px;
         font-size: 12px;
       }
       
       tooltip label {
-        color: ${toRGBA palette.base05 "0.9"};
+        color: ${toRGBA palette.base05 "1"};
       }
       
       #clock tooltip {
@@ -237,11 +237,11 @@ in
         border-radius: 6px;
       }
       #sway-workspaces button:hover,#niri-workspaces button:hover {
-        background-color: ${toRGBA palette.base02 "0.5"};
+        background-color: ${toRGBA palette.base02 "0.6"};
       }
       #sway-workspaces button.focused,#niri-workspaces button.focused {
-        background-color: ${toRGBA palette.base03 "0.6"};
-        box-shadow: inset 0 -3px ${toRGBA palette.base05 "0.8"};
+        background-color: ${toRGBA palette.base0D "0.6"};
+        box-shadow: inset 0 -3px ${toRGBA palette.base0D "0.8"};
       }
       #sway-workspaces button.urgent,#niri-workspaces button.urgent {
         background-color: ${toRGBA palette.base08 "0.7"};
@@ -250,13 +250,13 @@ in
       /* Right‐hand text color */
       #clock,#battery,#cpu,#memory,#temperature,#backlight,
       #network,#pulseaudio,#tray,#power-profiles-daemon,#custom-power {
-        color: ${toRGBA palette.base05 "0.9"};
+        color: ${toRGBA palette.base05 "1"};
       }
 
       /* Battery critical blink */
       @keyframes blink {
         to {
-          background: ${toRGBA palette.base05 "0.9"};
+          background: ${toRGBA palette.base05 "1"};
           color: ${toRGBA palette.base00 "1"};
         }
       }
