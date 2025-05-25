@@ -19,6 +19,14 @@ in
         foreground = "${hex palette.base05}ff";
         highlight  = "${hex palette.base0D}ff";
       };
+      window = {
+        border-radius = 12;
+        x             = "center";
+        y             = "center";
+      };
+      icons = {
+        size = 48;
+      };
     };
   };
 }
