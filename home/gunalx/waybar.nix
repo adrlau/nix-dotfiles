@@ -20,7 +20,7 @@ in
         {
           "height": 36,
           "spacing": 2,
-          "modules-left": [  "custom/overview", "custom/launcher", "sway/workspaces","niri/workspaces"],
+          "modules-left": ["custom/overview", "custom/launcher", "sway/workspaces", "niri/workspaces"],
           "modules-center": ["niri/window"],
           "modules-right": [
             "idle_inhibitor","backlight","pulseaudio","keyboard-state",
@@ -245,6 +245,11 @@ in
       }
       #sway-workspaces button.urgent,#niri-workspaces button.urgent {
         background-color: ${toRGBA palette.base08 "0.7"};
+      }
+
+      /* Active workspace buttons */
+      #sway-workspaces button.active,#niri-workspaces button.active {
+        background-color: ${toRGBA palette.base02 "0.7"};
       }
 
       /* Right‐hand text color */
