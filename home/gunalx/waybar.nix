@@ -224,30 +224,6 @@ in
         color: ${toRGBA palette.base05 "0.9"};
       }
       
-      /* Calendar tooltip specific stylin/* Tooltip styling */
-tooltip {
-  background-color: ${toRGBA palette.base00 "0.9"};
-  border: 1px solid ${toRGBA palette.base07 "0.4"};
-  border-radius: 8px;
-  color: ${toRGBA palette.base05 "0.9"};
-  padding: 8px 12px;
-  font-size: 12px;
-}
-
-tooltip label {
-  color: ${toRGBA palette.base05 "0.9"};
-}
-
-/* Calendar tooltip specific styling */
-#clock tooltip {
-  font-family: monospace;
-}
-
-/* Network tooltip specific styling */
-#network tooltip {
-  font-family: monospace;
-  max-width: 300px;
-}g */
       #clock tooltip {
         font-family: monospace;
       }
