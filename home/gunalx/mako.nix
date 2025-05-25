@@ -28,17 +28,23 @@ in {
     # Font & icons
     settings.font             = "monospace 10";              # Pango font
     settings.icons            = true;                        # show icons
-    settings.icon-path         = "/usr/share/icons:/usr/share/pixmaps";
     settings.max-icon-size      = 48;                          # px
 
     # Behavior & timing
-    settings.default-timeout   = 3000;                        # ms; 0 = no timeout
+    settings.default-timeout   = 5000;                        # ms; 0 = no timeout
     settings.ignore-timeout    = true;                        # use defaultTimeout always
     settings.actions          = true;                        # clickable actions
     settings.max-visible       = 5;                           # simultaneous popups
     settings.sort             = "-time";                     # newest first
     settings.group-by          = "app-name";                  # grouping criteria
     settings.markup           = true;                        # enable Pango markup
+
+    settings."actionable=true" = {
+      default-timeout   = 15000; 
+      border-radius     = 24; 
+      border-color      = "#${palette.base08}FF";     
+    };
+
 
   };
 }
