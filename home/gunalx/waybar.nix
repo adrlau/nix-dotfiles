@@ -228,11 +228,6 @@ in
         font-family: monospace;
       }
       
-      /* Network tooltip specific styling */
-      #network tooltip {
-        font-family: monospace;
-        width: 300px;
-      }
 
       /* Workspace buttons */
       #sway-workspaces button,#niri-workspaces button {
