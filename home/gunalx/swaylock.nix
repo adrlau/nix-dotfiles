@@ -8,7 +8,7 @@ in
     package = pkgs.swaylock-effects;
     settings = {
       # screen & indicator
-      color                    = "#${palette.base01}CC";       # --color
+      color                    = "#${palette.base00}CC";       # --color
       screenshots              = true;                 # --screenshots
       fade-in                  = 0.1;                  # --fade-in
       scaling                  = "fill";               # e.g. --scaling=fill
@@ -26,7 +26,7 @@ in
       indicator-thickness      = 7;                    # --indicator-thickness
 
       # indicator colors
-      ring-color               = "#${palette.base0D}FF";       # --ring-color
+      ring-color               = "#${palette.base05}FF";       # --ring-color
       key-hl-color             = "#${palette.base02}FF";       # --key-hl-color
       text-color               = "#${palette.base05}FF";       # --text-color
       inside-color             = "#${palette.base05}FF";       # --inside-color

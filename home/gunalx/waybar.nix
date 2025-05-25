@@ -181,7 +181,7 @@ in
 
       /* Bar container */
       window#waybar {
-        background-color: ${toRGBA palette.base01 "0.5"};
+        background-color: ${toRGBA palette.base00 "0.6"};
         border-radius: 12px;
         padding: 4px 20px;
         border: none;
@@ -194,7 +194,7 @@ in
       #idle_inhibitor,#backlight,#pulseaudio,#keyboard-state,
       #network,#cpu,#memory,#temperature,#battery,
       #power-profiles-daemon,#clock,#tray,#custom-power,#custom-launcher,#custom-overview,#niri-window {
-        background-color: ${toRGBA palette.base01 "0.4"};
+        background-color: ${toRGBA palette.base01 "0.5"};
         border-radius: 8px;
         margin: 0 6px;
         padding: 0 10px;
@@ -206,7 +206,7 @@ in
       #keyboard-state:hover,#network:hover,#cpu:hover,#memory:hover,
       #temperature:hover,#battery:hover,#power-profiles-daemon:hover,
       #clock:hover,#tray:hover,#custom-power:hover,#custom-launcher:hover,#custom-overview:hover,#niri-window:hover {
-        background-color: ${toRGBA palette.base02 "0.5"};
+        background-color: ${toRGBA palette.base02 "0.6"};
       }
 
       /* Tooltip styling */
