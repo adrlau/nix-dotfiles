@@ -91,17 +91,20 @@ layout {
         proportion 0.3333333
         proportion 0.5
         proportion 0.6666667
-        proportion 0.9
 
         // Fixed sets the width in logical pixels exactly.
         // fixed 1920
     }
 
     // You can also customize the heights that "switch-preset-window-height" (Mod+Shift+R) toggles between.
-    // preset-window-heights { }
+    preset-window-heights {
+      proportion 1.0
+      proportion 0.5
+
+    }
 
     // You can change the default width of the new windows.
-    default-column-width { proportion 0.5; }
+    default-column-width { proportion 1.0; }
     // If you leave the brackets empty, the windows themselves will decide their initial width.
     // default-column-width {}
 
@@ -119,7 +122,7 @@ layout {
         // Uncomment this line to disable the focus ring.
         // off
         
-	// How many logical pixels the ring extends out from the windows.
+	      // How many logical pixels the ring extends out from the windows.
         width 2
 
         // Colors can be set in a variety of ways:
@@ -194,8 +197,6 @@ layout {
         // Offset moves the shadow relative to the window.
         offset x=0 y=5
 
-
-
         // You can also change the shadow color and opacity.
         color "#0007"
     }
@@ -222,7 +223,7 @@ spawn-at-startup "foot" "--server"
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "mako"
 spawn-at-startup "swww-daemon"
-spawn-at-startup "waybar"
+//spawn-at-startup "waybar" //spawns by system service instead
 spawn-at-startup "swayidle" "-w" "timeout" "601" "niri msg action power-off-monitors" "timeout" "600" "swaylock -f" "before-sleep" "swaylock -f"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
@@ -237,9 +238,6 @@ prefer-no-csd
 // The path is formatted with strftime(3) to give you the screenshot date and time.
 screenshot-path "~/Pictures/screenshots/screenshot-%Y-%m-%d %H-%M-%S.png"
 
-// You can also set this to null to disable saving screenshots to disk.
-// screenshot-path null
-
 // Animation settings.
 // The wiki explains how to configure individual animations:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Animations
@@ -248,7 +246,7 @@ animations {
     off
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
-    // slowdown 3.0
+    // slowdown 0.3
 }
 
 // Window rules let you adjust behavior for individual windows.
@@ -273,20 +271,10 @@ window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     match app-id=r#"firefox$"# title="^Bitwarden$"
     match app-id=r#"firefox$"# title="^Extension: (Bitwarden Password Manager) - Bitwarden — Mozilla Firefox$"
-    match app-id=r#"Bitwarden$"#
+    match app-id="firefox" title="Extension: (Bitwarden Password Manager) - Bitwarden — Mozilla Firefox"
+    match app-id="Bitwarden$"
+    match title="^Bitwarden"
     open-floating true
-}
-
-//niri overview python script. 
-window-rule {
-    match app-id=r#"niri-overview.py"#
-    match app-id=r#"niri_overview.py"#
-    match app-id=r#"niri_overview.bin"#
-    match app-id=r#"niri_overview"#
-    open-focused true
-    open-floating true
-    default-window-height { proportion 0.5; }
-    default-column-width { proportion 0.8; }
 }
 
 //fix steam notifications to bottom rigth
@@ -301,7 +289,7 @@ window-rule {
 /-window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
     match app-id=r#"^org\.gnome\.World\.Secrets$"#
-    match app-id=r#"^Bitwarden$"#
+    match title=r#"^Bitwarden$"#
 
     block-out-from "screen-capture"
 
@@ -335,18 +323,13 @@ binds {
     // Mod-Shift-/, which is usually the same as Mod-?,
     // shows a list of important hotkeys.
     Mod+Shift+Slash { show-hotkey-overlay; }
-
-    // spawn niri overview script
-    Mod+Slash { spawn "/home/gunalx/.config/niri/niri_overview/niri_overview.bin"; }
-    // for next release
-    // Mod+Slash { toggle-overview; }
+    Mod+Slash { toggle-overview; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+Return { spawn "foot"; }
+    Mod+Return { spawn "footclient"; }
     Mod+D { spawn "fuzzel"; }
     Super+M { spawn "swaylock"; }
     
-    Mod+Escape { toggle-keyboard-shortcuts-inhibit; } //for diabling niri shortcuts for a while.
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
@@ -518,7 +501,8 @@ binds {
     Mod+Ctrl+R { reset-window-height; }
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
-
+    Mod+Ctrl+Shift+F { toggle-windowed-fullscreen; }
+   
     // Expand the focused column to space not taken up by other fully visible columns.
     // Makes the column "fill the rest of the space".
     Mod+Ctrl+F { expand-column-to-available-width; }
@@ -599,7 +583,6 @@ in
        ./swaylock.nix
        ./wlogout.nix
        ./mako.nix
-       ./fonts.nix
        ./fcitx5.nix
     ];
 
@@ -641,16 +624,6 @@ in
 
 
       #fonts
-      nerdfonts
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-emoji
-      liberation_ttf
-      fira-code
-      fira-code-symbols
-      nerdfonts
-      ubuntu_font_family
-      zpix-pixel-font
       _0xproto
       font-awesome
       font-awesome_5
