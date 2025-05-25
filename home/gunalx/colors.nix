@@ -72,5 +72,10 @@ in{
     style.name = "adwaita-dark";
   };
 
+  # Ensure the Adwaita GTK theme is installed so wlogout can load gtk.css
+  home.packages = with pkgs; [
+    gnome-themes-extra
+  ];
+
 }
 
