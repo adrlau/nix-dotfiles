@@ -231,7 +231,7 @@ in
       /* Network tooltip specific styling */
       #network tooltip {
         font-family: monospace;
-        max-width: 300px;
+        width: 300px;
       }
 
       /* Workspace buttons */
