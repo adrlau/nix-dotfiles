@@ -131,10 +131,10 @@ layout {
         // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
 
         // Color of the ring on the active monitor.
-        active-color "#7fffc8"
+        active-color "${palette.base0D}"
 
         // Color of the ring on inactive monitors.
-        inactive-color "#505050"
+        inactive-color "${palette.base03}"
 
         // You can also use gradients. They take precedence over solid colors.
         // Gradients are rendered the same as CSS linear-gradient(angle, from, to).
@@ -158,8 +158,8 @@ layout {
         // If you enable the border, you probably want to disable the focus ring.
         off
         width 2
-        active-color "#ffc87f"
-        inactive-color "#505050"
+        active-color "${palette.base0A}"
+        inactive-color "${palette.base03}"
         // active-gradient from="#ffbb66" to="#ffc880" angle=45 relative-to="workspace-view"
         // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
     }
