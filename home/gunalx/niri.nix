@@ -584,6 +584,7 @@ in
        ./wlogout.nix
        ./mako.nix
        ./fcitx5.nix
+       ./fuzzel.nix
     ];
 
 
