@@ -26,10 +26,10 @@ in
       indicator-thickness      = 7;                    # --indicator-thickness
 
       # indicator colors
-      ring-color               = "#${palette.base05}FF";       # --ring-color
-      key-hl-color             = "#${palette.base02}FF";       # --key-hl-color
+      ring-color               = "#${palette.base0D}FF";       # --ring-color
+      key-hl-color             = "#${palette.base0E}FF";       # --key-hl-color
       text-color               = "#${palette.base05}FF";       # --text-color
-      inside-color             = "#${palette.base05}FF";       # --inside-color
+      inside-color             = "#${palette.base02}FF";       # --inside-color
       line-color               = "#${palette.base01}FF";       # --line-color
       separator-color          = "#${palette.base01}FF";       # --separator-color
 
