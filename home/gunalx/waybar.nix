@@ -18,15 +18,20 @@ in
     settings = [
       (builtins.fromJSON ''
         {
-          "height": 30,
+          "height": 36,
           "spacing": 2,
-          "modules-left": ["sway/workspaces","niri/workspaces"],
+          "modules-left": [ "custom/launcher", "sway/workspaces","niri/workspaces"],
           "modules-center": ["niri/window"],
           "modules-right": [
             "idle_inhibitor","backlight","pulseaudio","keyboard-state",
             "network","cpu","memory","temperature","battery",
             "power-profiles-daemon","clock","tray","custom/power"
           ],
+
+          "custom/launcher": {
+            "format": "  ",
+            "on-click": "pkill fuzzel || fuzzel"
+          },
 
           "sway/workspaces": {
             "format": "{index}: {name} - {icon}",
@@ -74,14 +79,27 @@ in
           "keyboard-state": {
             "numlock": true,
             "capslock": true,
-            "format": "{icon}",
+            "format": "{icon}",            
             "format-icons": { "locked":"","unlocked":"" }
           },
 
           "network": {
-            "format-wifi": " {essid} ({signalStrength}%)",
-            "format-ethernet": " {ipaddr}",
-            "format-disconnected": "⚠ Disconnected"
+            "format-wifi": " {essid} ({signalStrength}%)",
+            "format-ethernet": " {ipaddr}",
+            "format-disconnected": "⚠ Disconnected",
+            "format-alt": " {ipaddr}/{cidr}",
+            "format-alt-click": "click-right",
+            "tooltip": true,
+            "tooltip-format-wifi": "<span color='${palette.base0C}'></span> <span color='${palette.base05}'>WiFi</span>\n<span color='${palette.base0A}'>SSID:</span> <span color='${palette.base06}'>{essid}</span>\n<span color='${palette.base0A}'>Interface:</span> <span color='${palette.base04}'>{ifname}</span>\n<span color='${palette.base0A}'>IP:</span> <span color='${palette.base06}'>{ipaddr}</span>\n<span color='${palette.base0A}'>IPv6:</span> <span color='${palette.base04}'>{ipaddr6}</span>\n<span color='${palette.base0A}'>Gateway:</span> <span color='${palette.base04}'>{gwaddr}</span>\n<span color='${palette.base0A}'>Frequency:</span> <span color='${palette.base04}'>{frequency} MHz</span>\n<span color='${palette.base0A}'>Signal:</span> <span color='${palette.base0B}'>{signalStrength}%</span> <span color='${palette.base04}'>({signaldBm} dBm)</span>",
+
+"tooltip-format-ethernet": "<span color='${palette.base0C}'></span> <span color='${palette.base05}'>Ethernet</span>\n<span color='${palette.base0A}'>Interface:</span> <span color='${palette.base04}'>{ifname}</span>\n<span color='${palette.base0A}'>IP:</span> <span color='${palette.base06}'>{ipaddr}</span>\n<span color='${palette.base0A}'>IPv6:</span> <span color='${palette.base04}'>{ipaddr6}</span>\n<span color='${palette.base0A}'>Gateway:</span> <span color='${palette.base04}'>{gwaddr}</span>\n<span color='${palette.base0A}'>Netmask:</span> <span color='${palette.base04}'>{netmask}</span>",
+
+        "tooltip-format-disconnected": "<span color='${palette.base08}'>⚠</span> <span color='${palette.base08}'>No Connection</span>\n<span color='${palette.base04}'>Click to refresh network info</span>",
+
+            "on-click": "nmcli device wifi rescan && nmcli connection show --active",
+            "on-click-right": "nmcli device status",
+            "interval": 5,
+            "max-length": 50
           },
 
           "cpu":    { "format": " {usage}%" },
@@ -121,17 +139,60 @@ in
 
           "clock": {
             "format": "{:%H:%M}",
-            "format-alt": "{:%Y-%m-%d}"
+            "format-alt": "{:%Y-%m-%d}",
+            "tooltip": true,
+            "tooltip-format": "<tt><small>{calendar}</small></tt>",
+            "calendar": {
+              "mode": "month",
+              "mode-mon-col": 3,
+              "weeks-pos": "right",
+              "on-scroll": 1,
+              "format": {
+                "months": "<span color='${palette.base05}'><b>{}</b></span>",
+                "days": "<span color='${palette.base04}'>{}</span>",
+                "weeks": "<span color='${palette.base0C}'><b>W{}</b></span>",
+                "weekdays": "<span color='${palette.base0A}'><b>{}</b></span>",
+                "today": "<span color='${palette.base08}'><b><u>{}</u></b></span>"
+              }
+            },
+            "actions": {
+              "on-click-right": "mode",
+              "on-scroll-up": "shift_up",
+              "on-scroll-down": "shift_down"
+            }
           },
 
           "tray": {
-            "spacing": 6
+            "spacing": 8
           },
 
           "custom/power": {
             "format": "⏻",
             "tooltip": "exit",
-            "on-click": "wleave"
+            "on-click": "wleave"/* Tooltip styling */
+tooltip {
+  background-color: ${toRGBA palette.base00 "0.9"};
+  border: 1px solid ${toRGBA palette.base07 "0.4"};
+  border-radius: 8px;
+  color: ${toRGBA palette.base05 "0.9"};
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+tooltip label {
+  color: ${toRGBA palette.base05 "0.9"};
+}
+
+/* Calendar tooltip specific styling */
+#clock tooltip {
+  font-family: monospace;
+}
+
+/* Network tooltip specific styling */
+#network tooltip {
+  font-family: monospace;
+  max-width: 300px;
+}
           }
         }
       '')
@@ -156,7 +217,7 @@ in
       /* Module blocks */
       #idle_inhibitor,#backlight,#pulseaudio,#keyboard-state,
       #network,#cpu,#memory,#temperature,#battery,
-      #power-profiles-daemon,#clock,#tray,#custom-power,#niri-window {
+      #power-profiles-daemon,#clock,#tray,#custom-power,#custom-launcher,#niri-window {
         background-color: ${toRGBA palette.base01 "0.4"};
         border-radius: 8px;
         margin: 0 6px;
@@ -168,8 +229,56 @@ in
       #idle_inhibitor:hover,#backlight:hover,#pulseaudio:hover,
       #keyboard-state:hover,#network:hover,#cpu:hover,#memory:hover,
       #temperature:hover,#battery:hover,#power-profiles-daemon:hover,
-      #clock:hover,#tray:hover,#custom-power:hover,#niri-window:hover {
+      #clock:hover,#tray:hover,#custom-power:hover,#custom-launcher:hover,#niri-window:hover {
         background-color: ${toRGBA palette.base02 "0.5"};
+      }
+
+      /* Tooltip styling */
+      tooltip {
+        background-color: ${toRGBA palette.base00 "0.9"};
+        border: 1px solid ${toRGBA palette.base07 "0.4"};
+        border-radius: 8px;
+        color: ${toRGBA palette.base05 "0.9"};
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+      
+      tooltip label {
+        color: ${toRGBA palette.base05 "0.9"};
+      }
+      
+      /* Calendar tooltip specific stylin/* Tooltip styling */
+tooltip {
+  background-color: ${toRGBA palette.base00 "0.9"};
+  border: 1px solid ${toRGBA palette.base07 "0.4"};
+  border-radius: 8px;
+  color: ${toRGBA palette.base05 "0.9"};
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+tooltip label {
+  color: ${toRGBA palette.base05 "0.9"};
+}
+
+/* Calendar tooltip specific styling */
+#clock tooltip {
+  font-family: monospace;
+}
+
+/* Network tooltip specific styling */
+#network tooltip {
+  font-family: monospace;
+  max-width: 300px;
+}g */
+      #clock tooltip {
+        font-family: monospace;
+      }
+      
+      /* Network tooltip specific styling */
+      #network tooltip {
+        font-family: monospace;
+        max-width: 300px;
       }
 
       /* Workspace buttons */
