@@ -14,18 +14,19 @@ in
         terminal = "${pkgs.foot}/bin/foot";
         layer    = "overlay";
       };
+      font = "monospace:size=16";
       colors = {
         background = "${hex palette.base00}ff";
         foreground = "${hex palette.base05}ff";
-        highlight  = "${hex palette.base0D}ff";
+        highlight  = "${hex palette.base0D}cc";
       };
       window = {
         border-radius = 12;
         x             = "center";
-        y             = "center";
+        y             = "15%";
       };
       icons = {
-        size = 48;
+        size = 64;
       };
     };
   };
