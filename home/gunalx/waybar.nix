@@ -84,17 +84,17 @@ in
           },
 
           "network": {
-            "format-wifi": " {essid} ({signalStrength}%)",
-            "format-ethernet": " {ipaddr}",
+            "format-wifi": " {essid} ({signalStrength}%)",
+            "format-ethernet": " {ipaddr}",
             "format-disconnected": "⚠ Disconnected",
             "format-alt": " {ipaddr}/{cidr}",
             "format-alt-click": "click-right",
             "tooltip": true,
-            "tooltip-format-wifi": "<span color='${palette.base0C}'></span> <span color='${palette.base05}'>WiFi</span>\n<span color='${palette.base0A}'>SSID:</span> <span color='${palette.base06}'>{essid}</span>\n<span color='${palette.base0A}'>Interface:</span> <span color='${palette.base04}'>{ifname}</span>\n<span color='${palette.base0A}'>IP:</span> <span color='${palette.base06}'>{ipaddr}</span>\n<span color='${palette.base0A}'>IPv6:</span> <span color='${palette.base04}'>{ipaddr6}</span>\n<span color='${palette.base0A}'>Gateway:</span> <span color='${palette.base04}'>{gwaddr}</span>\n<span color='${palette.base0A}'>Frequency:</span> <span color='${palette.base04}'>{frequency} MHz</span>\n<span color='${palette.base0A}'>Signal:</span> <span color='${palette.base0B}'>{signalStrength}%</span> <span color='${palette.base04}'>({signaldBm} dBm)</span>",
+            "tooltip-format-wifi": "<span color='#${palette.base0C}'></span> <span color='#${palette.base05}'>WiFi</span>\n<span color='#${palette.base0A}'>SSID:</span> <span color='#${palette.base06}'>{essid}</span>\n<span color='#${palette.base0A}'>Interface:</span> <span color='#${palette.base04}'>{ifname}</span>\n<span color='#${palette.base0A}'>IP:</span> <span color='#${palette.base06}'>{ipaddr}</span>\n<span color='#${palette.base0A}'>IPv6:</span> <span color='#${palette.base04}'>{ipaddr6}</span>\n<span color='#${palette.base0A}'>Gateway:</span> <span color='#${palette.base04}'>{gwaddr}</span>\n<span color='#${palette.base0A}'>Frequency:</span> <span color='#${palette.base04}'>{frequency} MHz</span>\n<span color='#${palette.base0A}'>Signal:</span> <span color='#${palette.base0B}'>{signalStrength}%</span> <span color='#${palette.base04}'>({signaldBm} dBm)</span>",
 
-"tooltip-format-ethernet": "<span color='${palette.base0C}'></span> <span color='${palette.base05}'>Ethernet</span>\n<span color='${palette.base0A}'>Interface:</span> <span color='${palette.base04}'>{ifname}</span>\n<span color='${palette.base0A}'>IP:</span> <span color='${palette.base06}'>{ipaddr}</span>\n<span color='${palette.base0A}'>IPv6:</span> <span color='${palette.base04}'>{ipaddr6}</span>\n<span color='${palette.base0A}'>Gateway:</span> <span color='${palette.base04}'>{gwaddr}</span>\n<span color='${palette.base0A}'>Netmask:</span> <span color='${palette.base04}'>{netmask}</span>",
+"tooltip-format-ethernet": "<span color='#${palette.base0C}'></span> <span color='#${palette.base05}'>Ethernet</span>\n<span color='#${palette.base0A}'>Interface:</span> <span color='#${palette.base04}'>{ifname}</span>\n<span color='#${palette.base0A}'>IP:</span> <span color='#${palette.base06}'>{ipaddr}</span>\n<span color='#${palette.base0A}'>IPv6:</span> <span color='#${palette.base04}'>{ipaddr6}</span>\n<span color='#${palette.base0A}'>Gateway:</span> <span color='#${palette.base04}'>{gwaddr}</span>\n<span color='#${palette.base0A}'>Netmask:</span> <span color='#${palette.base04}'>{netmask}</span>",
 
-        "tooltip-format-disconnected": "<span color='${palette.base08}'>⚠</span> <span color='${palette.base08}'>No Connection</span>\n<span color='${palette.base04}'>Click to refresh network info</span>",
+        "tooltip-format-disconnected": "<span color='#${palette.base08}'>⚠</span> <span color='#${palette.base08}'>No Connection</span>\n<span color='#${palette.base04}'>Click to refresh network info</span>",
 
             "on-click": "nmcli device wifi rescan && nmcli connection show --active",
             "on-click-right": "nmcli device status",
@@ -148,11 +148,11 @@ in
               "weeks-pos": "right",
               "on-scroll": 1,
               "format": {
-                "months": "<span color='${palette.base05}'><b>{}</b></span>",
-                "days": "<span color='${palette.base04}'>{}</span>",
-                "weeks": "<span color='${palette.base0C}'><b>W{}</b></span>",
-                "weekdays": "<span color='${palette.base0A}'><b>{}</b></span>",
-                "today": "<span color='${palette.base08}'><b><u>{}</u></b></span>"
+                "months": "<span color='#${palette.base05}'><b>{}</b></span>",
+                "days": "<span color='#${palette.base04}'>{}</span>",
+                "weeks": "<span color='#${palette.base0C}'><b>W{}</b></span>",
+                "weekdays": "<span color='#${palette.base0A}'><b>{}</b></span>",
+                "today": "<span color='#${palette.base08}'><b><u>{}</u></b></span>"
               }
             },
             "actions": {
