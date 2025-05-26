@@ -97,7 +97,6 @@ in
             "format-ethernet": " {ipaddr}",
             "format-disconnected": "⚠ Disconnected",
             "format-alt": " {ipaddr}/{cidr}",
-            "format-alt-click": "click",
             "tooltip": true,
             "tooltip-format-wifi": "<span color='#${palette.base0C}'></span> <span color='#${palette.base05}'>WiFi</span>\n<span color='#${palette.base0A}'>SSID:</span> <span color='#${palette.base06}'>{essid}</span>\n<span color='#${palette.base0A}'>Interface:</span> <span color='#${palette.base04}'>{ifname}</span>\n<span color='#${palette.base0A}'>IP:</span> <span color='#${palette.base06}'>{ipaddr}</span>\n<span color='#${palette.base0A}'>IPv6:</span> <span color='#${palette.base04}'>{ipaddr6}</span>\n<span color='#${palette.base0A}'>Gateway:</span> <span color='#${palette.base04}'>{gwaddr}</span>\n<span color='#${palette.base0A}'>Frequency:</span> <span color='#${palette.base04}'>{frequency} MHz</span>\n<span color='#${palette.base0A}'>Signal:</span> <span color='#${palette.base0B}'>{signalStrength}%</span> <span color='#${palette.base04}'>({signaldBm} dBm)</span>",
 
@@ -128,7 +127,7 @@ in
 
           "power-profiles-daemon": {
             "format": "{icon}",
-            "tooltip-format": "Power profile: {profile}nDriver: {driver}",
+            "tooltip-format": "Power profile: {profile}\\nDriver: {driver}",
             "tooltip": true,
             "format-icons": {
               "default": "",
