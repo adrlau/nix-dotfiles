@@ -13,6 +13,8 @@ in
 {
   programs.waybar = {
     enable = true;
+    package = pkgs.waybarFull;
+    trayAllOutputs = true;
 
     # Single-bar JSON config
     settings = [
