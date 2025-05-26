@@ -194,18 +194,18 @@ in
       #idle_inhibitor,#backlight,#pulseaudio,#keyboard-state,
       #network,#cpu,#memory,#temperature,#battery,
       #power-profiles-daemon,#clock,#tray,#custom-power,#custom-launcher,#custom-overview,#niri-window {
-        background-color: ${toRGBA palette.base01 "0.7"};
+        background-color: ${toRGBA palette.base01 "0.9"};
         border-radius: 8px;
         margin: 0 6px;
         padding: 0 10px;
-        border: 1px solid ${toRGBA palette.base03 "0.6"};
+        border: 1px solid ${toRGBA palette.base03 "0.9"};
       }
 
       /* Hover effect */
       #idle_inhibitor:hover,#backlight:hover,#pulseaudio:hover,
       #keyboard-state:hover,#network:hover,#cpu:hover,#memory:hover,
       #temperature:hover,#battery:hover,#power-profiles-daemon:hover,
-      #clock:hover,#tray:hover,#custom-power:hover,#custom-launcher:hover,#custom-overview:hover,#niri-window:hover {
+      #clock:hover,#tray:hover,#custom-power:hover,#custom-launcher:hover,#custom-overview:hover,#niri-window:hover,#niri-workspaces:hover {
         background-color: ${toRGBA palette.base02 "0.7"};
       }
 
