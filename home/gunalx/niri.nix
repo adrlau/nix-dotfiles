@@ -214,6 +214,11 @@ layout {
     }
 }
 
+overview {
+    zoom 0.5
+    backdrop-color "#${palette.base00}"
+}
+
 // Add lines like this to spawn processes at startup.
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
@@ -247,59 +252,54 @@ animations {
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
     // slowdown 0.3
+
+}
+
+
+layer-rule {
+    match namespace="^notifications$"
+    block-out-from "screencast"
 }
 
 // Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
 
-// Work around WezTerm's initial configure bug
-// by setting an empty default-column-width.
-window-rule {
-    // This regular expression is intentionally made as specific as possible,
-    // since this is the default config, and we want no false positives.
-    // You can get away with just app-id="wezterm" if you want.
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    default-column-width {}
-}
+
 
 // Floating Bitwarden extension popup windows only
 window-rule {
-    match app-id=r#"^firefox$"# title=r#"^Extension: \(Bitwarden Password Manager\) - Bitwarden — Mozilla Firefox$"#
-    open-floating true
-}
-// Floating the native Bitwarden desktop app
-window-rule {
+    match title=r#"^Extension: \(Bitwarden Password Manager\) - Bitwarden — Mozilla Firefox$"#
+    match title="^Extension: (Bitwarden Password Manager) - Bitwarden — Mozilla Firefox$"
     match app-id=r#"(?i)^bitwarden$"#
     open-floating true
+    default-column-width { proportion 0.3;}
+    default-floating-position x=0 y=0 relative-to="top-left"
+    opacity 0.9
+    block-out-from "screen-capture"
+}
+
+// dropdown terminal
+window-rule {
+    match title="^dropdown$"
+    open-focused true
+    open-floating true
+    default-floating-position x=0 y=0 relative-to="top"
+    default-window-height { proportion 0.5; }
+    // 80% of the screen wide.
+    default-column-width { proportion 0.8; }
+    // block-out-from "screencast"
+    block-out-from "screen-capture"
 }
 
 //fix steam notifications to bottom rigth
 window-rule {
     match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
     default-floating-position x=10 y=10 relative-to="bottom-right"
-}
-
-
-// Example: block out two password managers from screen capture.
-// (This example rule is commented out with a "/-" in front.)
-/-window-rule {
-    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
-    match app-id=r#"^org\.gnome\.World\.Secrets$"#
-    match title=r#"^Bitwarden$"#
-
+    //block-out-from "screencast"
     block-out-from "screen-capture"
-
-    // Use this instead if you want them visible on third-party screenshot tools.
-    // block-out-from "screencast"
 }
 
-// Example: enable rounded corners for all windows.
-// (This example rule is commented out with a "/-" in front.)
-/-window-rule {
-    geometry-corner-radius 12
-    clip-to-geometry true
-}
 
 window-rule {
     geometry-corner-radius 12
@@ -324,9 +324,10 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return { spawn "footclient"; }
+    Mod+T { spawn  "sh" "-c" "if pgrep -f '^foot -T dropdown$' >/dev/null; then pkill -f '^foot -T dropdown$'; else exec foot -T dropdown; fi"; }
     Mod+D { spawn "fuzzel"; }
-    Super+M { spawn "swaylock"; }
-    
+    Mod+M { spawn "swaylock" "--grace" "0"; }
+    Mod+O { toggle-window-rule-opacity; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
@@ -341,14 +342,14 @@ binds {
 
     Mod+Shift+Q { close-window; }
 
-    Mod+Left  { focus-column-left; }
-    Mod+Down  { focus-window-down; }
-    Mod+Up    { focus-window-up; }
-    Mod+Right { focus-column-right; }
-    Mod+H     { focus-column-left; }
-    Mod+J     { focus-window-down; }
-    Mod+K     { focus-window-up; }
-    Mod+L     { focus-column-right; }
+    Mod+Left  { focus-column-or-monitor-left; }
+    Mod+Down  { focus-window-or-monitor-down; }
+    Mod+Up    { focus-window-or-monitor-up; }
+    Mod+Right { focus-column-or-monitor-right; }
+    Mod+H     { focus-column-or-monitor-left; }
+    Mod+J     { focus-window-or-monitor-down; }
+    Mod+K     { focus-window-or-monitor-up; }
+    Mod+L     { focus-column-or-monitor-right; }
 
     Alt+Tab   { focus-window-previous; }
 
@@ -408,9 +409,6 @@ binds {
     Mod+Ctrl+U         { move-column-to-workspace-down; }
     Mod+Ctrl+I         { move-column-to-workspace-up; }
 
-    // Alternatively, there are commands to move just a single window:
-    // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
-    // ...
 
     Mod+Shift+Page_Down { move-workspace-down; }
     Mod+Shift+Page_Up   { move-workspace-up; }
@@ -423,22 +421,23 @@ binds {
     // To avoid scrolling through workspaces really fast, you can use
     // the cooldown-ms property. The bind will be rate-limited to this value.
     // You can set a cooldown on any bind, but it's most useful for the wheel.
-    Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
-    Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
-    Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
-    Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
+    Mod+Shift+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
+    Mod+Shift+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+    Mod+Shift+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
+    Mod+Ctrl+Shift+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
 
-    Mod+WheelScrollRight      { focus-column-right; }
-    Mod+WheelScrollLeft       { focus-column-left; }
-    Mod+Ctrl+WheelScrollRight { move-column-right; }
-    Mod+Ctrl+WheelScrollLeft  { move-column-left; }
+    Mod+WheelScrollRight       cooldown-ms=150 { focus-column-right; }
+    Mod+WheelScrollLeft        cooldown-ms=150 { focus-column-left; }
+    Mod+Ctrl+WheelScrollRight  cooldown-ms=150 { move-column-right; }
+    Mod+Ctrl+WheelScrollLeft   cooldown-ms=150 { move-column-left; }
 
     // Usually scrolling up and down with Shift in applications results in
-    // horizontal scrolling; these binds replicate that.
-    Mod+Shift+WheelScrollDown      { focus-column-right; }
-    Mod+Shift+WheelScrollUp        { focus-column-left; }
-    Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
-    Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
+    // horizontal scrolling; these binds replicate that. 
+    // But i found it impractical.  workspaces i can graphically cahnge. and probably more rarly, so i swapped it
+    Mod+WheelScrollDown       cooldown-ms=150 { focus-column-right; }
+    Mod+WheelScrollUp         cooldown-ms=150 { focus-column-left; }
+    Mod+Ctrl+WheelScrollDown  cooldown-ms=150 { move-column-right; }
+    Mod+Ctrl+WheelScrollUp    cooldown-ms=150 { move-column-left; }
 
     // Similarly, you can bind touchpad scroll "ticks".
     // Touchpad scrolling is continuous, so for these binds it is split into
@@ -516,10 +515,12 @@ binds {
     // set-column-width "100" will make the column occupy 200 physical screen pixels.
     Mod+Minus { set-column-width "-10%"; }
     Mod+Equal { set-column-width "+10%"; }
+    Mod+0 { set-column-width "+10%"; }
 
     // Finer height adjustments when in column with other windows.
     Mod+Shift+Minus { set-window-height "-10%"; }
     Mod+Shift+Equal { set-window-height "+10%"; }
+    Mod+Shift+0 { set-window-height "+10%"; }
 
     // Move the focused window between the floating and the tiling layout.
     Mod+V       { toggle-window-floating; }
@@ -593,6 +594,8 @@ in
 
       #term
     	foot
+      alacritty
+
 
     	wdisplays
       swww

@@ -13,7 +13,7 @@ in
 {
   programs.waybar = {
     enable = true;
-    package = pkgs.waybarFull;
+    package = pkgs.waybar;
 
     # Single-bar JSON config
     settings = [
