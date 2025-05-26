@@ -14,7 +14,6 @@ in
   programs.waybar = {
     enable = true;
     package = pkgs.waybarFull;
-    trayAllOutputs = true;
 
     # Single-bar JSON config
     settings = [
@@ -22,6 +21,8 @@ in
         {
           "height": 36,
           "spacing": 2,
+          "tray-position": "right",
+          "tray-all-outputs": true,
           "modules-left": ["custom/overview", "custom/launcher", "sway/workspaces", "niri/workspaces"],
           "modules-center": ["niri/window"],
           "modules-right": [
