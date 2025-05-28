@@ -23,7 +23,7 @@ in
           "spacing": 2,
           "tray-position": "right",
           "tray-all-outputs": true,
-          "modules-left": ["custom/overview", "custom/launcher", "sway/workspaces", "niri/workspaces"],
+          "modules-left": ["custom/overview", "custom/launcher", "custom/keyboard", "sway/workspaces", "niri/workspaces"],
           "modules-center": ["niri/window"],
           "modules-right": [
             "idle_inhibitor", "backlight", "pulseaudio", "keyboard-state",
@@ -62,6 +62,11 @@ in
             "format": "",
             "tooltip": "Toggle Overview",
             "on-click": "niri msg action toggle-overview"
+          },
+          "custom/keyboard": {
+            "format": "",
+            "tooltip": "On-Screen Keyboard",
+            "on-click": "pkill onboard || onboard"
           },
 
 
