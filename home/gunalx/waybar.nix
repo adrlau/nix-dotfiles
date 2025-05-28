@@ -164,7 +164,7 @@ in
           },
 
           "tray": {
-            "spacing": 8
+            "spacing": 12
           },
 
           "custom/power": {
