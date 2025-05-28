@@ -306,6 +306,11 @@ window-rule {
     clip-to-geometry true
 }
 
+window-rule {
+    match app-id="onboard"
+    open-floating true
+}
+
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
     // in the end. To find an XKB name for a particular key, you may use a program
