@@ -39,6 +39,8 @@ imports =
     memoryPercent = 25;
   };
 
+  boot.plymouth.enable = true;
+
 
   # Set your time zone.
   time.timeZone = "Europe/Oslo";

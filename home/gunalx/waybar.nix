@@ -11,6 +11,13 @@ let
     in "rgba(${rgb},${alpha})";
 in
 {
+
+ home.packages = with pkgs; [
+   fuzzel
+   wvkbd
+    ];
+
+
   programs.waybar = {
     enable = true;
     package = pkgs.waybar;
@@ -19,6 +26,7 @@ in
     settings = [
       (builtins.fromJSON ''
         {
+          "layer": "top",
           "height": 36,
           "spacing": 2,
           "tray-position": "right",
@@ -66,7 +74,7 @@ in
           "custom/keyboard": {
             "format": "",
             "tooltip": "On-Screen Keyboard",
-            "on-click": "pkill onboard || onboard"
+            "on-click": "pkill wvkbd-mobintl || wvkbd-mobintl"
           },
 
 

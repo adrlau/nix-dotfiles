@@ -49,9 +49,8 @@
     , unstable
   , ... }@inputs:
     let
-      overlay-unstable = final: prev: {
-        unstable = unstable.legacyPackages.${prev.system};
-      };
+      overlay-unstable = final: prev: { unstable = inputs.unstable.legacyPackages.${prev.system}; };
+      overlays = [ overlay-unstable ];
     in
     {
       nixosConfigurations = {

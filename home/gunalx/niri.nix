@@ -63,8 +63,8 @@ let
 switch-events {
     lid-close { spawn "swaylock"; }
     //lid-open { spawn "notify-send" "The laptop lid is open!"; }
-    tablet-mode-on { spawn "bash" "-c" "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true"; }
-    tablet-mode-off { spawn "bash" "-c" "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled false"; }
+    tablet-mode-on { spawn "bash" "-c" "wvkbd-mobintl"; }
+    tablet-mode-off { spawn "bash" "-c" "pkill   wvkbd-mobintl"; }
 }
 
 
@@ -308,7 +308,11 @@ window-rule {
 
 window-rule {
     match app-id="onboard"
+    match app-id="Onboard"
     open-floating true
+    default-window-height { proportion 0.2; }
+    default-column-width { proportion 0.8; }
+    block-out-from "screen-capture"
 }
 
 binds {
@@ -626,6 +630,8 @@ in
 
       emote
 
+        
+       wvkbd
 
 
       xdg-desktop-portal-gtk
