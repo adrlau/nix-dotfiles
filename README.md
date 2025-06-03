@@ -18,3 +18,14 @@ why depends:
 ```nix why-depends .#nixosConfigurations.galadriel nixpkgs#python312Packages.botorch```
 ```nix why-depends .\#nixosConfigurations.eowyn.config.system.build.toplevel pkgs.python3.12-libarcus-4.12.0 --impure```
 
+
+Fix after broken store after aborted rebuild.
+https://github.com/NixOS/nix/issues/11148#issuecomment-2438680917
+```
+nix-store --query --referrers-closure \
+    $(find /nix/store -maxdepth 1 -type f -name '*.drv' -size 0) |
+    xargs sudo nix-store --delete --ignore-liveness
+sudo nix store gc
+sudo nix store verify --repair --all
+```
+
