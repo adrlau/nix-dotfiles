@@ -105,6 +105,20 @@
       };
 
 
+
+      virtualHosts."chat.lauterer.it" = {
+        forceSSL = true;
+        useACMEHost = config.networking.domain;
+        locations."/" = {
+            proxyWebsockets = true;
+            proxyPass = "http://localhost:11111";
+        };
+        #basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
+      };
+
+
+
+
       #virtualHosts."azul.256.no" = {
       #  forceSSL = true;
       #  useACMEHost = config.networking.domain;

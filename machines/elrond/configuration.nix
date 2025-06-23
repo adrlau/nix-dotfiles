@@ -10,6 +10,7 @@
       ../../profiles/webhost.nix
       ../../profiles/base.nix
       #../../services/ozai.nix
+      ../../services/ollamaWebui.nix
       ./routes.nix
     ];
 
