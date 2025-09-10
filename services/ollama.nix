@@ -36,6 +36,7 @@ in
     # Acceleration settings
     acceleration = "cuda"; 
 
+  };
   # NGINX reverse proxy configuration
   services.nginx.virtualHosts."ollama.${config.networking.hostName}.${config.networking.domain}" = {
     forceSSL = true;
