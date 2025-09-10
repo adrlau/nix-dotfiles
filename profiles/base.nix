@@ -170,25 +170,7 @@ imports =
   };
 
   buildMachines = [
-      { hostName = "bolle.pbsds.net";
-	      system = "x86_64-linux";
-	      maxJobs = 6;
-	      speedFactor = 12857;
-	    }
-	    { hostName = "garp.pbsds.net";
-	      system = "x86_64-linux";
-	      maxJobs = 4;
-	      # i7-6700
-	      speedFactor = 8088;
-      }
-      { hostName = "localhost";
-	      system = "x86_64-linux";
-	      maxJobs = 4;
-	      #speedFactor = 8066;
-	      speedFactor = 8000;
-	      supportedFeatures = [ ];
-	      mandatoryFeatures = [ ];
-	    }
+
 	    { hostName = "aragon";
 	      system = "x86_64-linux";
 	      # if the builder supports building for multiple architectures, 
@@ -208,7 +190,15 @@ imports =
 	      supportedFeatures = [ "cuda" ];
 	      mandatoryFeatures = [ ];
 	    }
-	    # {
+      { hostName = "localhost";
+	      system = "x86_64-linux";
+	      maxJobs = 4;
+	      #speedFactor = 8066;
+	      speedFactor = 2000;
+	      supportedFeatures = [ ];
+	      mandatoryFeatures = [ ];
+	    }
+      # {
 	    #   hostName = "isvegg.pvv.ntnu.no";
 	    #   system = "x86_64-linux";
 	    #   maxJobs = 4;
