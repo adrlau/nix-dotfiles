@@ -151,8 +151,8 @@
             ./machines/elrond/configuration.nix
             ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
             sops-nix.nixosModules.sops
-            inputs.ozai.nixosModules.ozai
-            inputs.ozai-webui.nixosModules.ozai-webui
+            #inputs.ozai.nixosModules.ozai
+            #inputs.ozai-webui.nixosModules.ozai-webui
           ];
          };
        };

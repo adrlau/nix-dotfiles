@@ -22,10 +22,10 @@ imports =
 
       #libsForQt5.qt5ct
       #qt6Packages.qt6ct
-      where-is-my-sddm-theme
-      
+      where-is-my-sddm-theme      
       swww
 
+      nvtopPackages.full
   ];
 
   fonts.packages = with pkgs; [

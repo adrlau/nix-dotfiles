@@ -19,16 +19,15 @@ imports =
       wget
       rsync
       ripgrep
-      neofetch
-      htop
+      #neofetch
+      #htop
       bottom
       killall
       foot.terminfo
       tailscale
       sops
       atuin
-      upower
-      nvtopPackages.full
+      #upower
     ];
 
   #just allow unfree, im fine with it. 
@@ -39,7 +38,7 @@ imports =
     memoryPercent = 25;
   };
 
-  boot.plymouth.enable = true;
+  #boot.plymouth.enable = true;
 
 
   # Set your time zone.

@@ -20,9 +20,9 @@
       '';
       packages.myplugins = with pkgs.vimPlugins; {
         start = [ 
-		    vim-nix
-		    vim-lastplace 
-		    vim-yaml 
+        vim-nix
+        #vim-lastplace 
+        #vim-yaml 
 		    #coc-rust-analyzer 
 		    #neovim-fuzzy 
 		    #LanguageClient-neovim 
