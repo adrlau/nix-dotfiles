@@ -20,17 +20,13 @@ in
     # Preloaded models
     loadModels = [
       "gemma3:1b"
-      "qwen3:8b"
+      "qwen3:latest"
+      "qwen3:4b"
       "qwen3:0.6b"
-      "llama3.1"
-      "moondream"
-      "minicpm-v"
-      "qwen2.5vl:3b"
       "gemma3:4b"
+      "qwen2.5vl:3b"
       "granite3.2-vision"
-      "zylonai/multilingual-e5-large"
-      "nomic-embed-text"
-      "snowflake-arctic-embed2"
+      "gpt-oss:20b"
     ];
 
     # Acceleration settings
