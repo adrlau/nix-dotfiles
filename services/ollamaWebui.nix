@@ -1,8 +1,10 @@
 { config, pkgs, lib, ... }:
 {
   environment.systemPackages = [
-    pkgs.unstable.open-webui
+    #pkgs.open-webui
+    #pkgs.unstable.open-webui #needed stable one to hoefulle be able to take a backup from ui.
     pkgs.bash
+    pkgs.ffmpeg
 #    pkgs.unstable.tika
 
   ];
@@ -23,11 +25,22 @@
     port = 11111;
     host = "0.0.0.0";
     openFirewall = true;
-
+    stateDir = "/var/lib/open-webui";
     environment = {
       ANONYMIZED_TELEMETRY = "False";
       DO_NOT_TRACK = "True";
       SCARF_NO_ANALYTICS = "True";
+      
+      FRONTEND_BUILD_DIR = "${config.services.open-webui.stateDir}/build";
+      DATA_DIR = "${config.services.open-webui.stateDir}/data";
+      STATIC_DIR = "${config.services.open-webui.stateDir}/static";
+
+
+      WEBUI_AUTH = "True";
+      #ENABLE_SIGNUP = "True";
+      ENABLE_SIGNUP_PASSWORD_CONFIRMATION = "True";
+      #DEFAULT_USER_ROLE = "admin";
+      ENV = "prod";
     };
 
   };
