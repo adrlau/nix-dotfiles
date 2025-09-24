@@ -21,6 +21,7 @@
       #../../services/smb.nix
       #../../services/wordpress.nix # lets not
       ../../services/torrent.nix
+      ../../services/jupyterhub.nix 
       #../../services/ozai.nix
       #../../services/stableDiffusion.nix
       ../../services/rss.nix
