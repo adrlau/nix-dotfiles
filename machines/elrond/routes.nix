@@ -88,7 +88,7 @@
         useACMEHost = config.networking.domain;
         locations."/" = {
           proxyWebsockets = true;
-          proxyPass = "http://100.84.215.84:8081";
+          proxyPass = "http://100.84.215.84:8089";
         };
         #basicAuthFile = config.sops.secrets."nginx/defaultpass".path;
       };
