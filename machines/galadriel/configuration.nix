@@ -20,12 +20,14 @@
 
       #../../services/smb.nix
       #../../services/wordpress.nix # lets not
+      ../../services/bitwarden.nix
       ../../services/torrent.nix
       ../../services/jupyterhub.nix 
       #../../services/ozai.nix
       #../../services/stableDiffusion.nix
       ../../services/rss.nix
       ../../services/shiori.nix
+      ../../services/mealie.nix
     ];
 
   # Bootloader.
